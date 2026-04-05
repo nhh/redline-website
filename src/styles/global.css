@@ -1,0 +1,253 @@
+@import "tailwindcss";
+
+@theme {
+    --color-primary-black: #1A1A1A;
+    --color-accent-red: #C41E3A;
+    --color-red-dark: #A01A2E;
+    --color-red-muted: rgba(196, 30, 58, 0.1);
+    --color-neutral-gray: #E8E8E8;
+    --color-dark-gray: #2D2D2D;
+    --color-light-gray: #F5F5F5;
+
+    --color-bg-base: #FFFFFF;
+    --color-bg-floor: #F8F8F8;
+    --color-bg-inset: #F8F8F8;
+
+    --color-steel-dark: #1A1A1A;
+    --color-steel-mid: #2D2D2D;
+    --color-steel-light: #4A4A4A;
+    --color-steel-highlight: #666666;
+
+    --color-border-dark: #E8E8E8;
+    --color-border-mid: #D0D0D0;
+    --color-border-light: #B8B8B8;
+
+    --color-pass: #4A7C4A;
+    --color-pass-muted: rgba(74, 124, 74, 0.1);
+    --color-pass-border: #3A6A3A;
+
+    --color-amber: #8B6F3A;
+    --color-amber-muted: rgba(139, 111, 58, 0.1);
+
+    --color-text-primary: #1A1A1A;
+    --color-text-secondary: #4A4A4A;
+    --color-text-muted: #666666;
+    --color-text-label: #808080;
+
+    --font-display: 'Playfair Display', serif;
+    --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    --font-mono: 'IBM Plex Mono', monospace;
+}
+
+/* ── Base ── */
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+::selection {
+    background: var(--color-accent-red);
+    color: white;
+}
+
+/* ── Section title underline ── */
+
+.section-title::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60px;
+    height: 3px;
+    background: var(--color-accent-red);
+}
+
+/* ── Badge clip-path ── */
+
+.badge-clip {
+    clip-path: polygon(
+        4px 0, calc(100% - 4px) 0,
+        100% 4px, 100% calc(100% - 4px),
+        calc(100% - 4px) 100%, 4px 100%,
+        0 calc(100% - 4px), 0 4px
+    );
+}
+
+/* ── Brand divider ── */
+
+.brand-divider::after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 6px;
+    height: 6px;
+    background: var(--color-accent-red);
+    border-radius: 50%;
+}
+
+/* ── Industrial label plates ── */
+
+.label-plate::before {
+    content: attr(data-id);
+    position: absolute;
+    top: 0.5rem;
+    right: 0.5rem;
+    font-family: var(--font-mono);
+    font-size: 0.45rem;
+    color: var(--color-text-muted);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}
+
+.label-plate-batch::before {
+    content: attr(data-batch);
+    position: absolute;
+    top: 0.5rem;
+    right: 0.5rem;
+    font-family: var(--font-mono);
+    font-size: 0.45rem;
+    color: var(--color-text-muted);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}
+
+.label-plate-pass::before {
+    content: 'PROJEKT: ABGESCHLOSSEN';
+    position: absolute;
+    top: 0.6rem;
+    right: 0.6rem;
+    font-family: var(--font-mono);
+    font-size: 0.45rem;
+    color: var(--color-pass);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+}
+
+.label-plate-lighthouse::before {
+    content: 'LIGHTHOUSE · PAGESPEED INSIGHTS';
+    position: absolute;
+    top: -0.5rem;
+    left: 0.875rem;
+    font-family: var(--font-mono);
+    font-size: 0.5rem;
+    color: var(--color-pass);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    background: var(--color-light-gray);
+    padding: 0 0.4rem;
+}
+
+/* ── SVG arrow animation ── */
+
+.arrow-dash-anim {
+    animation: dashMove 2s linear infinite;
+}
+
+@keyframes dashMove {
+    to { stroke-dashoffset: -16; }
+}
+
+.arrow-gap-anim {
+    animation: dashMoveGap 1.5s linear infinite;
+}
+
+@keyframes dashMoveGap {
+    to { stroke-dashoffset: -16; }
+}
+
+/* ── Background texture ── */
+
+.bg-texture::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+        radial-gradient(circle at 20% 50%, rgba(196, 30, 58, 0.02) 0%, transparent 50%),
+        radial-gradient(circle at 80% 50%, rgba(26, 26, 26, 0.02) 0%, transparent 50%);
+    pointer-events: none;
+}
+
+/* ── FAQ answer animation ── */
+
+.faq-answer {
+    display: grid;
+    grid-template-rows: 0fr;
+    transition: grid-template-rows 0.3s ease;
+}
+
+details[open] > .faq-answer {
+    grid-template-rows: 1fr;
+}
+
+.faq-answer > div {
+    overflow: hidden;
+}
+
+/* ── Scroll reveal ── */
+
+.reveal {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.faq-reveal {
+    opacity: 0;
+    transform: translateY(16px);
+    transition: opacity 0.4s ease, transform 0.4s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+    transition-delay: var(--reveal-delay, 0ms);
+}
+
+.faq-reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Staggered children inside reveal containers */
+.reveal-stagger > * {
+    opacity: 0;
+    transform: translateY(16px);
+    transition: opacity 0.4s ease, transform 0.4s ease;
+}
+
+.reveal-stagger.visible > * {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.reveal-stagger.visible > *:nth-child(1) { transition-delay: 0ms; }
+.reveal-stagger.visible > *:nth-child(2) { transition-delay: 80ms; }
+.reveal-stagger.visible > *:nth-child(3) { transition-delay: 160ms; }
+.reveal-stagger.visible > *:nth-child(4) { transition-delay: 240ms; }
+.reveal-stagger.visible > *:nth-child(5) { transition-delay: 320ms; }
+.reveal-stagger.visible > *:nth-child(6) { transition-delay: 400ms; }
+.reveal-stagger.visible > *:nth-child(7) { transition-delay: 480ms; }
+
+/* Respect reduced motion */
+@media (prefers-reduced-motion: reduce) {
+    .reveal, .faq-reveal, .reveal-stagger > * {
+        opacity: 1;
+        transform: none;
+        transition: none;
+    }
+}
+
+/* ── Scrollbar ── */
+
+::-webkit-scrollbar { width: 5px; }
+::-webkit-scrollbar-track { background: var(--color-light-gray); }
+::-webkit-scrollbar-thumb { background: var(--color-neutral-gray); border-radius: 1px; }
+::-webkit-scrollbar-thumb:hover { background: var(--color-steel-mid); }

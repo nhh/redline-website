@@ -1,0 +1,22 @@
+---
+interface Props {
+  quote: string;
+  name: string;
+  role: string;
+}
+
+const { quote, name, role } = Astro.props;
+---
+
+<article class="label-plate-pass bg-bg-base border border-neutral-gray rounded-lg overflow-hidden transition-all duration-300 shadow-[0_2px_4px_rgba(0,0,0,0.05)] hover:border-accent-red hover:-translate-y-1 hover:shadow-[0_8px_20px_rgba(0,0,0,0.1)] relative">
+    <blockquote class="p-4 sm:p-5">
+        <p class="text-text-secondary italic leading-relaxed text-[0.85rem] max-sm:text-[0.8rem]">{quote}</p>
+    </blockquote>
+    <footer class="flex items-center gap-3 px-4 py-3.5 bg-bg-base border-t border-border-dark">
+        <div class="w-9 h-9 rounded-full bg-light-gray border border-border-mid flex items-center justify-center text-[0.9rem] text-steel-mid shrink-0" aria-hidden="true">◆</div>
+        <div>
+            <cite class="block mb-px text-text-primary text-[0.85rem] font-bold not-italic">{name}</cite>
+            <span class="text-[0.7rem] text-text-muted">{role}</span>
+        </div>
+    </footer>
+</article>

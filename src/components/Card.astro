@@ -1,0 +1,17 @@
+---
+interface Props {
+  id?: string;
+  hover?: boolean;
+  class?: string;
+}
+
+const { id, hover = true, class: className = '' } = Astro.props;
+const hoverClass = hover ? 'hover:border-accent-red hover:-translate-y-1.5 hover:shadow-[0_10px_30px_rgba(0,0,0,0.1)]' : '';
+---
+
+<article
+  class:list={['label-plate bg-bg-base border border-neutral-gray rounded-lg overflow-hidden transition-all duration-300 shadow-[0_2px_4px_rgba(0,0,0,0.05)] relative', hoverClass, className]}
+  data-id={id}
+>
+    <slot />
+</article>

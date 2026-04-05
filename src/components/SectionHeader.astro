@@ -1,0 +1,16 @@
+---
+interface Props {
+  subtitle?: string;
+}
+
+const { subtitle } = Astro.props;
+---
+
+<div class="mb-10">
+    <h2 class="section-title font-display text-[clamp(1.15rem,4vw,3rem)] text-center mb-2.5 tracking-tight font-bold text-primary-black relative inline-block w-full">
+        <slot />
+    </h2>
+    {subtitle && (
+        <p class="text-center text-text-secondary text-[0.95rem] max-sm:text-[0.85rem] mt-5 max-w-[520px] mx-auto">{subtitle}</p>
+    )}
+</div>

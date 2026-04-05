@@ -1,0 +1,38 @@
+---
+import Logo from './Logo.astro';
+
+interface NavItem {
+  href: string;
+  label: string;
+}
+
+const links: NavItem[] = [
+  { href: '#problem', label: 'Problem' },
+  { href: '#ansatz', label: 'Ansatz' },
+  { href: '#prozess', label: 'Prozess' },
+  { href: '#leistungen', label: 'Leistungen' },
+  { href: '#referenzen', label: 'Referenzen' },
+];
+---
+
+<a href="#main-content" class="sr-only focus:not-sr-only focus:fixed focus:top-2 focus:left-2 focus:z-[200] focus:bg-accent-red focus:text-white focus:px-4 focus:py-2 focus:rounded">
+    Zum Inhalt springen
+</a>
+
+<nav class="fixed top-0 left-0 right-0 z-50 bg-bg-base border-b border-neutral-gray shadow-[0_1px_3px_rgba(0,0,0,0.05)]" aria-label="Hauptnavigation">
+    <div class="max-w-[1200px] mx-auto px-8 py-3 flex justify-between items-center">
+        <a href="#" aria-label="Redline — Startseite">
+            <Logo />
+        </a>
+        <ul class="hidden md:flex items-center gap-7 list-none" role="list">
+            {links.map(({ href, label }) => (
+                <li>
+                    <a href={href} class="text-text-secondary font-medium text-[0.7rem] tracking-[0.08em] uppercase transition-colors hover:text-text-primary focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent-red">{label}</a>
+                </li>
+            ))}
+            <li>
+                <a href="#kontakt" class="bg-accent-red px-4 py-2 rounded text-white! font-semibold border border-accent-red transition-all hover:bg-red-dark hover:-translate-y-px hover:shadow-[0_2px_8px_rgba(196,30,58,0.3)] text-[0.7rem] tracking-[0.08em] uppercase focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white">Kostenloser Umbau</a>
+            </li>
+        </ul>
+    </div>
+</nav>

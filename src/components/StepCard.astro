@@ -1,0 +1,17 @@
+---
+interface Props {
+  num: string;
+  batch: string;
+  title: string;
+}
+
+const { num, batch, title } = Astro.props;
+---
+
+<article class="label-plate-batch grid grid-cols-1 md:grid-cols-[60px_1fr] gap-5 bg-bg-base border border-border-mid rounded-[1px] p-5 max-sm:p-4 transition-all duration-200 shadow-[0_2px_4px_rgba(0,0,0,0.06)] hover:border-border-light relative" data-batch={batch}>
+    <div class="font-mono text-3xl max-sm:text-xl font-bold text-steel-mid tracking-tight" aria-hidden="true">{num}</div>
+    <div>
+        <h3 class="font-sans text-[0.75rem] max-sm:text-[0.6rem] mb-1.5 font-semibold uppercase tracking-[0.08em] text-text-primary">{title}</h3>
+        <slot />
+    </div>
+</article>

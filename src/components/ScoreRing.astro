@@ -1,0 +1,26 @@
+---
+interface Props {
+  label: string;
+  score?: number;
+}
+
+const { label, score = 100 } = Astro.props;
+const circumference = 2 * Math.PI * 54;
+const offset = circumference - (score / 100) * circumference;
+---
+
+<figure class="relative text-center w-[85px] sm:w-[100px]" role="img" aria-label={`${label}: ${score} von 100`}>
+    <svg viewBox="0 0 120 120" class="w-[85px] h-[85px] sm:w-[100px] sm:h-[100px]" aria-hidden="true">
+        <circle cx="60" cy="60" r="54" fill="none" stroke="var(--color-border-dark)" stroke-width="4"/>
+        <circle
+          cx="60" cy="60" r="54"
+          fill="none" stroke="var(--color-pass)" stroke-width="4"
+          stroke-dasharray={circumference.toFixed(2)}
+          stroke-dashoffset={offset.toFixed(2)}
+          stroke-linecap="round"
+          transform="rotate(-90 60 60)"
+        />
+    </svg>
+    <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-[60%] font-mono text-xl sm:text-2xl font-bold text-pass" aria-hidden="true">{score}</div>
+    <figcaption class="font-mono text-[0.4rem] sm:text-[0.5rem] text-text-muted uppercase tracking-[0.08em] mt-1">{label}</figcaption>
+</figure>

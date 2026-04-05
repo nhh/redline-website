@@ -1,0 +1,18 @@
+---
+interface Props {
+  size?: 'sm' | 'md';
+}
+
+const { size = 'md' } = Astro.props;
+const dim = size === 'sm' ? 24 : 32;
+const textClass = size === 'sm' ? 'text-white' : 'text-primary-black';
+---
+
+<div class="flex items-center gap-2.5">
+    <svg viewBox="0 0 50 50" width={dim} height={dim} aria-hidden="true" role="img">
+        <polygon points="25,2 48,15 48,35 25,48 2,35 2,15" fill="none" stroke="#C41E3A" stroke-width="2"/>
+        <polygon points="25,10 40,19 40,31 25,40 10,31 10,19" fill="#C41E3A" opacity="0.12"/>
+        <text x="25" y="30" text-anchor="middle" fill="#C41E3A" font-family="Playfair Display" font-size="14" font-weight="700">R</text>
+    </svg>
+    <span class:list={['font-display text-xl font-bold tracking-tight uppercase', textClass]}>Redline</span>
+</div>
