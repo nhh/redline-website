@@ -13,7 +13,7 @@ const { value, name, fill } = Astro.props;
         <span class="font-mono text-[0.9rem] max-sm:text-[0.8rem] font-semibold text-pass min-w-[40px]">{value}</span>
         <span class="text-[0.75rem] max-sm:text-[0.65rem] text-text-secondary">{name}</span>
     </div>
-    <div class="flex-1 max-sm:w-full h-1 bg-border-dark rounded-sm overflow-hidden" role="progressbar" aria-valuenow={fill} aria-valuemin={0} aria-valuemax={100}>
+    <div class="flex-1 max-sm:w-full h-1 bg-border-dark rounded-sm overflow-hidden" role="progressbar" aria-valuenow={fill} aria-valuemin={0} aria-valuemax={100} aria-label={`${name}: ${value}`}>
         <div class="h-full bg-pass rounded-sm" style={`width: ${fill}%`}></div>
     </div>
 </div>
