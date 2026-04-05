@@ -1,0 +1,56 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 85 55" width="85mm" height="55mm">
+  <defs>
+    <!-- Subtle speckled/mehliert texture -->
+    <filter id="grain-v">
+      <feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="4" seed="2" result="noise"/>
+      <feColorMatrix type="saturate" values="0" in="noise" result="gray-noise"/>
+      <feComponentTransfer in="gray-noise" result="faint-noise">
+        <feFuncA type="linear" slope="0.06"/>
+      </feComponentTransfer>
+      <feBlend in="SourceGraphic" in2="faint-noise" mode="multiply"/>
+    </filter>
+    <!-- Glow for red line -->
+    <filter id="glow-vk" x="-20%" y="-100%" width="140%" height="300%">
+      <feGaussianBlur in="SourceGraphic" stdDeviation="0.4" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+    <linearGradient id="streak-vk" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#C41E3A" stop-opacity="0"/>
+      <stop offset="20%" stop-color="#C41E3A" stop-opacity="0.7"/>
+      <stop offset="50%" stop-color="#E8334F" stop-opacity="1"/>
+      <stop offset="80%" stop-color="#C41E3A" stop-opacity="0.7"/>
+      <stop offset="100%" stop-color="#C41E3A" stop-opacity="0"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Background: silver-white, mehliert -->
+  <rect width="85" height="55" fill="#F4F3F1" filter="url(#grain-v)"/>
+
+  <!-- Red inset border -->
+  <rect x="2.5" y="2.5" width="80" height="50" fill="none" stroke="#C41E3A" stroke-width="0.4" />
+
+  <!-- Industrial label -->
+  <text x="79" y="5" text-anchor="end" font-family="IBM Plex Mono, monospace" font-size="1.2" fill="#B0ADA8" letter-spacing="0.08em">VK-001</text>
+
+  <!-- Logo: REDLINE wordmark with red streak below -->
+  <text x="8" y="15" font-family="Playfair Display, serif" font-size="6.5" font-weight="700" fill="#1A1A1A" letter-spacing="-0.02em">REDLINE</text>
+  <line x1="4" y1="18" x2="48" y2="18" stroke="url(#streak-vk)" stroke-width="0.7" stroke-linecap="round" filter="url(#glow-vk)"/>
+  <line x1="8" y1="18" x2="44" y2="18" stroke="#E8334F" stroke-width="0.2" stroke-linecap="round" opacity="0.4"/>
+
+  <!-- Name -->
+  <text x="8" y="28" font-family="Inter, sans-serif" font-size="3.5" font-weight="600" fill="#1A1A1A">Niklas Hanft</text>
+
+  <!-- Role -->
+  <text x="8" y="32.5" font-family="Inter, sans-serif" font-size="2.3" font-weight="400" fill="#6B6862">Web Engineering</text>
+
+  <!-- Divider -->
+  <line x1="8" y1="36.5" x2="30" y2="36.5" stroke="#D8D6D2" stroke-width="0.2"/>
+
+  <!-- Contact details -->
+  <text x="8" y="41.5" font-family="IBM Plex Mono, monospace" font-size="1.8" fill="#8A8680" letter-spacing="0.03em">hallo@redline.dev</text>
+  <text x="8" y="45.5" font-family="IBM Plex Mono, monospace" font-size="1.8" fill="#8A8680" letter-spacing="0.03em">redline.dev</text>
+  <text x="8" y="49.5" font-family="IBM Plex Mono, monospace" font-size="1.8" fill="#8A8680" letter-spacing="0.03em">+49 XXX XXXXXXX</text>
+</svg>

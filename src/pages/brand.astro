@@ -1,0 +1,346 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Navbar from '../components/Navbar.astro';
+import Section from '../components/Section.astro';
+import SectionHeader from '../components/SectionHeader.astro';
+import Card from '../components/Card.astro';
+import Logo from '../components/Logo.astro';
+import Footer from '../components/Footer.astro';
+
+const colors = [
+  { name: 'Crimson Red', hex: '#C41E3A', rgb: '196, 30, 58', cmyk: '0 / 85 / 70 / 23', usage: 'Primärer Akzent, CTAs, Logo, Highlights', bg: '#C41E3A', text: 'white' },
+  { name: 'Red Dark', hex: '#A01A2E', rgb: '160, 26, 46', cmyk: '0 / 84 / 71 / 37', usage: 'Hover-Zustände, Tiefe', bg: '#A01A2E', text: 'white' },
+  { name: 'Primary Black', hex: '#1A1A1A', rgb: '26, 26, 26', cmyk: '0 / 0 / 0 / 90', usage: 'Headlines, Footer, primärer Text', bg: '#1A1A1A', text: 'white' },
+  { name: 'Dark Gray', hex: '#2D2D2D', rgb: '45, 45, 45', cmyk: '0 / 0 / 0 / 82', usage: 'Sekundärer dunkler Text', bg: '#2D2D2D', text: 'white' },
+  { name: 'Steel Light', hex: '#4A4A4A', rgb: '74, 74, 74', cmyk: '0 / 0 / 0 / 71', usage: 'Body-Text, Icons', bg: '#4A4A4A', text: 'white' },
+  { name: 'Text Muted', hex: '#666666', rgb: '102, 102, 102', cmyk: '0 / 0 / 0 / 60', usage: 'Labels, Muted Text', bg: '#666666', text: 'white' },
+  { name: 'Neutral Gray', hex: '#E8E8E8', rgb: '232, 232, 232', cmyk: '0 / 0 / 0 / 9', usage: 'Borders, Trennlinien', bg: '#E8E8E8', text: '#1A1A1A' },
+  { name: 'Light Gray', hex: '#F5F5F5', rgb: '245, 245, 245', cmyk: '0 / 0 / 0 / 4', usage: 'Section-Hintergründe', bg: '#F5F5F5', text: '#1A1A1A' },
+  { name: 'White', hex: '#FFFFFF', rgb: '255, 255, 255', cmyk: '0 / 0 / 0 / 0', usage: 'Basis-Hintergrund, Cards', bg: '#FFFFFF', text: '#1A1A1A' },
+  { name: 'Success Green', hex: '#4A7C4A', rgb: '74, 124, 74', cmyk: '40 / 0 / 40 / 51', usage: 'Erfolgszustände, Checkmarks', bg: '#4A7C4A', text: 'white' },
+];
+
+const fonts = [
+  { name: 'Playfair Display', class: 'font-display', weights: '400, 700', role: 'Display & Headlines', usage: 'Markenname, Section-Titel, Hero-Text. Immer Uppercase für den Markennamen.', specimen: 'Wir reden nicht. Wir bauen.' },
+  { name: 'Inter', class: 'font-sans', weights: '300, 400, 500, 600, 700', role: 'Body & UI', usage: 'Fließtext, Navigation, Buttons, Card-Überschriften. Primäre Leseschrift.', specimen: 'KI ist mächtig. Aber ohne Erfahrung, die sie lenkt, ist sie nur ein schneller Zufallsgenerator.' },
+  { name: 'IBM Plex Mono', class: 'font-mono', weights: '400, 500, 600, 700', role: 'Technical & Labels', usage: 'Badges, Label-Plates, Code, Tags, Metriken. Immer Uppercase + Tracking.', specimen: 'PHASE-01 · MENSCH + KI · ERGEBNIS VOR ANGEBOT' },
+];
+
+const toneRules = [
+  { title: 'Klartext statt Blabla', desc: 'Kurze Sätze. Aktive Sprache. Keine Füllwörter. Wenn ein Satz ohne ein Wort funktioniert, streiche es.' },
+  { title: 'Ergebnisse statt Versprechen', desc: 'Zeigen, nicht behaupten. Zahlen statt Adjektive. Konkrete Beispiele statt abstrakte Claims.' },
+  { title: 'Technisch, nicht arrogant', desc: 'Expertise zeigen, ohne herabzuschauen. Fachbegriffe nur, wenn sie der Klarheit dienen — nie zum Beeindrucken.' },
+  { title: 'Deutsch-First', desc: 'Primär Deutsch. Englische Fachbegriffe nur wenn branchenüblich (Landing Page, CMS, SEO). Kein Denglisch.' },
+];
+---
+
+<Layout title="Redline — Corporate Identity Guide" description="Design-Richtlinien, Farbpalette, Typografie und Druckmaterialien der Marke Redline.">
+
+<div class="bg-texture fixed inset-0 -z-10 pointer-events-none bg-linear-to-br from-white to-bg-floor"></div>
+
+<Navbar />
+
+<!-- Header -->
+<section class="min-h-[160px] flex items-center justify-center bg-linear-to-br from-white to-bg-floor relative overflow-hidden px-8 py-8 mt-[52px] border-b border-neutral-gray">
+    <div class="text-center z-10 relative w-full max-w-[1200px]">
+        <h1 class="font-display text-[clamp(2rem,5vw,3.5rem)] font-bold tracking-tight text-primary-black mb-2 leading-none">Corporate Identity Guide</h1>
+        <p class="text-[clamp(0.75rem,1.5vw,0.95rem)] font-light tracking-[0.2em] text-text-muted uppercase">Die visuelle und sprachliche Identität von Redline</p>
+    </div>
+</section>
+
+<main>
+
+<!-- Logo -->
+<Section id="logo">
+    <SectionHeader subtitle="Das Hexagon-Logo ist das zentrale Erkennungszeichen der Marke.">
+        <span class="text-accent-red">Logo</span> & Markenzeichen
+    </SectionHeader>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
+        <div class="bg-bg-base border border-neutral-gray rounded-lg p-8 flex flex-col items-center justify-center gap-4">
+            <svg viewBox="0 0 50 50" width="80" height="80" aria-hidden="true">
+                <polygon points="25,2 48,15 48,35 25,48 2,35 2,15" fill="none" stroke="#C41E3A" stroke-width="2"/>
+                <polygon points="25,10 40,19 40,31 25,40 10,31 10,19" fill="#C41E3A" opacity="0.12"/>
+                <text x="25" y="30" text-anchor="middle" fill="#C41E3A" font-family="Playfair Display" font-size="14" font-weight="700">R</text>
+            </svg>
+            <span class="font-mono text-[0.55rem] text-text-muted uppercase tracking-[0.1em]">Logo · Primär</span>
+        </div>
+        <div class="bg-primary-black border border-neutral-gray rounded-lg p-8 flex flex-col items-center justify-center gap-4">
+            <svg viewBox="0 0 50 50" width="80" height="80" aria-hidden="true">
+                <polygon points="25,2 48,15 48,35 25,48 2,35 2,15" fill="none" stroke="#C41E3A" stroke-width="2"/>
+                <polygon points="25,10 40,19 40,31 25,40 10,31 10,19" fill="#C41E3A" opacity="0.12"/>
+                <text x="25" y="30" text-anchor="middle" fill="#C41E3A" font-family="Playfair Display" font-size="14" font-weight="700">R</text>
+            </svg>
+            <span class="font-mono text-[0.55rem] text-steel-highlight uppercase tracking-[0.1em]">Logo · Dunkel</span>
+        </div>
+        <div class="bg-bg-base border border-neutral-gray rounded-lg p-8 flex flex-col items-center justify-center gap-4">
+            <svg viewBox="0 0 32 32" width="64" height="64" aria-hidden="true">
+                <rect width="32" height="32" rx="4" fill="#1A1A1A"/>
+                <text x="16" y="23" text-anchor="middle" fill="#C41E3A" font-family="serif" font-size="22" font-weight="700">R</text>
+            </svg>
+            <span class="font-mono text-[0.55rem] text-text-muted uppercase tracking-[0.1em]">Favicon · Kompakt</span>
+        </div>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <Card id="LOGO-DO" hover={false}>
+            <div class="font-mono text-[0.6rem] font-semibold uppercase tracking-[0.12em] px-4 py-3 text-center border-b bg-pass-muted text-pass border-b-pass/15">Richtig</div>
+            <ul class="px-4 py-3 list-none">
+                <li class="text-[0.85rem] text-text-secondary py-1.5 border-b border-border-dark">✓ Auf weißem oder schwarzem Hintergrund verwenden</li>
+                <li class="text-[0.85rem] text-text-secondary py-1.5 border-b border-border-dark">✓ Mindestgröße: 24px digital, 10mm Print</li>
+                <li class="text-[0.85rem] text-text-secondary py-1.5 border-b border-border-dark">✓ Schutzzone: Höhe des „R" auf allen Seiten</li>
+                <li class="text-[0.85rem] text-text-secondary py-1.5">✓ Seitenverhältnis immer beibehalten</li>
+            </ul>
+        </Card>
+        <Card id="LOGO-DONT" hover={false}>
+            <div class="font-mono text-[0.6rem] font-semibold uppercase tracking-[0.12em] px-4 py-3 text-center border-b bg-red-muted text-accent-red border-b-accent-red/15">Falsch</div>
+            <ul class="px-4 py-3 list-none">
+                <li class="text-[0.85rem] text-text-secondary py-1.5 border-b border-border-dark">✗ Logo verzerren oder rotieren</li>
+                <li class="text-[0.85rem] text-text-secondary py-1.5 border-b border-border-dark">✗ Farben ändern oder Effekte hinzufügen</li>
+                <li class="text-[0.85rem] text-text-secondary py-1.5 border-b border-border-dark">✗ Auf unruhigen Hintergründen platzieren</li>
+                <li class="text-[0.85rem] text-text-secondary py-1.5">✗ Unter Mindestgröße verwenden</li>
+            </ul>
+        </Card>
+    </div>
+</Section>
+
+<!-- Farbpalette -->
+<Section id="farben" gray>
+    <SectionHeader subtitle="Reduzierte Palette. Crimson Red als einziger Akzent auf neutraler Basis.">
+        <span class="text-accent-red">Farb</span>palette
+    </SectionHeader>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
+        {colors.map((c) => (
+            <div class="bg-bg-base border border-neutral-gray rounded-lg overflow-hidden shadow-[0_2px_4px_rgba(0,0,0,0.05)]">
+                <div class="h-20" style={`background: ${c.bg}`}></div>
+                <div class="p-3">
+                    <div class="font-sans text-[0.85rem] font-semibold text-text-primary mb-1">{c.name}</div>
+                    <div class="font-mono text-[0.6rem] text-text-muted leading-relaxed">
+                        <div>HEX {c.hex}</div>
+                        <div>RGB {c.rgb}</div>
+                        <div>CMYK {c.cmyk}</div>
+                    </div>
+                    <div class="mt-2 text-[0.7rem] text-text-secondary leading-snug">{c.usage}</div>
+                </div>
+            </div>
+        ))}
+    </div>
+
+    <div class="mt-8 max-w-[720px] mx-auto">
+        <div class="bg-bg-base border border-neutral-gray rounded-lg p-5">
+            <h3 class="font-sans text-[0.75rem] font-semibold uppercase tracking-[0.08em] mb-2 text-text-primary">Verwendungsregeln</h3>
+            <ul class="list-none space-y-1.5 text-[0.85rem] text-text-secondary">
+                <li>→ Crimson Red nur für Akzente, CTAs und Markenzeichen — nie als großflächiger Hintergrund</li>
+                <li>→ Primary Black für Headlines und Footer-Hintergrund</li>
+                <li>→ Grau-Abstufungen für Text-Hierarchie und Borders</li>
+                <li>→ Weiß/Light Gray im Wechsel für Sektions-Hintergründe</li>
+                <li>→ Success Green nur für positive Zustände (Checkmarks, Pass-Labels)</li>
+            </ul>
+        </div>
+    </div>
+</Section>
+
+<!-- Typografie -->
+<Section id="typografie">
+    <SectionHeader subtitle="Drei Schriftfamilien. Klare Rollen. Keine Ausnahmen.">
+        <span class="text-accent-red">Typo</span>grafie
+    </SectionHeader>
+
+    <div class="flex flex-col gap-6">
+        {fonts.map((f) => (
+            <div class="bg-bg-base border border-neutral-gray rounded-lg overflow-hidden shadow-[0_2px_4px_rgba(0,0,0,0.05)]">
+                <div class="flex max-sm:flex-col">
+                    <div class="p-5 border-r max-sm:border-r-0 max-sm:border-b border-border-dark min-w-[220px]">
+                        <div class="font-mono text-[0.5rem] text-text-muted uppercase tracking-[0.1em] mb-2">{f.role}</div>
+                        <div class={`${f.class} text-2xl font-bold text-text-primary mb-1`}>{f.name}</div>
+                        <div class="font-mono text-[0.6rem] text-text-muted">Weights: {f.weights}</div>
+                    </div>
+                    <div class="p-5 flex-1">
+                        <div class={`${f.class} text-lg text-text-primary mb-2 leading-relaxed`}>{f.specimen}</div>
+                        <p class="text-[0.8rem] text-text-secondary leading-relaxed">{f.usage}</p>
+                    </div>
+                </div>
+            </div>
+        ))}
+    </div>
+
+    <div class="mt-8 grid grid-cols-1 md:grid-cols-3 gap-4">
+        <div class="bg-bg-base border border-neutral-gray rounded-lg p-5">
+            <div class="font-display text-[clamp(1.5rem,3vw,2.5rem)] font-bold text-text-primary mb-2">Aa</div>
+            <div class="font-display text-[0.75rem] text-text-muted">Playfair Display Bold</div>
+            <div class="font-display text-[0.85rem] text-text-primary mt-2">ABCDEFGHIJKLM<br>NOPQRSTUVWXYZ<br>abcdefghijklm<br>1234567890</div>
+        </div>
+        <div class="bg-bg-base border border-neutral-gray rounded-lg p-5">
+            <div class="font-sans text-[clamp(1.5rem,3vw,2.5rem)] font-bold text-text-primary mb-2">Aa</div>
+            <div class="font-sans text-[0.75rem] text-text-muted">Inter Semibold</div>
+            <div class="font-sans text-[0.85rem] text-text-primary mt-2">ABCDEFGHIJKLM<br>NOPQRSTUVWXYZ<br>abcdefghijklm<br>1234567890</div>
+        </div>
+        <div class="bg-bg-base border border-neutral-gray rounded-lg p-5">
+            <div class="font-mono text-[clamp(1.5rem,3vw,2.5rem)] font-bold text-text-primary mb-2">Aa</div>
+            <div class="font-mono text-[0.75rem] text-text-muted">IBM Plex Mono Medium</div>
+            <div class="font-mono text-[0.85rem] text-text-primary mt-2">ABCDEFGHIJKLM<br>NOPQRSTUVWXYZ<br>abcdefghijklm<br>1234567890</div>
+        </div>
+    </div>
+</Section>
+
+<!-- Tonalität -->
+<Section id="tonalitaet" gray>
+    <SectionHeader subtitle="Wie Redline klingt — in jedem Text, jeder E-Mail, jedem Gespräch.">
+        <span class="text-accent-red">Ton</span>alität
+    </SectionHeader>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-8">
+        {toneRules.map((r) => (
+            <Card hover={false}>
+                <div class="p-5">
+                    <h3 class="font-sans text-[0.95rem] font-semibold text-text-primary mb-2">{r.title}</h3>
+                    <p class="text-[0.85rem] text-text-secondary leading-relaxed">{r.desc}</p>
+                </div>
+            </Card>
+        ))}
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-[800px] mx-auto">
+        <div class="bg-bg-base border border-neutral-gray rounded-lg p-5">
+            <div class="font-mono text-[0.55rem] text-pass uppercase tracking-[0.1em] mb-3 font-semibold">So schreiben wir</div>
+            <ul class="list-none space-y-2 text-[0.85rem] text-text-secondary">
+                <li>"Wir bauen deine Website um — als Arbeitsprobe."</li>
+                <li>"Das dauert Tage, nicht Monate."</li>
+                <li>"Du kaufst keine Theorie."</li>
+            </ul>
+        </div>
+        <div class="bg-bg-base border border-neutral-gray rounded-lg p-5">
+            <div class="font-mono text-[0.55rem] text-accent-red uppercase tracking-[0.1em] mb-3 font-semibold">So nicht</div>
+            <ul class="list-none space-y-2 text-[0.85rem] text-text-muted">
+                <li>"Wir bieten innovative, ganzheitliche Digitallösungen."</li>
+                <li>"Unser agiler Prozess maximiert Ihre Synergien."</li>
+                <li>"Wir begleiten Sie auf Ihrer digitalen Reise."</li>
+            </ul>
+        </div>
+    </div>
+</Section>
+
+<!-- Bildsprache -->
+<Section id="bildsprache">
+    <SectionHeader subtitle="Industrial. Reduziert. Rot auf Schwarz-Weiß.">
+        <span class="text-accent-red">Bild</span>sprache & Ikonografie
+    </SectionHeader>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+        <div class="bg-bg-base border border-neutral-gray rounded-lg p-5">
+            <h3 class="font-sans text-[0.75rem] font-semibold uppercase tracking-[0.08em] mb-3 text-text-primary">Visuelle Prinzipien</h3>
+            <ul class="list-none space-y-2 text-[0.85rem] text-text-secondary">
+                <li>→ Monochromer Stil mit rotem Akzent als einzigem Farbsignal</li>
+                <li>→ Klare Linien, hoher Kontrast, keine Verläufe in Flächen</li>
+                <li>→ Geometrische Formen statt illustrativer Icons</li>
+                <li>→ Industrial-Ästhetik: Label-Plates, Seriennummern, Datenfelder</li>
+                <li>→ Kein Stock-Material — lieber abstrakt als generisch</li>
+            </ul>
+        </div>
+        <div class="bg-bg-base border border-neutral-gray rounded-lg p-5">
+            <h3 class="font-sans text-[0.75rem] font-semibold uppercase tracking-[0.08em] mb-3 text-text-primary">Ikonografie</h3>
+            <div class="flex gap-6 items-center justify-center py-4">
+                <div class="text-center">
+                    <div class="text-3xl text-steel-light mb-1">■</div>
+                    <div class="font-mono text-[0.5rem] text-text-muted uppercase">Quadrat</div>
+                </div>
+                <div class="text-center">
+                    <div class="text-3xl text-steel-light mb-1">▲</div>
+                    <div class="font-mono text-[0.5rem] text-text-muted uppercase">Dreieck</div>
+                </div>
+                <div class="text-center">
+                    <div class="text-3xl text-steel-light mb-1">◆</div>
+                    <div class="font-mono text-[0.5rem] text-text-muted uppercase">Raute</div>
+                </div>
+                <div class="text-center">
+                    <div class="text-3xl text-steel-light mb-1">●</div>
+                    <div class="font-mono text-[0.5rem] text-text-muted uppercase">Kreis</div>
+                </div>
+                <div class="text-center">
+                    <div class="text-3xl text-steel-light mb-1">◉</div>
+                    <div class="font-mono text-[0.5rem] text-text-muted uppercase">Bullseye</div>
+                </div>
+            </div>
+            <p class="text-[0.8rem] text-text-secondary text-center">Geometrische Symbole ersetzen klassische Icons. Jedes Service-Feld hat ein festes Symbol.</p>
+        </div>
+    </div>
+</Section>
+
+<!-- Layout-Prinzipien -->
+<Section id="layout" gray>
+    <SectionHeader subtitle="Konsistente Abstände, klare Hierarchie, responsive Grid.">
+        <span class="text-accent-red">Layout</span>-Prinzipien
+    </SectionHeader>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+        {[
+          { label: 'Max-Width', value: '1200px', desc: 'Content-Container' },
+          { label: 'Section Padding', value: '4rem / 2.75rem', desc: 'Desktop / Mobile' },
+          { label: 'Card Radius', value: '8px (lg)', desc: 'Buttons: 1px' },
+          { label: 'Grid Gaps', value: '1.5rem', desc: '1rem auf Mobile' },
+        ].map((item) => (
+            <div class="bg-bg-base border border-neutral-gray rounded-lg p-4 text-center">
+                <div class="font-mono text-xl font-bold text-text-primary mb-1">{item.value}</div>
+                <div class="font-mono text-[0.55rem] text-accent-red uppercase tracking-[0.1em] mb-1">{item.label}</div>
+                <div class="text-[0.75rem] text-text-muted">{item.desc}</div>
+            </div>
+        ))}
+    </div>
+
+    <div class="mt-6 bg-bg-base border border-neutral-gray rounded-lg p-5 max-w-[600px] mx-auto">
+        <h3 class="font-sans text-[0.75rem] font-semibold uppercase tracking-[0.08em] mb-3 text-text-primary">Responsive Breakpoints</h3>
+        <div class="space-y-1.5 font-mono text-[0.8rem] text-text-secondary">
+            <div class="flex justify-between border-b border-border-dark pb-1.5"><span>Desktop</span><span class="text-text-muted">&gt; 1024px</span></div>
+            <div class="flex justify-between border-b border-border-dark pb-1.5"><span>Tablet</span><span class="text-text-muted">768 – 1024px</span></div>
+            <div class="flex justify-between border-b border-border-dark pb-1.5"><span>Mobile</span><span class="text-text-muted">480 – 768px</span></div>
+            <div class="flex justify-between"><span>Small</span><span class="text-text-muted">&lt; 480px</span></div>
+        </div>
+    </div>
+</Section>
+
+<!-- Druckmaterialien -->
+<Section id="druckmaterialien">
+    <SectionHeader subtitle="Druckfertige Vorlagen als SVG. Skalierbar, editierbar, sofort einsetzbar.">
+        <span class="text-accent-red">Druck</span>materialien
+    </SectionHeader>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div>
+            <h3 class="font-sans text-[0.95rem] font-semibold mb-4 text-text-primary">Visitenkarte · 85 × 55 mm</h3>
+            <div class="grid grid-cols-2 gap-3 mb-4">
+                <div class="bg-bg-base border border-neutral-gray rounded-lg overflow-hidden aspect-[85/55]">
+                    <img src="/print/visitenkarte-vorne.svg" alt="Visitenkarte Vorderseite" class="w-full h-full object-contain p-2" loading="lazy">
+                </div>
+                <div class="bg-bg-base border border-neutral-gray rounded-lg overflow-hidden aspect-[85/55]">
+                    <img src="/print/visitenkarte-hinten.svg" alt="Visitenkarte Rückseite" class="w-full h-full object-contain p-2" loading="lazy">
+                </div>
+            </div>
+            <div class="flex gap-2">
+                <a href="/print/visitenkarte-vorne.svg" download class="font-mono text-[0.65rem] uppercase tracking-[0.08em] px-3 py-1.5 border border-neutral-gray rounded-[1px] text-text-secondary hover:border-accent-red hover:text-accent-red transition-colors">↓ Vorne</a>
+                <a href="/print/visitenkarte-hinten.svg" download class="font-mono text-[0.65rem] uppercase tracking-[0.08em] px-3 py-1.5 border border-neutral-gray rounded-[1px] text-text-secondary hover:border-accent-red hover:text-accent-red transition-colors">↓ Hinten</a>
+            </div>
+        </div>
+        <div>
+            <h3 class="font-sans text-[0.95rem] font-semibold mb-4 text-text-primary">Flyer · DL-Format · 99 × 210 mm</h3>
+            <div class="grid grid-cols-2 gap-3 mb-4">
+                <div class="bg-bg-base border border-neutral-gray rounded-lg overflow-hidden aspect-[99/210]">
+                    <img src="/print/flyer-vorne.svg" alt="Flyer Vorderseite" class="w-full h-full object-contain p-2" loading="lazy">
+                </div>
+                <div class="bg-bg-base border border-neutral-gray rounded-lg overflow-hidden aspect-[99/210]">
+                    <img src="/print/flyer-hinten.svg" alt="Flyer Rückseite" class="w-full h-full object-contain p-2" loading="lazy">
+                </div>
+            </div>
+            <div class="flex gap-2">
+                <a href="/print/flyer-vorne.svg" download class="font-mono text-[0.65rem] uppercase tracking-[0.08em] px-3 py-1.5 border border-neutral-gray rounded-[1px] text-text-secondary hover:border-accent-red hover:text-accent-red transition-colors">↓ Vorne</a>
+                <a href="/print/flyer-hinten.svg" download class="font-mono text-[0.65rem] uppercase tracking-[0.08em] px-3 py-1.5 border border-neutral-gray rounded-[1px] text-text-secondary hover:border-accent-red hover:text-accent-red transition-colors">↓ Hinten</a>
+            </div>
+        </div>
+    </div>
+</Section>
+
+</main>
+
+<Footer />
+
+</Layout>

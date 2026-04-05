@@ -1,0 +1,68 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 99 210" width="99mm" height="210mm">
+  <!-- Background -->
+  <rect width="99" height="210" fill="#FFFFFF"/>
+
+  <!-- === TOP: Process section === -->
+  <text x="49.5" y="16" text-anchor="middle" font-family="Playfair Display, serif" font-size="4.5" font-weight="700" fill="#1A1A1A">So funktioniert's</text>
+  <line x1="40" y1="20" x2="59" y2="20" stroke="#C41E3A" stroke-width="0.4"/>
+
+  <!-- Step 1 -->
+  <circle cx="20" cy="35" r="5" fill="none" stroke="#C41E3A" stroke-width="0.4"/>
+  <text x="20" y="37" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="3.5" font-weight="700" fill="#2D2D2D">01</text>
+  <text x="30" y="33.5" font-family="Inter, sans-serif" font-size="2.5" font-weight="600" fill="#1A1A1A">Website einsenden</text>
+  <text x="30" y="38" font-family="Inter, sans-serif" font-size="2" fill="#4A4A4A">Deine URL + 2-3 Referenzen</text>
+
+  <!-- Dashed arrow -->
+  <line x1="20" y1="42" x2="20" y2="48" stroke="#C41E3A" stroke-width="0.3" stroke-dasharray="1,1"/>
+
+  <!-- Step 2 -->
+  <circle cx="20" cy="55" r="5" fill="none" stroke="#C41E3A" stroke-width="0.4"/>
+  <text x="20" y="57" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="3.5" font-weight="700" fill="#2D2D2D">02</text>
+  <text x="30" y="53.5" font-family="Inter, sans-serif" font-size="2.5" font-weight="600" fill="#1A1A1A">Wir bauen um</text>
+  <text x="30" y="58" font-family="Inter, sans-serif" font-size="2" fill="#4A4A4A">KI + Mensch = deine neue Website</text>
+
+  <!-- Dashed arrow -->
+  <line x1="20" y1="62" x2="20" y2="68" stroke="#C41E3A" stroke-width="0.3" stroke-dasharray="1,1"/>
+
+  <!-- Step 3 -->
+  <circle cx="20" cy="75" r="5" fill="none" stroke="#C41E3A" stroke-width="0.4"/>
+  <text x="20" y="77" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="3.5" font-weight="700" fill="#2D2D2D">03</text>
+  <text x="30" y="73.5" font-family="Inter, sans-serif" font-size="2.5" font-weight="600" fill="#1A1A1A">Ergebnis bewerten</text>
+  <text x="30" y="78" font-family="Inter, sans-serif" font-size="2" fill="#4A4A4A">Du entscheidest erst danach</text>
+
+  <!-- Separator -->
+  <line x1="10" y1="90" x2="89" y2="90" stroke="#E8E8E8" stroke-width="0.3"/>
+
+  <!-- === MIDDLE: Services === -->
+  <text x="49.5" y="102" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="2" fill="#808080" letter-spacing="0.12em" font-weight="500">LEISTUNGEN</text>
+
+  <!-- Service items -->
+  <text x="15" y="115" font-family="Inter, sans-serif" font-size="2.5" fill="#4A4A4A">◆</text>
+  <text x="21" y="115" font-family="Inter, sans-serif" font-size="2.5" font-weight="600" fill="#1A1A1A">Landing Pages</text>
+  <text x="21" y="119.5" font-family="Inter, sans-serif" font-size="2" fill="#666666">Conversion-optimiert, schnell live</text>
+
+  <text x="15" y="128" font-family="Inter, sans-serif" font-size="2.5" fill="#4A4A4A">■</text>
+  <text x="21" y="128" font-family="Inter, sans-serif" font-size="2.5" font-weight="600" fill="#1A1A1A">Unternehmenswebsites</text>
+  <text x="21" y="132.5" font-family="Inter, sans-serif" font-size="2" fill="#666666">Vertrauen aufbauen, Kompetenz zeigen</text>
+
+  <text x="15" y="141" font-family="Inter, sans-serif" font-size="2.5" fill="#4A4A4A">▲</text>
+  <text x="21" y="141" font-family="Inter, sans-serif" font-size="2.5" font-weight="600" fill="#1A1A1A">Web-Applikationen</text>
+  <text x="21" y="145.5" font-family="Inter, sans-serif" font-size="2" fill="#666666">Interaktive Tools und Dashboards</text>
+
+  <text x="15" y="154" font-family="Inter, sans-serif" font-size="2.5" fill="#4A4A4A">●</text>
+  <text x="21" y="154" font-family="Inter, sans-serif" font-size="2.5" font-weight="600" fill="#1A1A1A">Relaunch & Optimierung</text>
+  <text x="21" y="158.5" font-family="Inter, sans-serif" font-size="2" fill="#666666">Modernisierung statt Neuanfang</text>
+
+  <!-- Separator -->
+  <line x1="10" y1="167" x2="89" y2="167" stroke="#E8E8E8" stroke-width="0.3"/>
+
+  <!-- === BOTTOM: Testimonial === -->
+  <rect x="10" y="173" width="79" height="26" rx="1.5" fill="#F5F5F5" stroke="#E8E8E8" stroke-width="0.3"/>
+  <text x="49.5" y="181" text-anchor="middle" font-family="Inter, sans-serif" font-size="2" fill="#4A4A4A" font-style="italic">"Redline hat einfach gebaut —</text>
+  <text x="49.5" y="185" text-anchor="middle" font-family="Inter, sans-serif" font-size="2" fill="#4A4A4A" font-style="italic">und es hat sofort gepasst."</text>
+  <text x="49.5" y="192" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="1.6" fill="#808080">Katharina Wendt, Geschäftsführerin</text>
+
+  <!-- Footer bar -->
+  <rect x="0" y="205" width="99" height="5" fill="#C41E3A"/>
+  <text x="49.5" y="208.5" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="2.2" font-weight="600" fill="#FFFFFF" letter-spacing="0.08em">redline.dev</text>
+</svg>

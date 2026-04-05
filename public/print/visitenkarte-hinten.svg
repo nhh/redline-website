@@ -1,0 +1,54 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 85 55" width="85mm" height="55mm">
+  <defs>
+    <!-- Matching speckled/mehliert texture -->
+    <filter id="grain-vh">
+      <feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="4" seed="5" result="noise"/>
+      <feColorMatrix type="saturate" values="0" in="noise" result="gray-noise"/>
+      <feComponentTransfer in="gray-noise" result="faint-noise">
+        <feFuncA type="linear" slope="0.06"/>
+      </feComponentTransfer>
+      <feBlend in="SourceGraphic" in2="faint-noise" mode="multiply"/>
+    </filter>
+    <!-- Glow for red line -->
+    <filter id="glow-vkh" x="-20%" y="-100%" width="140%" height="300%">
+      <feGaussianBlur in="SourceGraphic" stdDeviation="0.5" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+    <linearGradient id="streak-vkh" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#C41E3A" stop-opacity="0"/>
+      <stop offset="15%" stop-color="#C41E3A" stop-opacity="0.7"/>
+      <stop offset="50%" stop-color="#E8334F" stop-opacity="1"/>
+      <stop offset="85%" stop-color="#C41E3A" stop-opacity="0.7"/>
+      <stop offset="100%" stop-color="#C41E3A" stop-opacity="0"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Background: silver-white, mehliert -->
+  <rect width="85" height="55" fill="#F4F3F1" filter="url(#grain-vh)"/>
+
+  <!-- Red inset border -->
+  <rect x="2.5" y="2.5" width="80" height="50" fill="none" stroke="#C41E3A" stroke-width="0.4" />
+
+  <!-- Corner marks -->
+  <line x1="5" y1="3" x2="5" y2="5.5" stroke="#D8D6D2" stroke-width="0.15"/>
+  <line x1="3" y1="5" x2="5.5" y2="5" stroke="#D8D6D2" stroke-width="0.15"/>
+  <line x1="80" y1="3" x2="80" y2="5.5" stroke="#D8D6D2" stroke-width="0.15"/>
+  <line x1="79.5" y1="5" x2="82" y2="5" stroke="#D8D6D2" stroke-width="0.15"/>
+  <line x1="5" y1="52" x2="5" y2="49.5" stroke="#D8D6D2" stroke-width="0.15"/>
+  <line x1="3" y1="50" x2="5.5" y2="50" stroke="#D8D6D2" stroke-width="0.15"/>
+  <line x1="80" y1="52" x2="80" y2="49.5" stroke="#D8D6D2" stroke-width="0.15"/>
+  <line x1="79.5" y1="50" x2="82" y2="50" stroke="#D8D6D2" stroke-width="0.15"/>
+
+  <!-- Centered wordmark -->
+  <text x="42.5" y="26" text-anchor="middle" font-family="Playfair Display, serif" font-size="9" font-weight="700" fill="#1A1A1A" letter-spacing="-0.02em">REDLINE</text>
+
+  <!-- Red streak below wordmark -->
+  <line x1="5" y1="30" x2="80" y2="30" stroke="url(#streak-vkh)" stroke-width="1" stroke-linecap="round" filter="url(#glow-vkh)"/>
+  <line x1="15" y1="30" x2="70" y2="30" stroke="#E8334F" stroke-width="0.3" stroke-linecap="round" opacity="0.4"/>
+
+  <!-- Tagline -->
+  <text x="42.5" y="37" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="1.7" fill="#8A8680" letter-spacing="0.25em">PRECISION AI ENGINEERING</text>
+</svg>
