@@ -412,3 +412,4 @@ details[open] > .faq-answer {
 ::-webkit-scrollbar-track { background: var(--color-light-gray); }
 ::-webkit-scrollbar-thumb { background: var(--color-neutral-gray); border-radius: 1px; }
 ::-webkit-scrollbar-thumb:hover { background: var(--color-steel-mid); }
+
