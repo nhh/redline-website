@@ -1,0 +1,177 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="Vergleich — Redline">
+
+<div id="compare" class="fixed inset-0 bg-white overflow-hidden">
+
+    <iframe id="frame-old" class="absolute inset-0 w-full h-full border-0 bg-white" referrerpolicy="no-referrer" title="Alte Seite"></iframe>
+    <iframe id="frame-new" class="absolute inset-0 w-full h-full border-0 bg-white" referrerpolicy="no-referrer" title="Neue Seite" style="clip-path: inset(0 50% 0 0)"></iframe>
+
+    <div id="divider" class="absolute top-0 bottom-0 z-20 w-[2px] -translate-x-1/2 bg-accent-red pointer-events-none" style="left: 50%">
+        <button id="handle" type="button" aria-label="Vergleichs-Slider ziehen" class="pointer-events-auto cursor-ew-resize absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-14 h-14 rounded-full bg-accent-red text-white flex items-center justify-center shadow-[0_6px_24px_rgba(0,0,0,0.35)] border-2 border-white touch-none">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <polyline points="9 6 3 12 9 18" />
+                <polyline points="15 6 21 12 15 18" />
+            </svg>
+        </button>
+    </div>
+
+    <div class="absolute top-4 left-4 z-20 text-[10px] font-mono uppercase tracking-wider bg-primary-black text-white px-3 py-1.5 select-none pointer-events-none">Neu</div>
+    <div class="absolute top-4 right-4 z-20 text-[10px] font-mono uppercase tracking-wider bg-primary-black text-white px-3 py-1.5 select-none pointer-events-none">Alt</div>
+
+    <div id="panel" class="absolute bottom-4 left-1/2 -translate-x-1/2 z-30 bg-white border border-border-mid shadow-[0_8px_32px_rgba(0,0,0,0.18)] p-4 flex flex-col gap-2 w-[min(640px,calc(100vw-2rem))]">
+        <div class="flex items-center justify-between mb-1">
+            <span class="text-[10px] font-mono uppercase tracking-wider text-text-label">Vergleich · Alt vs. Neu</span>
+            <button id="panel-close" type="button" class="text-text-label hover:text-text-primary text-xs font-mono leading-none" aria-label="Panel schließen">[ × ]</button>
+        </div>
+        <label class="flex items-center gap-2">
+            <span class="text-[10px] font-mono uppercase text-text-label w-10 shrink-0">Alt</span>
+            <input id="url-old" type="url" placeholder="https://alte-seite.tld" autocomplete="url" class="flex-1 min-w-0 border border-border-mid px-2 py-1.5 text-sm font-mono focus:outline-none focus:border-accent-red" />
+        </label>
+        <label class="flex items-center gap-2">
+            <span class="text-[10px] font-mono uppercase text-text-label w-10 shrink-0">Neu</span>
+            <input id="url-new" type="url" placeholder="https://neue-seite.tld" autocomplete="url" class="flex-1 min-w-0 border border-border-mid px-2 py-1.5 text-sm font-mono focus:outline-none focus:border-accent-red" />
+        </label>
+        <div class="flex items-center justify-between gap-3 mt-1">
+            <p class="text-[10px] text-text-muted font-mono leading-snug">Manche Seiten verbieten das Einbetten in iframes (X-Frame-Options / CSP).</p>
+            <button id="load" type="button" class="bg-accent-red text-white px-4 py-1.5 text-xs font-mono uppercase tracking-wider hover:bg-red-dark shrink-0">Laden</button>
+        </div>
+    </div>
+
+    <button id="panel-open" type="button" class="hidden absolute bottom-4 left-1/2 -translate-x-1/2 z-30 bg-primary-black text-white px-4 py-2 text-xs font-mono uppercase tracking-wider hover:bg-dark-gray">URLs ändern</button>
+
+</div>
+
+<script is:inline>
+(function () {
+    const frameOld = document.getElementById('frame-old');
+    const frameNew = document.getElementById('frame-new');
+    const divider = document.getElementById('divider');
+    const handle = document.getElementById('handle');
+    const panel = document.getElementById('panel');
+    const panelOpen = document.getElementById('panel-open');
+    const panelClose = document.getElementById('panel-close');
+    const inputOld = document.getElementById('url-old');
+    const inputNew = document.getElementById('url-new');
+    const loadBtn = document.getElementById('load');
+
+    let dragging = false;
+
+    function setPos(ratio) {
+        const pos = Math.max(0, Math.min(1, ratio));
+        const pct = pos * 100;
+        divider.style.left = pct + '%';
+        frameNew.style.clipPath = 'inset(0 ' + (100 - pct) + '% 0 0)';
+    }
+
+    function pointerX(e) {
+        if (e.touches && e.touches.length) return e.touches[0].clientX;
+        return e.clientX;
+    }
+
+    function onMove(e) {
+        if (!dragging) return;
+        setPos(pointerX(e) / window.innerWidth);
+        if (e.cancelable) e.preventDefault();
+    }
+
+    function onUp() {
+        if (!dragging) return;
+        dragging = false;
+        frameOld.style.pointerEvents = '';
+        frameNew.style.pointerEvents = '';
+        document.body.style.userSelect = '';
+    }
+
+    function onDown(e) {
+        dragging = true;
+        frameOld.style.pointerEvents = 'none';
+        frameNew.style.pointerEvents = 'none';
+        document.body.style.userSelect = 'none';
+        onMove(e);
+    }
+
+    handle.addEventListener('mousedown', onDown);
+    handle.addEventListener('touchstart', onDown, { passive: false });
+    window.addEventListener('mousemove', onMove);
+    window.addEventListener('touchmove', onMove, { passive: false });
+    window.addEventListener('mouseup', onUp);
+    window.addEventListener('touchend', onUp);
+    window.addEventListener('touchcancel', onUp);
+
+    function b64encode(obj) {
+        const bytes = new TextEncoder().encode(JSON.stringify(obj));
+        let binary = '';
+        for (let i = 0; i < bytes.length; i++) binary += String.fromCharCode(bytes[i]);
+        return btoa(binary).replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, '');
+    }
+
+    function b64decode(str) {
+        try {
+            const padded = str.replace(/-/g, '+').replace(/_/g, '/') + '==='.slice((str.length + 3) % 4);
+            const binary = atob(padded);
+            const bytes = new Uint8Array(binary.length);
+            for (let i = 0; i < binary.length; i++) bytes[i] = binary.charCodeAt(i);
+            return JSON.parse(new TextDecoder().decode(bytes));
+        } catch (e) {
+            return null;
+        }
+    }
+
+    function applyUrls(a, b) {
+        if (a) frameOld.src = a; else frameOld.removeAttribute('src');
+        if (b) frameNew.src = b; else frameNew.removeAttribute('src');
+    }
+
+    function persist(a, b) {
+        const params = new URLSearchParams(location.search);
+        params.set('s', b64encode({ a: a, b: b }));
+        history.replaceState(null, '', location.pathname + '?' + params.toString());
+    }
+
+    function showPanel(show) {
+        panel.classList.toggle('hidden', !show);
+        panelOpen.classList.toggle('hidden', show);
+    }
+
+    function loadFromQuery() {
+        const s = new URLSearchParams(location.search).get('s');
+        if (!s) return false;
+        const data = b64decode(s);
+        if (!data || typeof data !== 'object') return false;
+        const a = typeof data.a === 'string' ? data.a : '';
+        const b = typeof data.b === 'string' ? data.b : '';
+        inputOld.value = a;
+        inputNew.value = b;
+        applyUrls(a, b);
+        return !!(a || b);
+    }
+
+    loadBtn.addEventListener('click', function () {
+        const a = inputOld.value.trim();
+        const b = inputNew.value.trim();
+        applyUrls(a, b);
+        persist(a, b);
+        if (a || b) showPanel(false);
+    });
+
+    [inputOld, inputNew].forEach(function (el) {
+        el.addEventListener('keydown', function (e) {
+            if (e.key === 'Enter') {
+                e.preventDefault();
+                loadBtn.click();
+            }
+        });
+    });
+
+    panelClose.addEventListener('click', function () { showPanel(false); });
+    panelOpen.addEventListener('click', function () { showPanel(true); });
+
+    if (loadFromQuery()) showPanel(false);
+    setPos(0.5);
+})();
+</script>
+
+</Layout>

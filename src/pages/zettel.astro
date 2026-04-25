@@ -1,0 +1,548 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Navbar from '../components/Navbar.astro';
+import Section from '../components/Section.astro';
+import SectionHeader from '../components/SectionHeader.astro';
+import Button from '../components/Button.astro';
+import Card from '../components/Card.astro';
+import FaqItem from '../components/FaqItem.astro';
+import Footer from '../components/Footer.astro';
+
+const features = [
+  { id: 'FEA-001', icon: '▶', title: 'Auftrag in 30 Sekunden', body: 'Kunde auswählen oder anlegen, Adresse, Tätigkeit — fertig. Keine 20-Feld-Formulare, keine Pflichtschulung.' },
+  { id: 'FEA-002', icon: '◐', title: 'Zeit kommt aus Stempel', body: 'Hast du Stempel im Einsatz? Zeiten werden automatisch dem richtigen Auftrag zugeordnet. Sonst: manuell mit zwei Klicks.' },
+  { id: 'FEA-003', icon: '◆', title: 'Material aus Vorlage', body: 'Stückpreise einmal hinterlegen, beim Auftrag per Klick hinzufügen. Nie wieder „wie viel kostet ein Meter Kabel XYZ?".' },
+  { id: 'FEA-004', icon: '■', title: 'Fotos direkt aus der Kamera', body: 'Vorher/Nachher-Bilder landen sofort im Auftrag. Keine WhatsApp-Umwege, keine verlorenen Handy-Fotos.' },
+  { id: 'FEA-005', icon: '◉', title: 'Kundenunterschrift auf dem Handy', body: 'Auf der Baustelle, im Kundenhof, vor der Werkstatt — Kunde unterschreibt mit dem Finger. Rechtssicher, datiert, archiviert.' },
+  { id: 'FEA-006', icon: '▲', title: 'PDF auf Knopfdruck', body: 'Regiebericht oder Stundennachweis als fertiges PDF — zum Versenden, Ausdrucken oder für die Rechnung.' },
+  { id: 'FEA-007', icon: '□', title: 'Offline-first', body: 'Auf der Baustelle kein Netz? Egal. Zettel funktioniert offline und synchronisiert, sobald wieder Empfang da ist.' },
+  { id: 'FEA-008', icon: '◈', title: 'Läuft auf jedem Webspace', body: 'Kein eigener Server nötig. PHP-fähiger Hoster genügt — bei 1&1, Hetzner, All-Inkl oder wo du schon deine Website hostest.' },
+];
+
+const workflow = [
+  { step: '01', title: 'Auftrag anlegen', body: 'Kunde, Adresse, Leistung. 30 Sekunden am Handy, bevor du mit der Arbeit beginnst.' },
+  { step: '02', title: 'Arbeit erfassen', body: 'Zeit, Material, Fotos — live vor Ort. Stempel-Zeiten fließen automatisch ein.' },
+  { step: '03', title: 'Unterschreiben lassen', body: 'Der Kunde unterschreibt mit dem Finger. Datum, Uhrzeit und Position werden mit protokolliert.' },
+  { step: '04', title: 'PDF raus, Rechnung schreiben', body: 'Ein Klick, fertiges PDF. Direkt als Anhang in die Rechnung oder ins E-Mail-Archiv.' },
+];
+
+const tiers = [
+  { name: 'Team', size: 'bis 5 Mitarbeiter', price: '490 €', highlight: false },
+  { name: 'Büro', size: 'bis 15 Mitarbeiter', price: '990 €', highlight: true },
+  { name: 'Betrieb', size: 'bis 25 Mitarbeiter', price: '1.490 €', highlight: false },
+  { name: 'Unternehmen', size: '50+ Mitarbeiter', price: 'ab 2.490 €', highlight: false },
+];
+
+const tierIncludes = [
+  'Vollständige Software-Lizenz',
+  'Installation per FTP oder Docker (Anleitung)',
+  'E-Mail-Support bei Einrichtung',
+  '1 Jahr Security- & Bugfix-Updates',
+  'Integration mit Stempel (falls vorhanden)',
+  'Vollständiger Source-Code-Zugang',
+];
+
+const faqs = [
+  { q: 'Was unterscheidet Zettel von einem Rechnungsprogramm?', a: 'Zettel endet beim unterschriebenen Leistungsnachweis — Rechnungsprogramme fangen dort an. Das PDF aus Zettel ist die <strong>Grundlage</strong> für die Rechnung (SevDesk, Lexoffice, DATEV oder handgeschrieben). Wir wollen nicht DAS Rechnungsprogramm sein, sondern die saubere Dokumentations-Schicht davor.' },
+  { q: 'Ist die Unterschrift auf dem Handy rechtssicher?', a: 'Für die normale Werkleistungs-Dokumentation und als Gewährleistungsnachweis: ja. Die einfache elektronische Signatur (eIDAS, Art. 25) ist als Beweismittel zugelassen. Für qualifizierte Signaturen (notarielle Vorgänge etc.) gilt das nicht — dafür ist Zettel nicht gedacht.' },
+  { q: 'Funktioniert das auf der Baustelle ohne Netz?', a: 'Ja. Zettel ist als Progressive Web App gebaut — einmal auf dem Handy installiert, funktioniert es komplett offline. Sobald Netz da ist, synchronisiert alles mit dem Server. Keine verlorenen Einträge.' },
+  { q: 'Kann ich Zettel ohne Stempel nutzen?', a: 'Absolut. Zettel funktioniert eigenständig — Zeiten trägst du dann manuell ein (oder gar nicht, wenn du nur Material und Leistung dokumentierst). Wer Stempel schon hat, bekommt die Zeit-Integration gratis dazu.' },
+  { q: 'Wo werden Fotos und Unterschriften gespeichert?', a: 'Auf deinem Webspace. Stempel speichert nichts bei uns — alle Fotos, Unterschriften und Aufträge liegen in deiner Datenbank, auf deinem Server. Du entscheidest über Backups und Zugriff.' },
+  { q: 'Export zu Lexoffice, SevDesk, DATEV?', a: 'Das fertige PDF lässt sich an jede Rechnungssoftware anhängen. Für Lexoffice und SevDesk gibt es zusätzlich REST-API-Webhooks, die den Auftrag direkt als Belegvorschlag übergeben.' },
+  { q: 'Was ist, wenn der Kunde das PDF später anzweifelt?', a: 'Jede Unterschrift wird mit Zeitstempel, Geräte-ID und (optional) Geo-Position protokolliert. Der Audit-Trail zeigt jede Änderung am Auftrag. Im Streitfall hast du objektive Belege — nicht nur ein Papier-Zettel.' },
+];
+---
+
+<Layout title="Zettel — Digitaler Regiebericht · Redline" description="Zettel ist das digitale Auftragsbuch für Handwerk, KFZ und Service: Stunden, Material, Fotos und Kundenunterschrift — direkt vor Ort. Läuft auf jedem Webspace.">
+
+<div class="bg-texture fixed inset-0 -z-10 pointer-events-none bg-linear-to-br from-white to-bg-floor overflow-hidden" aria-hidden="true">
+    <div class="bg-accent-glow bg-accent-glow-1"></div>
+    <div class="bg-accent-glow bg-accent-glow-2"></div>
+</div>
+
+<Navbar />
+
+<!-- Hero -->
+<header id="main-content" class="pt-[calc(52px+3rem)] pb-12 px-5 max-w-[1200px] mx-auto">
+    <div class="max-w-[760px] mx-auto text-center mb-10">
+        <div class="badge-clip inline-flex items-center gap-2 bg-bg-base border border-border-dark px-2.5 py-1 font-mono text-[0.55rem] text-text-muted mb-5 font-medium tracking-[0.1em] uppercase shadow-[0_1px_2px_rgba(0,0,0,0.08)]">
+            Produkt · Handwerk · KFZ · Service
+        </div>
+        <h1 class="font-display text-[clamp(2rem,5vw,3.75rem)] font-bold leading-[1.1] mb-4 tracking-tight text-primary-black">Regiebericht, <span class="text-accent-red">digital</span>.</h1>
+        <p class="text-lg text-text-secondary mb-3">Stunden, Material, Fotos, Unterschrift — <span class="text-accent-red">vor Ort erfasst</span>.</p>
+        <p class="text-[1rem] text-text-secondary mb-7 max-w-[620px] leading-relaxed mx-auto">Zerknitterte Stundenzettel am Freitagabend. Handy-Fotos in der WhatsApp-History. Materiallisten auf Bonbon-Papier. <strong>Schluss damit.</strong> Zettel dokumentiert den Auftrag vor Ort — und unterschreiben lässt der Kunde gleich mit.</p>
+        <div class="flex gap-3 justify-center max-sm:flex-col">
+            <Button href="#tarife">
+                <span>Jetzt einführen</span><span aria-hidden="true">→</span>
+            </Button>
+            <Button href="#features" variant="secondary">Features ansehen</Button>
+        </div>
+    </div>
+
+    <!-- Phone mock -->
+    <div class="flex justify-center reveal">
+        <div class="zettel-phone relative">
+            <div class="zettel-phone-frame">
+                <div class="zettel-phone-notch"></div>
+                <div class="zettel-phone-screen">
+                    <div class="px-4 pt-3 pb-1 flex items-center justify-between border-b border-border-dark">
+                        <span class="font-mono text-[0.55rem] text-text-muted tracking-[0.1em] uppercase">zettel.app</span>
+                        <span class="font-mono text-[0.55rem] text-text-primary tabular-nums">14:32</span>
+                    </div>
+                    <div class="px-4 py-3 border-b border-border-dark">
+                        <div class="font-mono text-[0.5rem] text-text-muted tracking-[0.1em] uppercase mb-0.5">Auftrag · 2026-137</div>
+                        <div class="font-sans text-[0.95rem] font-semibold text-text-primary leading-tight">Heizung Wartung</div>
+                        <div class="text-[0.7rem] text-text-muted">Fam. Krause · Lindenweg 12</div>
+                    </div>
+
+                    <div class="px-4 py-3 border-b border-border-dark flex items-center justify-between">
+                        <div>
+                            <div class="font-mono text-[0.5rem] text-text-muted tracking-[0.1em] uppercase mb-0.5">Arbeitszeit</div>
+                            <div class="font-mono text-[0.95rem] font-semibold text-text-primary tabular-nums">2h 25m</div>
+                        </div>
+                        <span class="font-mono text-[0.5rem] bg-pass-muted text-pass tracking-[0.1em] uppercase font-semibold px-2 py-1 rounded-[1px]">← Stempel</span>
+                    </div>
+
+                    <div class="px-4 py-3 border-b border-border-dark">
+                        <div class="font-mono text-[0.5rem] text-text-muted tracking-[0.1em] uppercase mb-2">Material</div>
+                        <ul class="list-none flex flex-col gap-1.5">
+                            {[
+                                { item: 'Dichtung 3/4″', q: '2×', p: '3,40 €' },
+                                { item: 'Heizöl-Filter', q: '1×', p: '28,90 €' },
+                                { item: 'Wartungsprotokoll', q: '1×', p: 'inkl.' },
+                            ].map((m) => (
+                                <li class="flex items-baseline gap-2 text-[0.7rem]">
+                                    <span class="font-mono text-text-muted tabular-nums w-6">{m.q}</span>
+                                    <span class="text-text-primary flex-1">{m.item}</span>
+                                    <span class="font-mono text-text-primary tabular-nums">{m.p}</span>
+                                </li>
+                            ))}
+                        </ul>
+                    </div>
+
+                    <div class="px-4 py-3 border-b border-border-dark">
+                        <div class="font-mono text-[0.5rem] text-text-muted tracking-[0.1em] uppercase mb-2">Fotos · 3</div>
+                        <div class="grid grid-cols-3 gap-1.5">
+                            <div class="aspect-square bg-bg-inset border border-border-dark rounded-[1px] flex items-center justify-center">
+                                <span class="text-steel-mid text-lg" aria-hidden="true">▨</span>
+                            </div>
+                            <div class="aspect-square bg-bg-inset border border-border-dark rounded-[1px] flex items-center justify-center">
+                                <span class="text-steel-mid text-lg" aria-hidden="true">▨</span>
+                            </div>
+                            <div class="aspect-square bg-bg-inset border border-border-dark rounded-[1px] flex items-center justify-center">
+                                <span class="text-steel-mid text-lg" aria-hidden="true">▨</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="px-4 py-3">
+                        <div class="font-mono text-[0.5rem] text-text-muted tracking-[0.1em] uppercase mb-2">Kundenunterschrift</div>
+                        <div class="bg-bg-inset border border-dashed border-border-mid rounded-[1px] p-3 h-16 flex items-center justify-center relative">
+                            <svg viewBox="0 0 200 40" class="w-full h-full" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
+                                <path class="zettel-signature" d="M 20 22 Q 30 8, 42 24 T 62 22 Q 72 12, 82 24 T 106 20 Q 120 8, 128 28 T 150 22 Q 164 12, 180 24" fill="none" stroke="var(--color-accent-red)" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" pathLength="100"/>
+                            </svg>
+                        </div>
+                        <div class="font-mono text-[0.5rem] text-text-muted tracking-[0.08em] mt-1">M. Krause · 22.04. 14:31 · signiert</div>
+                    </div>
+
+                    <div class="p-3 border-t border-border-dark bg-bg-inset">
+                        <button class="w-full bg-accent-red text-white font-mono text-[0.65rem] tracking-[0.12em] uppercase font-semibold py-3 rounded-[1px]" aria-label="Abschließen-Button">✓ Abschließen &amp; PDF</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<main>
+
+<!-- Features -->
+<Section id="features" gray>
+    <SectionHeader subtitle="Das, was jeder Handwerker, KFZler und Service-Betrieb täglich braucht. Nichts, was er nicht braucht.">Was <span class="text-accent-red">Zettel</span> kann</SectionHeader>
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-6 reveal-stagger">
+        {features.map((f) => (
+            <Card id={f.id}>
+                <div class="text-lg pt-3.5 px-4 pb-1.5 text-accent-red" aria-hidden="true">{f.icon}</div>
+                <h3 class="font-sans text-[0.7rem] px-4 mb-1.5 text-text-primary font-semibold uppercase tracking-[0.08em]">{f.title}</h3>
+                <p class="text-text-secondary text-[0.82rem] leading-relaxed px-4 pb-4">{f.body}</p>
+            </Card>
+        ))}
+    </div>
+</Section>
+
+<!-- Workflow -->
+<Section id="ablauf">
+    <SectionHeader subtitle="Vier Schritte. Vom ersten Handgriff bis zum fertigen PDF.">Von der Baustelle zur <span class="text-accent-red">Rechnung</span></SectionHeader>
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 max-w-[1100px] mx-auto reveal-stagger">
+        {workflow.map((w, i, arr) => (
+            <div class="bg-bg-base border border-border-mid rounded-[2px] p-5 max-sm:p-4 relative">
+                <div class="flex items-baseline gap-2 mb-2">
+                    <span class="font-mono text-2xl font-bold text-accent-red tabular-nums">{w.step}</span>
+                    <span class="font-mono text-[0.55rem] text-text-muted tracking-[0.14em] uppercase">Schritt</span>
+                </div>
+                <h3 class="font-sans text-[0.85rem] font-semibold mb-1.5 text-text-primary">{w.title}</h3>
+                <p class="text-[0.82rem] text-text-secondary leading-snug">{w.body}</p>
+                {i < arr.length - 1 && (
+                    <span class="hidden lg:block absolute top-1/2 -right-[14px] text-steel-mid text-xl" aria-hidden="true">→</span>
+                )}
+            </div>
+        ))}
+    </div>
+</Section>
+
+<!-- Zentrale → Außendienst -->
+<Section id="dispatch" gray>
+    <SectionHeader subtitle="Aufgabenverteilung ohne WhatsApp-Chaos, Anruf-Ketten und Zettel-Wirtschaft.">Zentrale <span class="text-accent-red">↔</span> Außendienst</SectionHeader>
+
+    <p class="text-text-secondary text-[0.95rem] max-sm:text-[0.9rem] leading-relaxed text-center max-md:text-left mb-8 max-w-[740px] mx-auto">
+        Wer macht heute welchen Auftrag? Wo steht Tour 3? Was hängt, weil ein Ersatzteil fehlt? <strong class="text-text-primary">Zettel verteilt Aufgaben aus der Zentrale aufs Handy</strong> — und meldet Status live zurück. Kein Telefonbaum, keine E-Mail-Loops.
+    </p>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 max-w-[1100px] mx-auto reveal-stagger mb-8">
+        <div class="bg-bg-base border border-border-mid rounded-[2px] p-5 max-sm:p-4">
+            <div class="text-accent-red text-lg mb-2" aria-hidden="true">▶</div>
+            <h3 class="font-sans text-[0.75rem] font-semibold uppercase tracking-[0.08em] mb-2 text-text-primary">Zuweisen per Drag-&amp;-Drop</h3>
+            <p class="text-[0.82rem] text-text-secondary leading-snug">Dispatcher-Board in der Zentrale — Aufträge auf Personen oder Touren ziehen. Der Monteur sieht seinen Auftrag sofort auf dem Handy.</p>
+        </div>
+        <div class="bg-bg-base border border-border-mid rounded-[2px] p-5 max-sm:p-4">
+            <div class="text-accent-red text-lg mb-2" aria-hidden="true">◉</div>
+            <h3 class="font-sans text-[0.75rem] font-semibold uppercase tracking-[0.08em] mb-2 text-text-primary">Statusupdates live zurück</h3>
+            <p class="text-[0.82rem] text-text-secondary leading-snug">Unterwegs · Angekommen · In Arbeit · Fertig. Ohne Anruf, ohne „kurz melden bitte". Die Zentrale sieht jeden Schritt in Echtzeit.</p>
+        </div>
+        <div class="bg-bg-base border border-border-mid rounded-[2px] p-5 max-sm:p-4">
+            <div class="text-accent-red text-lg mb-2" aria-hidden="true">◆</div>
+            <h3 class="font-sans text-[0.75rem] font-semibold uppercase tracking-[0.08em] mb-2 text-text-primary">Chat im Auftragskontext</h3>
+            <p class="text-[0.82rem] text-text-secondary leading-snug">Rückfragen, Fotos, Material-Nachbestellungen — direkt am Auftrag, nicht in WhatsApp-Gruppen verstreut. Später wiederauffindbar.</p>
+        </div>
+        <div class="bg-bg-base border border-border-mid rounded-[2px] p-5 max-sm:p-4">
+            <div class="text-accent-red text-lg mb-2" aria-hidden="true">■</div>
+            <h3 class="font-sans text-[0.75rem] font-semibold uppercase tracking-[0.08em] mb-2 text-text-primary">Team-Übersicht am Bildschirm</h3>
+            <p class="text-[0.82rem] text-text-secondary leading-snug">Großer Monitor in der Zentrale: wer ist wo, welche Aufträge laufen, was hängt. Disponieren ohne Excel, ohne Whiteboard, ohne Fragen.</p>
+        </div>
+    </div>
+
+    <!-- Dispatcher mock -->
+    <div class="stempel-mock bg-bg-base border border-border-mid rounded-[2px] shadow-[0_4px_16px_rgba(0,0,0,0.08)] overflow-hidden max-w-[960px] mx-auto" aria-label="Dispatcher-Board" role="figure">
+        <div class="flex items-center gap-2 px-3 py-2 border-b border-border-dark bg-bg-inset">
+            <span class="w-2.5 h-2.5 rounded-full bg-[#FF5F57]"></span>
+            <span class="w-2.5 h-2.5 rounded-full bg-[#FEBC2E]"></span>
+            <span class="w-2.5 h-2.5 rounded-full bg-[#28C840]"></span>
+            <span class="font-mono text-[0.55rem] text-text-muted tracking-[0.1em] uppercase ml-2">zettel.app · dispatcher · heute</span>
+        </div>
+        <div class="p-5 max-sm:p-4">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
+                {[
+                    {
+                        who: 'M. Krause',
+                        role: 'Tour Nord',
+                        jobs: [
+                            { t: '08:00 · Krause, Lindenweg', s: 'done' },
+                            { t: '10:30 · Müller, Heizung', s: 'active' },
+                            { t: '14:00 · Weber, Wartung', s: 'pending' },
+                        ],
+                    },
+                    {
+                        who: 'S. Weber',
+                        role: 'Tour West',
+                        jobs: [
+                            { t: '08:30 · Schmidt, Rohrbruch', s: 'done' },
+                            { t: '11:00 · Becker, Notdienst', s: 'blocked' },
+                            { t: '15:00 · —', s: 'empty' },
+                        ],
+                    },
+                    {
+                        who: 'T. Hoffmann',
+                        role: 'Tour Süd',
+                        jobs: [
+                            { t: '09:00 · Meier, Inspektion', s: 'active' },
+                            { t: '13:00 · Richter, TÜV', s: 'pending' },
+                            { t: '16:00 · Braun, Diagnose', s: 'pending' },
+                        ],
+                    },
+                ].map((c) => (
+                    <div class="bg-bg-inset border border-border-dark rounded-[1px] p-3">
+                        <div class="flex items-baseline justify-between mb-2 pb-2 border-b border-border-dark">
+                            <span class="font-sans text-[0.8rem] font-semibold text-text-primary">{c.who}</span>
+                            <span class="font-mono text-[0.5rem] text-text-muted tracking-[0.1em] uppercase">{c.role}</span>
+                        </div>
+                        <ul class="list-none flex flex-col gap-1.5">
+                            {c.jobs.map((j) => (
+                                <li class="flex items-start gap-2 text-[0.7rem]">
+                                    <span
+                                        class:list={[
+                                            'shrink-0 mt-1 w-1.5 h-1.5 rounded-full',
+                                            j.s === 'done' && 'bg-pass',
+                                            j.s === 'active' && 'bg-accent-red',
+                                            j.s === 'pending' && 'bg-steel-mid',
+                                            j.s === 'blocked' && 'bg-amber',
+                                            j.s === 'empty' && 'bg-transparent border border-dashed border-border-mid',
+                                        ]}
+                                        aria-hidden="true"
+                                    ></span>
+                                    <span class:list={['leading-snug', j.s === 'empty' ? 'text-text-muted italic' : j.s === 'done' ? 'text-text-muted line-through' : 'text-text-primary']}>{j.t}</span>
+                                </li>
+                            ))}
+                        </ul>
+                    </div>
+                ))}
+            </div>
+            <div class="flex items-center gap-4 justify-center mt-4 pt-3 border-t border-border-dark flex-wrap">
+                {[
+                    { l: 'Fertig', c: 'bg-pass' },
+                    { l: 'Läuft', c: 'bg-accent-red' },
+                    { l: 'Geplant', c: 'bg-steel-mid' },
+                    { l: 'Hängt', c: 'bg-amber' },
+                ].map((l) => (
+                    <div class="flex items-center gap-1.5">
+                        <span class:list={['w-1.5 h-1.5 rounded-full', l.c]} aria-hidden="true"></span>
+                        <span class="font-mono text-[0.55rem] text-text-muted tracking-[0.1em] uppercase">{l.l}</span>
+                    </div>
+                ))}
+            </div>
+        </div>
+    </div>
+</Section>
+
+<!-- KFZ-Werkstätten -->
+<Section id="kfz">
+    <SectionHeader subtitle="Kennzeichen, Kilometerstand, Arbeitswerte, Ersatzteile — der digitale Auftragszettel für Annahme, Werkstatt und Übergabe.">Für <span class="text-accent-red">KFZ</span>-Werkstätten</SectionHeader>
+
+    <div class="grid grid-cols-1 lg:grid-cols-[1.1fr_1fr] gap-8 lg:gap-10 items-start max-w-[1100px] mx-auto reveal">
+        <div>
+            <p class="text-text-secondary text-[0.95rem] max-sm:text-[0.9rem] leading-relaxed mb-6">
+                Annahme, Diagnose, Reparatur, Übergabe — in jeder Phase steckt Dokumentation, und jede Nachlässigkeit rächt sich beim Gewährleistungsfall. <strong class="text-text-primary">Zettel bringt ein KFZ-Template mit</strong>, das die typischen Felder direkt parat hat — vom Kennzeichen bis zum Arbeitswert.
+            </p>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                {[
+                    { icon: '◉', t: 'Fahrzeugdaten per Kennzeichen', b: 'Kennzeichen eintippen — bekannte Kunden und Fahrzeuge erscheinen mit Historie.' },
+                    { icon: '◆', t: 'Arbeitswerte statt Minuten', b: 'AW aus Herstellervorgaben übernehmen oder manuell — egal ob DAT, Haynes oder frei.' },
+                    { icon: '■', t: 'Checklisten für Standardarbeiten', b: 'Ölwechsel, Inspektion, Bremsen-Check, Reifenwechsel — abhaken statt Freitext.' },
+                    { icon: '●', t: 'TÜV / HU-Reminder pro Fahrzeug', b: 'Nach der Hauptuntersuchung automatisch Wiedervorlage in 24 Monaten — E-Mail an den Kunden.' },
+                ].map((f) => (
+                    <div class="flex gap-2.5 items-start bg-bg-base border border-border-dark rounded-[1px] px-3 py-2.5">
+                        <span class="text-accent-red text-[0.9rem] leading-none mt-0.5" aria-hidden="true">{f.icon}</span>
+                        <div>
+                            <div class="font-sans text-[0.78rem] font-semibold text-text-primary mb-0.5">{f.t}</div>
+                            <div class="text-[0.75rem] text-text-secondary leading-snug">{f.b}</div>
+                        </div>
+                    </div>
+                ))}
+            </div>
+        </div>
+
+        <!-- KFZ-Auftrag mock -->
+        <div class="bg-bg-base border border-border-mid rounded-[2px] shadow-[0_4px_16px_rgba(0,0,0,0.08)] overflow-hidden" aria-label="KFZ-Auftrag" role="figure">
+            <div class="flex items-center gap-2 px-3 py-2 border-b border-border-dark bg-bg-inset">
+                <span class="w-2.5 h-2.5 rounded-full bg-[#FF5F57]"></span>
+                <span class="w-2.5 h-2.5 rounded-full bg-[#FEBC2E]"></span>
+                <span class="w-2.5 h-2.5 rounded-full bg-[#28C840]"></span>
+                <span class="font-mono text-[0.55rem] text-text-muted tracking-[0.1em] uppercase ml-2">zettel.app · kfz-auftrag</span>
+            </div>
+
+            <div class="px-4 py-3 border-b border-border-dark flex items-baseline justify-between gap-3">
+                <div>
+                    <div class="font-mono text-[0.5rem] text-text-muted tracking-[0.1em] uppercase mb-0.5">Auftrag · 2026-041</div>
+                    <div class="font-sans text-[0.9rem] font-semibold text-text-primary">Große Inspektion + HU</div>
+                </div>
+                <span class="font-mono text-[0.55rem] bg-red-muted text-accent-red tracking-[0.1em] uppercase font-semibold px-2 py-1 rounded-[1px]">In Arbeit</span>
+            </div>
+
+            <div class="px-4 py-3 border-b border-border-dark">
+                <div class="font-mono text-[0.5rem] text-text-muted tracking-[0.1em] uppercase mb-2">Fahrzeug</div>
+                <div class="flex items-baseline justify-between mb-1.5">
+                    <span class="font-mono text-[1.1rem] font-bold text-text-primary tracking-[0.04em] tabular-nums">B-RL 1337</span>
+                    <span class="font-mono text-[0.7rem] text-text-muted tabular-nums">127.834 km</span>
+                </div>
+                <div class="text-[0.75rem] text-text-secondary">VW Golf VII · 2.0 TDI · Bj. 2018</div>
+                <div class="font-mono text-[0.55rem] text-text-muted tracking-[0.06em] mt-1">FIN · WVWZZZ1KZ8M123456</div>
+            </div>
+
+            <div class="px-4 py-3 border-b border-border-dark">
+                <div class="font-mono text-[0.5rem] text-text-muted tracking-[0.1em] uppercase mb-2">Arbeiten · 28 AW</div>
+                <ul class="list-none flex flex-col gap-1.5">
+                    {[
+                        { t: 'Ölwechsel inkl. Filter', aw: '12 AW', done: true },
+                        { t: 'Luftfilter tauschen', aw: '4 AW', done: true },
+                        { t: 'Bremsen prüfen', aw: '6 AW', done: false },
+                        { t: 'HU-Vorbereitung', aw: '6 AW', done: false },
+                    ].map((a) => (
+                        <li class="flex items-baseline gap-2 text-[0.75rem]">
+                            <span class:list={['shrink-0 w-3 h-3 inline-flex items-center justify-center rounded-[1px] border text-[0.55rem]', a.done ? 'bg-pass border-pass text-white' : 'border-border-mid text-transparent']} aria-hidden="true">✓</span>
+                            <span class:list={['flex-1 leading-snug', a.done ? 'text-text-muted line-through' : 'text-text-primary']}>{a.t}</span>
+                            <span class="font-mono text-text-muted tabular-nums">{a.aw}</span>
+                        </li>
+                    ))}
+                </ul>
+            </div>
+
+            <div class="px-4 py-3">
+                <div class="font-mono text-[0.5rem] text-text-muted tracking-[0.1em] uppercase mb-2">Ersatzteile</div>
+                <ul class="list-none flex flex-col gap-1">
+                    {[
+                        { oe: 'OE 06L-115-562-B', t: 'Ölfilter', p: '12,40 €' },
+                        { oe: 'OE 1K0-129-620-C', t: 'Luftfilter', p: '18,90 €' },
+                        { oe: '5W-30 LongLife III', t: 'Motoröl · 5 L', p: '54,50 €' },
+                    ].map((p) => (
+                        <li class="flex items-baseline gap-2 text-[0.72rem]">
+                            <span class="font-mono text-text-muted tabular-nums text-[0.6rem] w-28 truncate shrink-0">{p.oe}</span>
+                            <span class="text-text-primary flex-1 leading-snug truncate">{p.t}</span>
+                            <span class="font-mono text-text-primary tabular-nums shrink-0">{p.p}</span>
+                        </li>
+                    ))}
+                </ul>
+            </div>
+        </div>
+    </div>
+</Section>
+
+<!-- Rechtssicherheit / Gewährleistung -->
+<Section id="rechtlich" gray>
+    <SectionHeader subtitle="Unterschriebener Leistungsnachweis ist nicht Nice-to-have. Er entscheidet im Streitfall, wer am Ende recht bekommt.">Rechtssicher <span class="text-accent-red">dokumentiert</span></SectionHeader>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 max-w-[960px] mx-auto mb-6 reveal-stagger">
+        <div class="bg-bg-base border border-border-mid rounded-[2px] p-5">
+            <div class="font-mono text-[0.55rem] text-accent-red tracking-[0.14em] uppercase font-semibold mb-2">§ 640 BGB</div>
+            <h3 class="font-sans text-[0.85rem] font-semibold mb-2 text-text-primary">Abnahme sauber dokumentieren</h3>
+            <p class="text-[0.82rem] text-text-secondary leading-snug">Die Abnahme startet die Gewährleistungsfrist — und die Zahlungspflicht. Eine datierte Unterschrift des Kunden ist der sauberste Nachweis, dass sie stattgefunden hat.</p>
+        </div>
+        <div class="bg-bg-base border border-border-mid rounded-[2px] p-5">
+            <div class="font-mono text-[0.55rem] text-accent-red tracking-[0.14em] uppercase font-semibold mb-2">§ 634a BGB</div>
+            <h3 class="font-sans text-[0.85rem] font-semibold mb-2 text-text-primary">Gewährleistungs­start belegen</h3>
+            <p class="text-[0.82rem] text-text-secondary leading-snug">Zwei oder fünf Jahre — die Frist läuft ab dem Tag der Abnahme. Ohne dokumentierten Starttermin streitet man später darüber, ob Ansprüche verjährt sind oder nicht.</p>
+        </div>
+        <div class="bg-bg-base border border-border-mid rounded-[2px] p-5">
+            <div class="font-mono text-[0.55rem] text-accent-red tracking-[0.14em] uppercase font-semibold mb-2">GoBD-Archivierung</div>
+            <h3 class="font-sans text-[0.85rem] font-semibold mb-2 text-text-primary">10 Jahre, manipulationssicher</h3>
+            <p class="text-[0.82rem] text-text-secondary leading-snug">Jeder abgeschlossene Auftrag wird unveränderlich archiviert, mit Audit-Trail für alle späteren Ergänzungen. GoBD-konform, auch ohne eigenes Archiv-System.</p>
+        </div>
+    </div>
+
+    <div class="max-w-[860px] mx-auto bg-bg-base border border-accent-red rounded-[2px] p-5 max-sm:p-4 shadow-[0_4px_16px_rgba(196,30,58,0.10)]">
+        <div class="flex items-start gap-4 max-sm:flex-col max-sm:gap-2">
+            <div class="font-mono text-[0.55rem] text-accent-red tracking-[0.14em] uppercase font-semibold shrink-0 mt-1 whitespace-nowrap">Nachtrags-Falle</div>
+            <p class="text-[0.9rem] max-sm:text-[0.85rem] text-text-secondary leading-snug">
+                Der Klassiker: „Machen Sie das bitte auch noch mit." Zwei Stunden später eingebaut, drei Monate später steht der Kunde auf dem Standpunkt, das sei im Ursprungsangebot enthalten gewesen. <strong class="text-text-primary">Mit Zettel</strong> dokumentierst du den Nachtrag vor Ort — mit Zeit, Material und Unterschrift. Dann gibt es nichts mehr zu diskutieren.
+            </p>
+        </div>
+    </div>
+
+    <p class="text-center text-[0.7rem] text-text-muted mt-6 max-w-[680px] mx-auto leading-snug font-mono tracking-[0.04em]">Hinweis: Dieser Abschnitt fasst den aktuellen Rechtsstand zusammen und ersetzt keine individuelle Rechtsberatung.</p>
+</Section>
+
+<!-- Integration mit Stempel -->
+<Section id="integration">
+    <div class="max-w-[860px] mx-auto bg-bg-base border border-border-mid rounded-[2px] p-6 max-sm:p-5 shadow-[0_2px_4px_rgba(0,0,0,0.05)] reveal">
+        <div class="flex items-baseline gap-3 mb-3 flex-wrap">
+            <span class="font-mono text-[0.6rem] text-accent-red tracking-[0.14em] uppercase font-bold">Zusammen stärker</span>
+            <span class="font-mono text-[0.55rem] text-text-muted tracking-[0.14em] uppercase">Stempel × Zettel</span>
+        </div>
+        <h2 class="font-display text-2xl max-sm:text-xl font-bold mb-3 leading-tight">Zeiten aus <a href="/stempel" class="text-accent-red underline hover:text-red-dark">Stempel</a> fließen direkt in den Auftrag.</h2>
+        <p class="text-[0.95rem] max-sm:text-[0.9rem] text-text-secondary leading-relaxed mb-4">
+            Wer Stempel im Einsatz hat, muss Zeiten in Zettel nicht nochmal erfassen. Gestempelte Arbeitszeit wird automatisch dem aktiven Auftrag zugeordnet — über Projekt-Tags oder Geo-Zuordnung. Ein Klick, die Stunden stehen im Regiebericht.
+        </p>
+        <p class="text-[0.9rem] text-text-muted leading-snug">
+            Du kannst Zettel aber auch eigenständig nutzen, wenn du nur Material und Leistungen dokumentieren willst. Beide Produkte teilen sich Account und Datenbank, werden aber separat lizenziert.
+        </p>
+    </div>
+</Section>
+
+<!-- Pricing -->
+<Section id="tarife" gray>
+    <SectionHeader subtitle="Einmal zahlen, dauerhaft nutzen. Identische Tarife wie Stempel — wer beides will, zahlt zwei Lizenzen, nutzt ein System.">Preise, <span class="text-accent-red">einmalig</span></SectionHeader>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 max-w-[1100px] mx-auto reveal-stagger mb-6">
+        {tiers.map((t) => (
+            <div class:list={[
+                'bg-bg-base border rounded-[2px] p-5 max-sm:p-4 shadow-[0_2px_4px_rgba(0,0,0,0.05)] relative flex flex-col',
+                t.highlight ? 'border-accent-red shadow-[0_4px_16px_rgba(196,30,58,0.15)]' : 'border-border-mid'
+            ]}>
+                {t.highlight && <span class="absolute -top-2.5 left-4 bg-accent-red text-white font-mono text-[0.5rem] tracking-[0.14em] uppercase font-semibold px-2 py-1 rounded-[1px]">Beliebt</span>}
+                <div class="font-mono text-[0.6rem] text-text-muted tracking-[0.14em] uppercase mb-1">{t.name}</div>
+                <div class="text-[0.7rem] text-text-muted mb-3">{t.size}</div>
+                <div class="flex items-baseline gap-1.5 mb-1">
+                    <span class="font-display text-3xl font-bold text-text-primary">{t.price}</span>
+                </div>
+                <div class="font-mono text-[0.6rem] text-text-muted tracking-[0.06em]">einmalig · Festpreis</div>
+            </div>
+        ))}
+    </div>
+
+    <div class="max-w-[860px] mx-auto bg-bg-base border border-border-mid rounded-[2px] p-5 max-sm:p-4 shadow-[0_2px_4px_rgba(0,0,0,0.05)] mb-6 flex items-center justify-between gap-4 max-sm:flex-col max-sm:items-start">
+        <div>
+            <div class="font-mono text-[0.55rem] text-accent-red tracking-[0.14em] uppercase font-semibold mb-1">Updates ab Jahr 2 · optional</div>
+            <div class="font-sans text-[0.95rem] text-text-primary leading-snug max-sm:text-[0.9rem]">Security- und Bugfix-Updates, Zugang zu neuen Features — für alle Tarife gleich.</div>
+        </div>
+        <div class="flex items-baseline gap-2 shrink-0">
+            <span class="font-display text-3xl font-bold text-text-primary">150 €</span>
+            <span class="font-mono text-[0.65rem] text-text-muted tracking-[0.06em]">pro Jahr · pauschal</span>
+        </div>
+    </div>
+
+    <div class="max-w-[860px] mx-auto bg-bg-base border border-border-mid rounded-[2px] p-5 max-sm:p-4 shadow-[0_2px_4px_rgba(0,0,0,0.05)]">
+        <div class="font-mono text-[0.55rem] text-accent-red tracking-[0.14em] uppercase font-semibold mb-3">Jeder Tarif enthält</div>
+        <ul class="list-none grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-2">
+            {tierIncludes.map((item) => (
+                <li class="flex items-start gap-2 text-[0.85rem] text-text-secondary leading-snug">
+                    <span class="text-pass mt-0.5 font-bold shrink-0" aria-hidden="true">✓</span> {item}
+                </li>
+            ))}
+        </ul>
+    </div>
+
+    <div class="flex justify-center gap-3 mt-8 max-sm:flex-col max-sm:items-center">
+        <Button href="mailto:zettel@redline.sh">
+            <span>Tarif anfragen</span><span aria-hidden="true">→</span>
+        </Button>
+        <Button href="mailto:zettel@redline.sh?subject=Zettel+Stempel%20Bundle" variant="secondary">Bundle mit Stempel</Button>
+    </div>
+
+    <p class="text-center text-[0.75rem] text-text-muted mt-6 max-w-[620px] mx-auto leading-snug">Alle Preise zzgl. USt. Läuft auf jedem PHP-fähigen Webspace. Updates sind optional — die Software bleibt voll funktionsfähig, auch ohne Verlängerung.</p>
+</Section>
+
+<!-- FAQ -->
+<Section id="faq">
+    <SectionHeader subtitle="Was Handwerker, KFZler und Service-Betriebe am häufigsten fragen.">Häufige <span class="text-accent-red">Fragen</span></SectionHeader>
+    <div class="max-w-[800px] mx-auto flex flex-col gap-3">
+        {faqs.map((faq, i) => <FaqItem question={faq.q} answer={faq.a} index={i} />)}
+    </div>
+</Section>
+
+<!-- CTA -->
+<section class="text-center py-16 max-sm:py-11 px-5 border-t border-border-dark" id="kontakt">
+    <div class="max-w-[1200px] mx-auto">
+        <h2 class="font-display text-[clamp(1.3rem,3vw,2.25rem)] mb-3 font-bold tracking-tight">Zettel, <span class="text-accent-red">einführen</span>?</h2>
+        <p class="text-text-secondary max-w-[520px] mx-auto mb-6 text-[0.95rem] leading-relaxed">Schreib uns deine Teamgröße und Branche. Du bekommst innerhalb eines Werktags ein Angebot plus einen Demo-Zugang zum Durchklicken — am Schreibtisch und auf dem Handy.</p>
+        <div class="flex justify-center gap-3 mb-5 max-sm:flex-col max-sm:items-center max-sm:px-4">
+            <Button href="mailto:zettel@redline.sh" size="lg">
+                <span>Angebot anfordern</span><span aria-hidden="true">→</span>
+            </Button>
+            <Button href="#tarife" variant="secondary" size="lg">Preise ansehen</Button>
+        </div>
+        <p class="text-text-muted text-[0.75rem]">
+            Fragen? <a href="mailto:zettel@redline.sh" class="underline hover:text-accent-red">zettel@redline.sh</a>
+        </p>
+    </div>
+</section>
+</main>
+
+<Footer />
+
+<script>
+const observer = new IntersectionObserver(
+  (entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  },
+  { threshold: 0.1, rootMargin: '0px 0px -40px 0px' }
+);
+
+document.querySelectorAll('.reveal, .reveal-stagger, .faq-reveal').forEach((el) => {
+  observer.observe(el);
+});
+</script>
+
+</Layout>

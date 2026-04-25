@@ -50,5 +50,5 @@
   <line x1="15" y1="30" x2="70" y2="30" stroke="#E8334F" stroke-width="0.3" stroke-linecap="round" opacity="0.4"/>
 
   <!-- Tagline -->
-  <text x="42.5" y="37" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="1.7" fill="#8A8680" letter-spacing="0.25em">PRECISION AI ENGINEERING</text>
+  <text x="42.5" y="37" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="1.7" fill="#8A8680" letter-spacing="0.25em">PRECISION WEB ENGINEERING</text>
 </svg>

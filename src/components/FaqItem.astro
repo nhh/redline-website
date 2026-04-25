@@ -24,7 +24,7 @@ const { question, answer, index = 0 } = Astro.props;
     <div class="faq-answer overflow-hidden">
         <div class="px-5 pb-5 pt-0">
             <div class="h-px bg-border-dark mb-4"></div>
-            <p class="text-text-secondary text-[0.85rem] max-sm:text-[0.8rem] leading-relaxed">{answer}</p>
+            <p class="text-text-secondary text-[0.85rem] max-sm:text-[0.8rem] leading-relaxed" set:html={answer}></p>
         </div>
     </div>
 </details>

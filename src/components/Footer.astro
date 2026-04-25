@@ -15,19 +15,25 @@ const columns: FooterColumn[] = [
   {
     title: 'Leistungen',
     links: [
-      { href: '#leistungen', label: 'Landing Pages' },
-      { href: '#leistungen', label: 'Unternehmenswebsites' },
-      { href: '#leistungen', label: 'Web-Applikationen' },
-      { href: '#leistungen', label: 'Relaunch & Optimierung' },
+      { href: '/#leistungen', label: 'Landing Pages' },
+      { href: '/#leistungen', label: 'Unternehmenswebsites' },
+      { href: '/#leistungen', label: 'Web-Applikationen' },
+      { href: '/#leistungen', label: 'Relaunch & Tuning' },
+    ],
+  },
+  {
+    title: 'Produkte',
+    links: [
+      { href: '/stempel', label: 'Stempel — Arbeitszeiterfassung' },
+      { href: '/zettel', label: 'Zettel — Regiebericht' },
     ],
   },
   {
     title: 'Unternehmen',
     links: [
-      { href: '#ansatz', label: 'Unser Ansatz' },
-      { href: '#prozess', label: 'Prozess' },
-      { href: '#referenzen', label: 'Referenzen' },
-      { href: '#faq', label: 'FAQ' },
+      { href: '/#prozess', label: 'Prozess' },
+      { href: '/#referenzen', label: 'Referenzen' },
+      { href: '/#faq', label: 'FAQ' },
       { href: '/brand', label: 'Brand Guide' },
     ],
   },
@@ -44,13 +50,13 @@ const columns: FooterColumn[] = [
 
 <footer class="bg-primary-black border-t border-neutral-gray pt-10 pb-5 text-neutral-gray" role="contentinfo">
     <div class="max-w-[1200px] mx-auto px-5 max-sm:px-4">
-        <div class="grid grid-cols-1 md:grid-cols-[2fr_1fr_1fr_1fr] gap-8 mb-8 max-md:text-center">
+        <div class="grid grid-cols-1 md:grid-cols-[2fr_1fr_1fr_1fr_1fr] gap-8 mb-8 max-md:text-center">
             <div>
                 <div class="max-md:flex max-md:justify-center">
                     <Logo size="sm" />
                 </div>
-                <p class="text-neutral-gray text-[0.85rem] my-3 leading-normal">KI-gestützte Webentwicklung mit menschlicher Präzision. Für Unternehmen, die mehr wollen als eine hübsche Visitenkarte im Internet.</p>
-                <p class="text-[0.7rem] tracking-[0.3em] text-accent-red uppercase mt-3">Precision AI Engineering</p>
+                <p class="text-neutral-gray text-[0.85rem] my-3 leading-normal">Handwerklich gebaute Websites. Schnell, klar, verkaufsstark — für Unternehmen, die mehr wollen als eine hübsche Visitenkarte.</p>
+                <p class="text-[0.7rem] tracking-[0.3em] text-accent-red uppercase mt-3">Precision Web Engineering</p>
             </div>
             {columns.map((col) => (
                 <nav aria-label={col.title}>

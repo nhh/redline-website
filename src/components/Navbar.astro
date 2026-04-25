@@ -7,11 +7,11 @@ interface NavItem {
 }
 
 const links: NavItem[] = [
-  { href: '#problem', label: 'Problem' },
-  { href: '#ansatz', label: 'Ansatz' },
-  { href: '#prozess', label: 'Prozess' },
-  { href: '#leistungen', label: 'Leistungen' },
-  { href: '#referenzen', label: 'Referenzen' },
+  { href: '/#leistungen', label: 'Leistungen' },
+  { href: '/#prozess', label: 'Prozess' },
+  { href: '/#produkte', label: 'Produkte' },
+  { href: '/#referenzen', label: 'Referenzen' },
+  { href: '/#faq', label: 'FAQ' },
 ];
 ---
 
@@ -20,10 +20,12 @@ const links: NavItem[] = [
 </a>
 
 <nav class="fixed top-0 left-0 right-0 z-50 bg-bg-base border-b border-neutral-gray shadow-[0_1px_3px_rgba(0,0,0,0.05)]" aria-label="Hauptnavigation">
-    <div class="max-w-[1200px] mx-auto px-8 py-3 flex justify-between items-center">
-        <a href="#" aria-label="Redline — Startseite">
+    <div class="max-w-[1200px] mx-auto px-8 max-sm:px-5 py-3 flex justify-between items-center">
+        <a href="/" aria-label="Redline — Startseite" class="relative z-10">
             <Logo />
         </a>
+
+        <!-- Desktop -->
         <ul class="hidden md:flex items-center gap-7 list-none" role="list">
             {links.map(({ href, label }) => (
                 <li>
@@ -31,8 +33,87 @@ const links: NavItem[] = [
                 </li>
             ))}
             <li>
-                <a href="#kontakt" class="bg-accent-red px-4 py-2 rounded text-white! font-semibold border border-accent-red transition-all hover:bg-red-dark hover:-translate-y-px hover:shadow-[0_2px_8px_rgba(196,30,58,0.3)] text-[0.7rem] tracking-[0.08em] uppercase focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white">Kostenloser Umbau</a>
+                <a href="/#kontakt" class="bg-accent-red px-4 py-2 rounded text-white! font-semibold border border-accent-red transition-all hover:bg-red-dark hover:-translate-y-px hover:shadow-[0_2px_8px_rgba(196,30,58,0.3)] text-[0.7rem] tracking-[0.08em] uppercase focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white">Projekt anfragen</a>
+            </li>
+        </ul>
+
+        <!-- Mobile toggle -->
+        <button
+            id="nav-toggle"
+            class="md:hidden relative z-10 w-9 h-9 flex flex-col items-center justify-center gap-[5px] border border-border-mid rounded-[1px] bg-bg-base focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent-red"
+            type="button"
+            aria-expanded="false"
+            aria-controls="nav-mobile"
+            aria-label="Menü öffnen"
+        >
+            <span class="nav-bar block w-4 h-[1.5px] bg-text-primary transition-all duration-200" aria-hidden="true"></span>
+            <span class="nav-bar block w-4 h-[1.5px] bg-text-primary transition-all duration-200" aria-hidden="true"></span>
+            <span class="nav-bar block w-4 h-[1.5px] bg-text-primary transition-all duration-200" aria-hidden="true"></span>
+        </button>
+    </div>
+
+    <!-- Mobile panel -->
+    <div
+        id="nav-mobile"
+        class="md:hidden bg-bg-base border-t border-neutral-gray overflow-hidden transition-[max-height] duration-300 ease-out max-h-0 shadow-[0_4px_16px_rgba(0,0,0,0.05)]"
+        aria-hidden="true"
+    >
+        <ul class="list-none flex flex-col py-2" role="list">
+            {links.map(({ href, label }) => (
+                <li>
+                    <a href={href} class="nav-mobile-link block px-5 py-3 text-text-primary font-medium text-[0.85rem] tracking-[0.04em] border-b border-border-dark hover:bg-bg-inset hover:text-accent-red focus-visible:outline-2 focus-visible:outline-offset-[-2px] focus-visible:outline-accent-red">{label}</a>
+                </li>
+            ))}
+            <li class="p-3">
+                <a href="/#kontakt" class="nav-mobile-link block text-center bg-accent-red text-white font-semibold px-4 py-3 rounded text-[0.75rem] tracking-[0.08em] uppercase border border-accent-red transition-all hover:bg-red-dark focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent-red">Projekt anfragen</a>
             </li>
         </ul>
     </div>
 </nav>
+
+<style>
+    #nav-toggle[aria-expanded="true"] .nav-bar:nth-child(1) {
+        transform: translateY(6.5px) rotate(45deg);
+    }
+    #nav-toggle[aria-expanded="true"] .nav-bar:nth-child(2) {
+        opacity: 0;
+    }
+    #nav-toggle[aria-expanded="true"] .nav-bar:nth-child(3) {
+        transform: translateY(-6.5px) rotate(-45deg);
+    }
+
+    #nav-mobile.open {
+        max-height: 420px;
+    }
+</style>
+
+<script>
+    const toggle = document.getElementById('nav-toggle');
+    const panel = document.getElementById('nav-mobile');
+
+    if (toggle && panel) {
+        const setState = (open: boolean) => {
+            toggle.setAttribute('aria-expanded', String(open));
+            toggle.setAttribute('aria-label', open ? 'Menü schließen' : 'Menü öffnen');
+            panel.setAttribute('aria-hidden', String(!open));
+            panel.classList.toggle('open', open);
+            document.body.style.overflow = open ? 'hidden' : '';
+        };
+
+        toggle.addEventListener('click', () => {
+            const open = toggle.getAttribute('aria-expanded') !== 'true';
+            setState(open);
+        });
+
+        panel.querySelectorAll('.nav-mobile-link').forEach((link) => {
+            link.addEventListener('click', () => setState(false));
+        });
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && toggle.getAttribute('aria-expanded') === 'true') {
+                setState(false);
+                (toggle as HTMLButtonElement).focus();
+            }
+        });
+    }
+</script>

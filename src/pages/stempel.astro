@@ -1,0 +1,456 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Navbar from '../components/Navbar.astro';
+import Section from '../components/Section.astro';
+import SectionHeader from '../components/SectionHeader.astro';
+import Button from '../components/Button.astro';
+import Card from '../components/Card.astro';
+import FaqItem from '../components/FaqItem.astro';
+import Footer from '../components/Footer.astro';
+
+const features = [
+  { id: 'FEA-001', icon: '▶', title: 'Ein Klick rein, einer raus', body: 'Kein Projekt-Dropdown-Baum, kein 5-Schritte-Formular. Start, Pause, Stopp — fertig. Stempeln soll Sekunden dauern, nicht Minuten.' },
+  { id: 'FEA-002', icon: '◆', title: 'Automatische Pausen', body: 'Pflichtpausen nach Arbeitszeitgesetz (30 Min ab 6 Std, 45 Min ab 9 Std) werden automatisch erkannt, dokumentiert und in der Saldo-Berechnung berücksichtigt.' },
+  { id: 'FEA-003', icon: '■', title: 'Alle Arbeitszeitmodelle', body: 'Gleitzeit, Teilzeit, Vertrauensarbeit, Schichtbetrieb. Ein System, alle Modelle. Saldo, Überstunden, Urlaub — immer aktuell.' },
+  { id: 'FEA-004', icon: '●', title: 'Gesetzeskonform', body: 'Erfüllt die Anforderungen aus BAG-Urteil 1 ABR 22/21 und EuGH C-55/18. Manipulationssicher, revisionsfähig, DSGVO-konform.' },
+  { id: 'FEA-005', icon: '▲', title: 'Exporte & Schnittstellen', body: 'PDF-Stundennachweise, CSV, DATEV-Export. Oder via REST-API direkt in deine Lohnabrechnung — Personio, Lexware, sevdesk und mehr.' },
+  { id: 'FEA-006', icon: '◈', title: 'Läuft auf jedem Webspace', body: 'Kein eigener Server nötig, kein Docker-Zwang. PHP-fähiger Hoster genügt — bei 1&1, Hetzner, All-Inkl oder wo du schon deine Website hostest.' },
+  { id: 'FEA-007', icon: '□', title: 'Offline-first', body: 'Die Browser-App funktioniert auch ohne Verbindung. Gestempelte Zeiten synchronisieren sich, sobald wieder Netz da ist.' },
+  { id: 'FEA-008', icon: '◐', title: 'Teams & Rollen', body: 'Führungskräfte sehen Team-Salden, Mitarbeitende nur die eigenen Daten. Feingranulare Rollen — Admin, Manager, Mitarbeiter.' },
+];
+
+const tiers = [
+  {
+    name: 'Team',
+    size: 'bis 5 Mitarbeiter',
+    price: '490 €',
+    highlight: false,
+  },
+  {
+    name: 'Büro',
+    size: 'bis 15 Mitarbeiter',
+    price: '990 €',
+    highlight: true,
+  },
+  {
+    name: 'Betrieb',
+    size: 'bis 25 Mitarbeiter',
+    price: '1.490 €',
+    highlight: false,
+  },
+  {
+    name: 'Unternehmen',
+    size: '50+ Mitarbeiter',
+    price: 'ab 2.490 €',
+    highlight: false,
+  },
+];
+
+const tierIncludes = [
+  'Vollständige Software-Lizenz',
+  'Installation per FTP oder Docker (Anleitung)',
+  'E-Mail-Support bei Einrichtung',
+  '1 Jahr Security- & Bugfix-Updates',
+  'Zugang zu allen künftigen Features',
+  'Vollständiger Source-Code-Zugang',
+];
+
+const faqs = [
+  { q: 'Warum noch eine Arbeitszeiterfassung?', a: 'Weil die bestehenden Tools entweder aufgebläht sind (40 Features, die niemand braucht) oder von Steuerkanzleien gebaut wurden (UX aus den 90ern). Wir wollten eine, die nur das kann, was Arbeitszeit-Erfassung wirklich braucht.' },
+  { q: 'Wo kann ich Stempel installieren?', a: 'Auf jedem PHP-fähigen Webspace — bei Hetzner, 1&1, All-Inkl oder wo du schon deine Website hostest. <strong>Kein eigener Server nötig, kein Cloud-Zwang.</strong> Wer eine Website hat, hat schon einen Ort für Stempel.' },
+  { q: 'Ist das wirklich gesetzeskonform?', a: 'Ja. Stempel erfüllt die Anforderungen aus dem BAG-Beschluss 1 ABR 22/21 und dem EuGH-Urteil C-55/18: objektive, verlässliche und zugängliche Erfassung, manipulationssicher durch revisionssicheren Audit-Trail.' },
+  { q: 'Was passiert, wenn ich die Update-Verlängerung nicht buche?', a: 'Deine Software läuft weiter — voll funktionsfähig, unbegrenzt. Du bekommst nur keine neuen Security- oder Feature-Updates mehr. Du kannst jederzeit später wieder einsteigen.' },
+  { q: 'Gibt es eine mobile App?', a: 'Stempel ist als Progressive Web App gebaut. Du installierst sie direkt aus dem Browser auf iOS und Android — ohne App-Store-Umweg, mit Offline-Support.' },
+  { q: 'Integration mit DATEV / Personio?', a: 'Direkter Export in DATEV-Format. Für Personio, Lexware, sevdesk und weitere Systeme gibt es REST-APIs und fertige Webhooks.' },
+  { q: 'Funktioniert das auch für Teams mit 100+ Mitarbeitenden?', a: 'Ja. Stempel ist auf mehreren tausend Nutzern pro Instanz getestet. Für Unternehmen ab 50 Mitarbeitern machen wir ein individuelles Angebot — inklusive optionaler Custom-Features und dedizierter Betreuung.' },
+];
+---
+
+<Layout title="Stempel — Minimalistische Arbeitszeiterfassung · Redline" description="Stempel ist eine schlanke, gesetzeskonforme Arbeitszeiterfassung. Läuft auf jedem Webspace. Von Redline.">
+
+<div class="bg-texture fixed inset-0 -z-10 pointer-events-none bg-linear-to-br from-white to-bg-floor overflow-hidden" aria-hidden="true">
+    <div class="bg-accent-glow bg-accent-glow-1"></div>
+    <div class="bg-accent-glow bg-accent-glow-2"></div>
+</div>
+
+<Navbar />
+
+<!-- Hero -->
+<header id="main-content" class="pt-[calc(52px+3rem)] pb-12 px-5 max-w-[1200px] mx-auto">
+    <div class="max-w-[760px] mx-auto text-center mb-10">
+        <div class="badge-clip inline-flex items-center gap-2 bg-bg-base border border-border-dark px-2.5 py-1 font-mono text-[0.55rem] text-text-muted mb-5 font-medium tracking-[0.1em] uppercase shadow-[0_1px_2px_rgba(0,0,0,0.08)]">
+            Produkt von Redline · seit 2024
+        </div>
+        <h1 class="font-display text-[clamp(2rem,5vw,3.75rem)] font-bold leading-[1.1] mb-4 tracking-tight text-primary-black">Arbeitszeiterfassung, <span class="text-accent-red">minimalistisch</span>.</h1>
+        <p class="text-lg text-text-secondary mb-3">Ein Klick rein. Ein Klick raus. Mehr nicht.</p>
+        <p class="text-[1rem] text-text-secondary mb-7 max-w-[620px] leading-relaxed mx-auto">Stempel ist die Arbeitszeiterfassung, die wir selbst nutzen — <strong>nur das, was Arbeitszeit-Erfassung wirklich braucht</strong>. Weniger Code = weniger Bugs = weniger Patches. Läuft auf jedem PHP-fähigen Webspace: hast du schon eine Website, hast du schon einen Ort für Stempel.</p>
+        <div class="flex gap-3 justify-center max-sm:flex-col">
+            <Button href="#tarife">
+                <span>Jetzt testen</span><span aria-hidden="true">→</span>
+            </Button>
+            <Button href="#features" variant="secondary">Features ansehen</Button>
+        </div>
+    </div>
+
+    <div class="stempel-mock bg-bg-base border border-border-mid rounded-[2px] shadow-[0_8px_32px_rgba(0,0,0,0.10)] overflow-hidden max-w-[960px] mx-auto" aria-label="Stempel-Dashboard" role="figure">
+        <div class="flex items-center gap-2 px-3 py-2 border-b border-border-dark bg-bg-inset">
+            <span class="w-2.5 h-2.5 rounded-full bg-[#FF5F57]"></span>
+            <span class="w-2.5 h-2.5 rounded-full bg-[#FEBC2E]"></span>
+            <span class="w-2.5 h-2.5 rounded-full bg-[#28C840]"></span>
+            <span class="font-mono text-[0.55rem] text-text-muted tracking-[0.1em] uppercase ml-2">stempel.app · dashboard</span>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-[1.4fr_1fr] gap-0">
+            <div class="p-6 max-sm:p-5 border-r max-md:border-r-0 max-md:border-b border-border-dark">
+                <div class="flex justify-between items-baseline mb-5">
+                    <div>
+                        <div class="font-mono text-[0.55rem] text-text-muted tracking-[0.1em] uppercase mb-1">Aktuelle Sitzung</div>
+                        <div class="font-mono text-4xl max-sm:text-3xl font-semibold text-text-primary tabular-nums">04:17:<span class="stempel-seconds">42</span></div>
+                    </div>
+                    <button class="bg-accent-red text-white font-mono text-[0.65rem] tracking-[0.12em] uppercase font-semibold px-4 py-2.5 rounded-[1px] border border-accent-red">● Aktiv · Stop</button>
+                </div>
+                <div class="grid grid-cols-3 gap-2 mb-5">
+                    {[
+                        { l: 'Heute', v: '6h 42m' },
+                        { l: 'Woche', v: '31h 08m' },
+                        { l: 'Saldo Monat', v: '+3h 22m', pos: true },
+                    ].map((s) => (
+                        <div class="bg-bg-inset border border-border-dark rounded-[1px] px-3 py-2.5">
+                            <div class="font-mono text-[0.5rem] text-text-muted tracking-[0.1em] uppercase mb-1">{s.l}</div>
+                            <div class:list={['font-mono text-[0.9rem] font-semibold tabular-nums', s.pos ? 'text-pass' : 'text-text-primary']}>{s.v}</div>
+                        </div>
+                    ))}
+                </div>
+                <div class="font-mono text-[0.5rem] text-text-muted tracking-[0.1em] uppercase mb-2">Diese Woche</div>
+                <div class="flex items-end gap-2 h-[80px] border-b border-border-dark">
+                    {[
+                        { d: 'Mo', v: 85 },
+                        { d: 'Di', v: 100 },
+                        { d: 'Mi', v: 62 },
+                        { d: 'Do', v: 92 },
+                        { d: 'Fr', v: 78, today: true },
+                        { d: 'Sa', v: 0 },
+                        { d: 'So', v: 0 },
+                    ].map((d) => (
+                        <div class="flex-1 flex flex-col items-center gap-1">
+                            <div class:list={['w-full rounded-t-[1px] stempel-bar', d.today ? 'bg-accent-red' : d.v > 0 ? 'bg-steel-light' : 'bg-neutral-gray']} style={`--bar-height: ${d.v}%`}></div>
+                            <span class="font-mono text-[0.5rem] text-text-muted tracking-[0.1em] uppercase">{d.d}</span>
+                        </div>
+                    ))}
+                </div>
+            </div>
+            <div class="p-5 max-sm:p-4 bg-bg-inset/50">
+                <div class="font-mono text-[0.55rem] text-text-muted tracking-[0.1em] uppercase mb-3">Letzte Einträge</div>
+                <ul class="list-none flex flex-col gap-0">
+                    {[
+                        { d: 'Fr, 22.04.', s: '09:02', e: '—', status: 'live' },
+                        { d: 'Do, 21.04.', s: '08:47', e: '17:52', status: 'done' },
+                        { d: 'Mi, 20.04.', s: '09:14', e: '15:58', status: 'done' },
+                        { d: 'Di, 19.04.', s: '08:30', e: '18:35', status: 'done' },
+                        { d: 'Mo, 18.04.', s: '09:05', e: '17:25', status: 'done' },
+                    ].map((r, i, arr) => (
+                        <li class:list={['py-2 flex items-center justify-between gap-2 text-[0.75rem]', i < arr.length - 1 && 'border-b border-border-dark']}>
+                            <span class="font-mono text-text-muted tabular-nums">{r.d}</span>
+                            <span class="font-mono tabular-nums text-text-primary">{r.s} → {r.e}</span>
+                            {r.status === 'live' ? (
+                                <span class="w-1.5 h-1.5 rounded-full bg-accent-red" style="animation: tileGlow 1.5s ease-in-out infinite" aria-label="Läuft"></span>
+                            ) : (
+                                <span class="text-pass" aria-hidden="true">✓</span>
+                            )}
+                        </li>
+                    ))}
+                </ul>
+            </div>
+        </div>
+    </div>
+</header>
+
+<main>
+
+<!-- Features -->
+<Section id="features" gray>
+    <SectionHeader subtitle="Alles was eine Arbeitszeiterfassung haben muss. Nichts, was sie nicht haben sollte.">Was <span class="text-accent-red">Stempel</span> kann</SectionHeader>
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-6 reveal-stagger">
+        {features.map((f) => (
+            <Card id={f.id}>
+                <div class="text-lg pt-3.5 px-4 pb-1.5 text-accent-red" aria-hidden="true">{f.icon}</div>
+                <h3 class="font-sans text-[0.7rem] px-4 mb-1.5 text-text-primary font-semibold uppercase tracking-[0.08em]">{f.title}</h3>
+                <p class="text-text-secondary text-[0.82rem] leading-relaxed px-4 pb-4">{f.body}</p>
+            </Card>
+        ))}
+    </div>
+</Section>
+
+<!-- Rechtspflicht -->
+<Section id="rechtspflicht">
+    <SectionHeader subtitle="Seit dem BAG-Urteil 2022 sind Arbeitgeber in Deutschland verpflichtet, Arbeitszeit objektiv zu erfassen — nicht bald, sondern heute.">Rechtlich <span class="text-accent-red">Pflicht</span>, nicht Empfehlung</SectionHeader>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 max-w-[960px] mx-auto mb-6 reveal-stagger">
+        <div class="bg-bg-base border border-border-mid rounded-[2px] p-5 relative">
+            <div class="font-mono text-[0.55rem] text-text-muted tracking-[0.14em] uppercase mb-1">14. Mai 2019</div>
+            <div class="font-sans text-[0.7rem] text-accent-red tracking-[0.08em] uppercase font-semibold mb-2">EuGH · C-55/18</div>
+            <h3 class="font-display text-lg font-bold mb-2 leading-tight text-text-primary">CCOO-Urteil</h3>
+            <p class="text-[0.82rem] text-text-secondary leading-snug">EU-Mitgliedstaaten müssen Arbeitgeber verpflichten, ein <strong>objektives, verlässliches und zugängliches System</strong> zur Arbeitszeiterfassung einzuführen.</p>
+        </div>
+        <div class="bg-bg-base border border-accent-red rounded-[2px] p-5 relative shadow-[0_4px_16px_rgba(196,30,58,0.12)]">
+            <span class="absolute -top-2.5 left-4 bg-accent-red text-white font-mono text-[0.5rem] tracking-[0.14em] uppercase font-semibold px-2 py-1 rounded-[1px]">Aktuell geltend</span>
+            <div class="font-mono text-[0.55rem] text-text-muted tracking-[0.14em] uppercase mb-1">13. September 2022</div>
+            <div class="font-sans text-[0.7rem] text-accent-red tracking-[0.08em] uppercase font-semibold mb-2">BAG · 1 ABR 22/21</div>
+            <h3 class="font-display text-lg font-bold mb-2 leading-tight text-text-primary">Pflicht in DE gilt sofort</h3>
+            <p class="text-[0.82rem] text-text-secondary leading-snug">Das Bundesarbeitsgericht leitet aus <strong>§ 3 Abs. 2 Nr. 1 ArbSchG</strong> ab: Arbeitgeber müssen Beginn, Ende und Dauer der täglichen Arbeitszeit erfassen. <strong class="text-accent-red">Ohne Übergangsfrist.</strong></p>
+        </div>
+        <div class="bg-bg-base border border-border-mid rounded-[2px] p-5 relative">
+            <div class="font-mono text-[0.55rem] text-text-muted tracking-[0.14em] uppercase mb-1">Heute</div>
+            <div class="font-sans text-[0.7rem] text-accent-red tracking-[0.08em] uppercase font-semibold mb-2">ArbZG-Entwurf</div>
+            <h3 class="font-display text-lg font-bold mb-2 leading-tight text-text-primary">Konkretisierung läuft</h3>
+            <p class="text-[0.82rem] text-text-secondary leading-snug">Das geplante neue Arbeitszeitgesetz regelt Details wie Aufbewahrungsfristen und Mitarbeiter-Einsicht. <strong>Die Grund­pflicht besteht heute schon</strong> — unabhängig vom Gesetzgebungsprozess.</p>
+        </div>
+    </div>
+
+    <div class="max-w-[960px] mx-auto grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div class="bg-red-muted border border-accent-red/30 rounded-[2px] p-5">
+            <div class="font-mono text-[0.55rem] text-accent-red tracking-[0.14em] uppercase font-semibold mb-2">Ignorieren kostet</div>
+            <ul class="list-none space-y-1.5">
+                <li class="flex items-start gap-2 text-[0.85rem] text-text-secondary leading-snug"><span class="text-accent-red font-bold mt-0.5" aria-hidden="true">→</span> Bis zu <strong class="text-text-primary">30.000 €</strong> Bußgeld nach ArbSchG</li>
+                <li class="flex items-start gap-2 text-[0.85rem] text-text-secondary leading-snug"><span class="text-accent-red font-bold mt-0.5" aria-hidden="true">→</span> Betriebsrat kann Einführung <strong class="text-text-primary">erzwingen</strong></li>
+                <li class="flex items-start gap-2 text-[0.85rem] text-text-secondary leading-snug"><span class="text-accent-red font-bold mt-0.5" aria-hidden="true">→</span> Nachzahlungen bei Überstunden-Streitigkeiten</li>
+                <li class="flex items-start gap-2 text-[0.85rem] text-text-secondary leading-snug"><span class="text-accent-red font-bold mt-0.5" aria-hidden="true">→</span> Prüfungen durch Zoll und Gewerbeaufsicht</li>
+            </ul>
+        </div>
+        <div class="bg-pass-muted border border-pass-border rounded-[2px] p-5">
+            <div class="font-mono text-[0.55rem] text-pass tracking-[0.14em] uppercase font-semibold mb-2">Mit Stempel erfüllt</div>
+            <ul class="list-none space-y-1.5">
+                <li class="flex items-start gap-2 text-[0.85rem] text-text-secondary leading-snug"><span class="text-pass font-bold mt-0.5" aria-hidden="true">✓</span> <strong class="text-text-primary">Objektiv:</strong> Zeit wird automatisch festgehalten</li>
+                <li class="flex items-start gap-2 text-[0.85rem] text-text-secondary leading-snug"><span class="text-pass font-bold mt-0.5" aria-hidden="true">✓</span> <strong class="text-text-primary">Verlässlich:</strong> Audit-Trail, revisionssicher</li>
+                <li class="flex items-start gap-2 text-[0.85rem] text-text-secondary leading-snug"><span class="text-pass font-bold mt-0.5" aria-hidden="true">✓</span> <strong class="text-text-primary">Zugänglich:</strong> Mitarbeiter sehen eigene Daten</li>
+                <li class="flex items-start gap-2 text-[0.85rem] text-text-secondary leading-snug"><span class="text-pass font-bold mt-0.5" aria-hidden="true">✓</span> <strong class="text-text-primary">Einführbar in Tagen</strong>, nicht Monaten</li>
+            </ul>
+        </div>
+    </div>
+
+    <p class="text-center text-[0.7rem] text-text-muted mt-6 max-w-[680px] mx-auto leading-snug font-mono tracking-[0.04em]">Hinweis: Dieser Abschnitt fasst den aktuellen Rechtsstand zusammen und ersetzt keine individuelle Rechtsberatung.</p>
+</Section>
+
+<!-- Warum wir sie gebaut haben -->
+<Section id="warum" gray>
+    <SectionHeader subtitle="Manche Software gibt es schon hundertfach. Trotzdem ist kein einziges Angebot gut.">Warum wir sie <span class="text-accent-red">gebaut</span> haben</SectionHeader>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-[960px] mx-auto reveal-stagger">
+        <Card id="WHY-A" hover={false}>
+            <div class="font-mono text-[0.6rem] font-semibold uppercase tracking-[0.12em] px-4 py-3 text-center border-b bg-red-muted text-accent-red border-b-accent-red/15">Was der Markt liefert</div>
+            <ul class="px-4 py-2 list-none">
+                {[
+                    'Bloated Enterprise-Suites mit 40 Features',
+                    'UX aus der Vor-Smartphone-Ära',
+                    'Excel-Tabellen, die niemand ausfüllt',
+                    'Pflichtschulungen für simples Stempeln',
+                    'Zwingen dich auf ihre Cloud-Infrastruktur',
+                    'Preise im zweistelligen €/User-Bereich',
+                    'Vendor-Lock-in und proprietäre Exporte',
+                ].map((item, i, arr) => (
+                    <li class:list={['text-[0.85rem] text-text-muted py-2 leading-snug', i < arr.length - 1 && 'border-b border-border-dark']}>{item}</li>
+                ))}
+            </ul>
+        </Card>
+        <Card id="WHY-B" hover={false} class="border-pass-border!">
+            <div class="font-mono text-[0.6rem] font-semibold uppercase tracking-[0.12em] px-4 py-3 text-center border-b bg-pass-muted text-pass border-b-pass/15">Was Stempel liefert</div>
+            <ul class="px-4 py-2 list-none">
+                {[
+                    'Ein Feature pro Aufgabe — sonst nichts',
+                    'Moderne Web-App, PWA, Offline-first',
+                    'Ein Klick, eine Sekunde, fertig',
+                    'Selbsterklärend — ohne Onboarding',
+                    'Einmalpreis ab 490 € statt monatliches Abo',
+                    'Läuft auf dem Webspace, den du eh schon hast',
+                    'Source-Code-Zugang, CSV- und JSON-Export',
+                ].map((item, i, arr) => (
+                    <li class:list={['text-[0.85rem] text-text-secondary py-2 leading-snug', i < arr.length - 1 && 'border-b border-border-dark']}>{item}</li>
+                ))}
+            </ul>
+        </Card>
+    </div>
+</Section>
+
+<!-- Vertrauen / Überstunden -->
+<Section id="vertrauen">
+    <SectionHeader subtitle="Überstunden werden genehmigt, nicht hinterfragt. Beide Seiten sehen die gleichen Zahlen.">Vertrauen, nicht <span class="text-accent-red">Verdacht</span></SectionHeader>
+
+    <div class="max-w-[960px] mx-auto reveal">
+        <p class="text-text-secondary text-[0.95rem] max-sm:text-[0.9rem] leading-relaxed text-center max-md:text-left mb-8 max-w-[740px] mx-auto">
+            In Branchen ohne Bürostunden — <strong class="text-text-primary">Handwerk, Außendienst, Pflege, Bau</strong> — ist schwer zu belegen, wer wirklich wann gearbeitet hat. Das Ergebnis: Diskussionen am Monatsende, handschriftliche Stundenzettel, Misstrauen in beide Richtungen. <strong class="text-text-primary">Stempel ersetzt Verdacht durch Zahlen.</strong>
+        </p>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 reveal-stagger mb-8">
+            <div class="bg-bg-base border border-border-mid rounded-[2px] p-5 max-sm:p-4">
+                <div class="text-accent-red text-lg mb-2" aria-hidden="true">◉</div>
+                <h3 class="font-sans text-[0.75rem] font-semibold uppercase tracking-[0.08em] mb-2 text-text-primary">Objektiv statt erinnert</h3>
+                <p class="text-[0.83rem] text-text-secondary leading-snug">Gestempelt wird per Klick auf dem Handy — nicht aus dem Gedächtnis am Monatsende. Kein Stundenzettel, der „ungefähr" stimmt.</p>
+            </div>
+            <div class="bg-bg-base border border-border-mid rounded-[2px] p-5 max-sm:p-4">
+                <div class="text-accent-red text-lg mb-2" aria-hidden="true">◈</div>
+                <h3 class="font-sans text-[0.75rem] font-semibold uppercase tracking-[0.08em] mb-2 text-text-primary">Überstunden genehmigen statt debattieren</h3>
+                <p class="text-[0.83rem] text-text-secondary leading-snug">Mitarbeiter beantragt, Führung genehmigt — <strong class="text-text-primary">bevor</strong> die Stunden anfallen. Klare Entscheidung, keine nachträglichen Überraschungen.</p>
+            </div>
+            <div class="bg-bg-base border border-border-mid rounded-[2px] p-5 max-sm:p-4">
+                <div class="text-accent-red text-lg mb-2" aria-hidden="true">◆</div>
+                <h3 class="font-sans text-[0.75rem] font-semibold uppercase tracking-[0.08em] mb-2 text-text-primary">Ein Stand für beide Seiten</h3>
+                <p class="text-[0.83rem] text-text-secondary leading-snug">Mitarbeiter sieht den eigenen Saldo jederzeit. Führung sieht Team-Saldo. Diskussionen werden Zahlen — Vertrauen entsteht von selbst.</p>
+            </div>
+        </div>
+
+        <!-- Overtime approval mock -->
+        <div class="stempel-mock bg-bg-base border border-border-mid rounded-[2px] shadow-[0_4px_16px_rgba(0,0,0,0.08)] overflow-hidden max-w-[720px] mx-auto" aria-label="Überstunden-Genehmigungs-Workflow" role="figure">
+            <div class="flex items-center gap-2 px-3 py-2 border-b border-border-dark bg-bg-inset">
+                <span class="w-2.5 h-2.5 rounded-full bg-[#FF5F57]"></span>
+                <span class="w-2.5 h-2.5 rounded-full bg-[#FEBC2E]"></span>
+                <span class="w-2.5 h-2.5 rounded-full bg-[#28C840]"></span>
+                <span class="font-mono text-[0.55rem] text-text-muted tracking-[0.1em] uppercase ml-2">stempel.app · überstunden</span>
+            </div>
+            <div class="p-5 max-sm:p-4">
+                <div class="font-mono text-[0.55rem] text-text-muted tracking-[0.14em] uppercase mb-3">Offene Anträge · 2</div>
+                <ul class="list-none flex flex-col gap-2">
+                    {[
+                        { name: 'M. Krause', date: 'Fr, 22.04.', hours: '+2h 15m', reason: 'Baustelle Hammerhof · Verputz fertig gestellt', status: 'pending' },
+                        { name: 'S. Weber', date: 'Do, 21.04.', hours: '+1h 30m', reason: 'Noteinsatz · Heizungsausfall Kunde Müller', status: 'approved' },
+                    ].map((r) => (
+                        <li class="bg-bg-inset border border-border-dark rounded-[1px] p-3 flex items-center gap-3 max-sm:flex-col max-sm:items-stretch max-sm:gap-2">
+                            <div class="flex-1">
+                                <div class="flex items-baseline gap-2 mb-0.5 flex-wrap">
+                                    <span class="font-sans text-[0.85rem] font-semibold text-text-primary">{r.name}</span>
+                                    <span class="font-mono text-[0.65rem] text-text-muted tabular-nums">{r.date}</span>
+                                    <span class="font-mono text-[0.8rem] font-semibold text-accent-red tabular-nums">{r.hours}</span>
+                                </div>
+                                <div class="text-[0.75rem] text-text-secondary leading-snug">{r.reason}</div>
+                            </div>
+                            {r.status === 'pending' ? (
+                                <div class="flex gap-1.5 shrink-0">
+                                    <button class="bg-pass text-white font-mono text-[0.6rem] tracking-[0.1em] uppercase font-semibold px-3 py-1.5 rounded-[1px]" aria-label="Genehmigen">✓ Genehmigen</button>
+                                    <button class="bg-bg-base border border-border-mid text-text-muted font-mono text-[0.6rem] tracking-[0.1em] uppercase font-semibold px-3 py-1.5 rounded-[1px]" aria-label="Ablehnen">Ablehnen</button>
+                                </div>
+                            ) : (
+                                <span class="font-mono text-[0.6rem] tracking-[0.12em] uppercase font-semibold text-pass shrink-0 max-sm:self-start">✓ Genehmigt</span>
+                            )}
+                        </li>
+                    ))}
+                </ul>
+            </div>
+        </div>
+
+        <div class="mt-8 flex items-center gap-3 justify-center flex-wrap max-sm:flex-col max-sm:items-start max-sm:px-2">
+            <span class="font-mono text-[0.55rem] text-text-muted tracking-[0.14em] uppercase shrink-0">Besonders relevant für</span>
+            <div class="flex gap-1.5 flex-wrap">
+                {['Handwerk', 'Außendienst', 'Pflege', 'Gastronomie', 'Bau', 'Logistik'].map((t) => (
+                    <span class="font-mono text-[0.65rem] text-text-primary bg-bg-base border border-border-mid rounded-[1px] px-2 py-1 tracking-[0.04em]">{t}</span>
+                ))}
+            </div>
+        </div>
+    </div>
+</Section>
+
+<!-- Pricing -->
+<Section id="tarife" gray>
+    <SectionHeader subtitle="Einmal zahlen, dauerhaft nutzen. Ein Jahr Updates inklusive — danach 150 €/Jahr pauschal, unabhängig von deiner Teamgröße.">Preise, <span class="text-accent-red">einmalig</span></SectionHeader>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 max-w-[1100px] mx-auto reveal-stagger mb-6">
+        {tiers.map((t) => (
+            <div class:list={[
+                'bg-bg-base border rounded-[2px] p-5 max-sm:p-4 shadow-[0_2px_4px_rgba(0,0,0,0.05)] relative flex flex-col',
+                t.highlight ? 'border-accent-red shadow-[0_4px_16px_rgba(196,30,58,0.15)]' : 'border-border-mid'
+            ]}>
+                {t.highlight && <span class="absolute -top-2.5 left-4 bg-accent-red text-white font-mono text-[0.5rem] tracking-[0.14em] uppercase font-semibold px-2 py-1 rounded-[1px]">Beliebt</span>}
+                <div class="font-mono text-[0.6rem] text-text-muted tracking-[0.14em] uppercase mb-1">{t.name}</div>
+                <div class="text-[0.7rem] text-text-muted mb-3">{t.size}</div>
+                <div class="flex items-baseline gap-1.5 mb-1">
+                    <span class="font-display text-3xl font-bold text-text-primary">{t.price}</span>
+                </div>
+                <div class="font-mono text-[0.6rem] text-text-muted tracking-[0.06em]">einmalig · Festpreis</div>
+            </div>
+        ))}
+    </div>
+
+    <div class="max-w-[860px] mx-auto bg-bg-base border border-border-mid rounded-[2px] p-5 max-sm:p-4 shadow-[0_2px_4px_rgba(0,0,0,0.05)] mb-6 flex items-center justify-between gap-4 max-sm:flex-col max-sm:items-start">
+        <div>
+            <div class="font-mono text-[0.55rem] text-accent-red tracking-[0.14em] uppercase font-semibold mb-1">Updates ab Jahr 2 · optional</div>
+            <div class="font-sans text-[0.95rem] text-text-primary leading-snug max-sm:text-[0.9rem]">Security- und Bugfix-Updates, Zugang zu neuen Features — für alle Tarife gleich.</div>
+        </div>
+        <div class="flex items-baseline gap-2 shrink-0">
+            <span class="font-display text-3xl font-bold text-text-primary">150 €</span>
+            <span class="font-mono text-[0.65rem] text-text-muted tracking-[0.06em]">pro Jahr · pauschal</span>
+        </div>
+    </div>
+
+    <div class="max-w-[860px] mx-auto bg-bg-base border border-border-mid rounded-[2px] p-5 max-sm:p-4 shadow-[0_2px_4px_rgba(0,0,0,0.05)]">
+        <div class="font-mono text-[0.55rem] text-accent-red tracking-[0.14em] uppercase font-semibold mb-3">Jeder Tarif enthält</div>
+        <ul class="list-none grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-2">
+            {tierIncludes.map((item) => (
+                <li class="flex items-start gap-2 text-[0.85rem] text-text-secondary leading-snug">
+                    <span class="text-pass mt-0.5 font-bold shrink-0" aria-hidden="true">✓</span> {item}
+                </li>
+            ))}
+        </ul>
+    </div>
+
+    <div class="flex justify-center gap-3 mt-8 max-sm:flex-col max-sm:items-center">
+        <Button href="mailto:stempel@redline.sh">
+            <span>Tarif anfragen</span><span aria-hidden="true">→</span>
+        </Button>
+        <Button href="mailto:stempel@redline.sh?subject=Stempel%20Installation" variant="secondary">Installation anfragen</Button>
+    </div>
+
+    <p class="text-center text-[0.75rem] text-text-muted mt-6 max-w-[620px] mx-auto leading-snug">Alle Preise zzgl. USt. Stempel läuft auf jedem PHP-fähigen Webspace — du brauchst keinen eigenen Server. Updates ab Jahr 2 sind optional; die Software bleibt voll funktionsfähig, auch ohne Verlängerung.</p>
+</Section>
+
+<!-- FAQ -->
+<Section id="faq">
+    <SectionHeader subtitle="Was Interessenten uns am häufigsten fragen.">Häufige <span class="text-accent-red">Fragen</span></SectionHeader>
+    <div class="max-w-[800px] mx-auto flex flex-col gap-3">
+        {faqs.map((faq, i) => <FaqItem question={faq.q} answer={faq.a} index={i} />)}
+    </div>
+</Section>
+
+<!-- CTA -->
+<section class="text-center py-16 max-sm:py-11 px-5 border-t border-border-dark" id="kontakt">
+    <div class="max-w-[1200px] mx-auto">
+        <h2 class="font-display text-[clamp(1.3rem,3vw,2.25rem)] mb-3 font-bold tracking-tight">Stempel, <span class="text-accent-red">testen</span>?</h2>
+        <p class="text-text-secondary max-w-[520px] mx-auto mb-6 text-[0.95rem] leading-relaxed">Schreib uns deine Teamgröße und Anforderungen — du bekommst innerhalb eines Werktags ein konkretes Angebot plus optionalen Demo-Zugang zum Testen.</p>
+        <div class="flex justify-center gap-3 mb-5 max-sm:flex-col max-sm:items-center max-sm:px-4">
+            <Button href="mailto:stempel@redline.sh" size="lg">
+                <span>Angebot anfordern</span><span aria-hidden="true">→</span>
+            </Button>
+            <Button href="#tarife" variant="secondary" size="lg">Preise ansehen</Button>
+        </div>
+        <p class="text-text-muted text-[0.75rem]">
+            Fragen? <a href="mailto:stempel@redline.sh" class="underline hover:text-accent-red">stempel@redline.sh</a>
+        </p>
+    </div>
+</section>
+</main>
+
+<Footer />
+
+<script>
+const observer = new IntersectionObserver(
+  (entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  },
+  { threshold: 0.1, rootMargin: '0px 0px -40px 0px' }
+);
+
+document.querySelectorAll('.reveal, .reveal-stagger, .faq-reveal').forEach((el) => {
+  observer.observe(el);
+});
+
+const sec = document.querySelector('.stempel-seconds');
+if (sec && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+  let s = 42;
+  setInterval(() => {
+    s = (s + 1) % 60;
+    sec.textContent = String(s).padStart(2, '0');
+  }, 1000);
+}
+</script>
+
+</Layout>

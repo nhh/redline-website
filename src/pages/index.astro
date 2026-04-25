@@ -14,42 +14,44 @@ import MetricBar from '../components/MetricBar.astro';
 import Footer from '../components/Footer.astro';
 
 const problems = [
-  { id: 'ISSUE-001', icon: '■', title: 'Agenturen verkaufen Theorie', body: 'Klassische Webagenturen präsentieren Konzepte, Moodboards und Wireframes. Du bezahlst <strong>bevor du etwas Echtes siehst</strong>. Wochen vergehen, tausende Euro fließen — und am Ende passt es vielleicht nicht.' },
-  { id: 'ISSUE-002', icon: '▲', title: 'KI allein liefert Mittelmaß', body: 'KI kann Code schreiben und Layouts erzeugen. Aber sie versteht nicht, warum ein Besucher bei dir kaufen soll. Sie kennt deine Marke nicht, deine Zielgruppe nicht, dein Geschäftsmodell nicht. <strong>Ohne jemanden, der sie steuert, produziert sie nur hübschen Durchschnitt.</strong>' },
-  { id: 'ISSUE-003', icon: '◆', title: 'Kaufen im Blindflug', body: 'Ob 3.000 € oder 30.000 € — du weißt erst nach Monaten, ob sich die Investition gelohnt hat. <strong>Kein anderer Dienstleister</strong> erwartet, dass du ein Produkt kaufst, das du vorher nicht sehen kannst.' },
-  { id: 'ISSUE-004', icon: '●', title: 'Fehlende Iteration', body: 'KI generiert einen Entwurf — aber sie weiß nicht, ob er funktioniert. Sie testet nicht, sie hinterfragt nicht, sie optimiert nicht. <strong>Ohne menschliche Iteration</strong> bleibt das Ergebnis am Ausgangspunkt stehen.' },
+  { id: 'ISSUE-001', icon: '■', title: 'CMS-Ballast', body: '30 Plugins, 4 MB Ladelast, 3 Sekunden Wartezeit. <strong>Jede Sekunde Ladezeit kostet Conversion</strong>.' },
+  { id: 'ISSUE-002', icon: '▲', title: 'Template-Einheitsbrei', body: 'Tausende Seiten sehen aus wie deine. Die Marke verschwindet im <strong>Theme-Rauschen</strong>.' },
+  { id: 'ISSUE-003', icon: '◆', title: 'Stundensatz-Roulette', body: 'Agenturen verkaufen Zeit, nicht Ergebnis. Budgets laufen aus, <strong>die Seite ist trotzdem nicht live</strong>.' },
+  { id: 'ISSUE-004', icon: '●', title: 'Wartungs-Abo auf Ewigkeit', body: 'WordPress patchen, Plugins aktualisieren, PHP-Versionen pflegen. <strong>Die Seite ist fertig — die Rechnung nie</strong>.' },
 ];
 
 const services = [
   { id: 'SVC-001', icon: '◆', title: 'Landing Pages', description: 'Conversion-optimierte Einzelseiten für Produkte, Kampagnen oder Lead-Generierung. Schnell live, messbar wirksam.', tags: ['Astro', 'Conversion', 'Performance'] },
   { id: 'SVC-002', icon: '■', title: 'Unternehmenswebsites', description: 'Mehrseitige Auftritte, die Vertrauen aufbauen und Kompetenz kommunizieren. Klar strukturiert, inhaltlich durchdacht.', tags: ['CMS', 'Mehrsprachig', 'SEO'] },
-  { id: 'SVC-003', icon: '▲', title: 'Web-Applikationen', description: 'Interaktive Tools, Dashboards und interne Anwendungen. Wo eine Website nicht reicht und eine App zu viel wäre.', tags: ['React', 'API', 'Interaktiv'] },
-  { id: 'SVC-004', icon: '●', title: 'Relaunch & Optimierung', description: 'Deine bestehende Website funktioniert, aber performt nicht? Wir analysieren, identifizieren Hebel und setzen um.', tags: ['Audit', 'Redesign', 'Speed'] },
+  { id: 'SVC-003', icon: '▲', title: 'Web-Applikationen', description: 'Interaktive Tools, Dashboards, interne Anwendungen — wo eine Website nicht reicht und eine App zu viel wäre.', tags: ['React', 'API', 'Interaktiv'] },
+  { id: 'SVC-004', icon: '●', title: 'Relaunch & Tuning', description: 'Deine Website läuft, performt aber nicht? Wir analysieren, identifizieren die Hebel und setzen um.', tags: ['Audit', 'Redesign', 'Speed'] },
 ];
 
 const testimonials = [
-  { quote: '"Ich hatte schon zwei Agenturen beauftragt, die nach wochenlanger Konzeptphase Ergebnisse lieferten, die mich nicht überzeugten. Redline hat einfach gebaut — und es hat sofort gepasst."', name: 'Katharina Wendt', role: 'Geschäftsführerin, Wendt Consulting' },
-  { quote: '"Der kostenlose Umbau hat mich ehrlich gesagt skeptisch gemacht. Dann habe ich das Ergebnis gesehen — und sofort den Feinschliff beauftragt. Conversion liegt 40% über dem alten Auftritt."', name: 'Markus Hahn', role: 'Head of Marketing, TechScale GmbH' },
-  { quote: '"Zum ersten Mal konnte ich meinem Team eine neue Website zeigen, bevor wir auch nur einen Euro ausgegeben haben. Das hat intern sofort Vertrauen geschaffen."', name: 'Dr. Lena Fries', role: 'Gründerin, MedConnect' },
+  { quote: '"Zehn Tage vom Briefing bis zum Launch. Die alte Agentur hätte für dasselbe Monate gebraucht — und wäre noch in der Konzeptphase."', name: 'Katharina Wendt', role: 'Geschäftsführerin, Wendt Consulting' },
+  { quote: '"100 Punkte bei PageSpeed — ohne dass wir danach fragen mussten. Die Conversion liegt 40 % über unserem alten Auftritt."', name: 'Markus Hahn', role: 'Head of Marketing, TechScale GmbH' },
+  { quote: '"Direkte Kommunikation, kein Projektmanagement-Overhead, keine Handoffs zwischen Designer und Entwickler. So sollte Webentwicklung immer laufen."', name: 'Dr. Lena Fries', role: 'Gründerin, MedConnect' },
 ];
 
 const faqs = [
-  { q: 'Was kostet die Arbeitsprobe?', a: 'Nichts. Der erste Umbau ist unsere Art zu zeigen, was wir können. Kein Haken, kein Abo. Wenn dir das Ergebnis gefällt, machen wir ein Angebot für den Feinschliff. Wenn nicht, war es das.' },
-  { q: 'Was genau ist der "Feinschliff"?', a: 'Die Arbeitsprobe liefert eine solide neue Version deiner Website. Der Feinschliff macht sie perfekt: individuelle Textarbeit, Conversion-Optimierung, spezielle Funktionen, SEO-Tuning. Nur das, was du wirklich brauchst.' },
-  { q: 'Warum baut ihr zuerst?', a: 'Weil Ergebnisse mehr sagen als Pitch-Decks. Wer seine neue Website sieht, muss keine Fantasie aufbringen. KI gibt uns die Geschwindigkeit, diesen Umbau in Stunden statt Wochen umzusetzen. Aber ohne unsere Expertise würde dabei nur generischer Output entstehen — deshalb funktioniert es nur mit beidem.' },
-  { q: 'Was kostet der Feinschliff?', a: 'Abhängig vom Umfang, typischerweise zwischen 1.500 und 5.000 €. Du bekommst ein konkretes Angebot basierend auf dem, was du an der umgebauten Website noch anpassen möchtest. Festpreis, kein Stundensatz-Roulette.' },
-  { q: 'Sehen KI-Websites nicht alle gleich aus?', a: 'Ja — wenn niemand die KI steuert. Das ist genau der Punkt. KI allein produziert austauschbare Ergebnisse. Der Unterschied ist, wer ihr sagt, was sie bauen soll, was sie ändern muss und wann es gut genug ist. Das können nur Menschen mit Erfahrung. Jedes unserer Projekte ist individuell.' },
-  { q: 'Bekomme ich den Source Code?', a: 'Ja, vollständig. Der komplette Quellcode gehört dir — kein Vendor Lock-in, kein proprietäres System, kein Abo. Du kannst jederzeit selbst weiterentwickeln oder einen anderen Entwickler beauftragen.' },
-  { q: 'Brauche ich eine bestehende Website?', a: 'Für die Arbeitsprobe ja — wir brauchen eine Basis zum Umbauen. Dazu deine Wünsche und 2-3 Referenz-Websites als Orientierung. Du hast noch keine Seite? Meld dich trotzdem — wir finden eine Lösung.' },
+  { q: 'Wie lange dauert ein Projekt?', a: 'Landing Pages: 3–5 Tage. Unternehmenswebsites: 7–10 Tage. Web-Apps individuell. Wir arbeiten in klaren Meilensteinen und halten Zeitpläne ein.' },
+  { q: 'Was kostet eine Website?', a: 'Festpreis: <strong>1.000 € für das Grundgerüst (eine Seite)</strong>, plus <strong>150 € pro weiterer Unterseite</strong>. Texte und Formulierungen sind inklusive — du lieferst nur Bilder, Ideen und Inhalte. Ein 4-Seiter kostet also 1.450 €.' },
+  { q: 'Was ist die kostenlose Arbeitsprobe?', a: 'Mit 1–3 Tagen Vorlauf bauen wir ein echtes Stück deiner neuen Seite — kostenlos, unverbindlich. Du siehst unseren Stil, unseren Code, unsere Geschwindigkeit, bevor du dich bindest.' },
+  { q: 'Nutzt ihr WordPress?', a: 'Nein. Wir bauen <strong>statisch</strong> — mit Astro oder ähnlichen modernen Stacks. Das Ergebnis ist reines HTML/CSS/JS, das von einem CDN ausgeliefert wird. Schneller, sicherer, wartungsfrei. Brauchst du Redaktions-Features, binden wir ein schlankes Headless-CMS an.' },
+  { q: 'Muss ich die Website warten lassen?', a: 'Nein. Statische Websites haben <strong>nichts, was gepatcht werden müsste</strong> — keine Datenbank, kein PHP, keine Plugin-Versionen. Die Seite läuft jahrelang ohne Wartung. Content-Änderungen buchst du bei Bedarf einzeln.' },
+  { q: 'Bekomme ich den Quellcode?', a: 'Ja, vollständig. Der Code gehört dir — kein Vendor Lock-in, kein Abo, keine Blackbox. Du kannst jederzeit selbst weiterentwickeln oder einen anderen Entwickler beauftragen.' },
+  { q: 'Was kosten spätere Änderungen?', a: 'Wenn du sie selbst machen willst: nichts — du hast den Code. Wenn wir dran sollen: Aufwandsschätzung im Voraus, Festpreis, keine Retainer. Content-Änderungen typischerweise ab 80 € pro Block.' },
+  { q: 'Arbeitet ihr mit bestimmten Branchen?', a: 'Kein Branchenfokus. Wir bauen für Dienstleister, B2B, Startups, Handwerk und Industrie — überall, wo Websites verkaufen sollen.' },
+  { q: 'Habt ihr eigene Produkte?', a: 'Ja — <a href="/stempel" class="underline text-accent-red">Stempel</a>, unsere selbstgebaute Arbeitszeiterfassung. Wir bauen nicht nur für Kunden, sondern setzen die gleichen Technologien für eigene Tools ein.' },
 ];
 
 const features = [
-  'Umbau deiner Website als Arbeitsprobe',
-  'Ergebnis sehen, bevor du dich entscheidest',
-  'KI als Werkzeug — gesteuert von erfahrenen Entwicklern',
-  'Jede Entscheidung wird von Menschen getroffen und geprüft',
-  'Kein Template — individuell für dich gebaut',
+  'Statisch gebaut — keine CMS-Updates, kein Wartungs-Abo',
+  'PageSpeed 100 als Standard, nicht als Ausnahme',
+  'Festpreis — keine Stundensätze, keine Überraschungen',
+  'Ein Team für Design und Code — kein Ping-Pong, keine Handoffs',
   'Kompletter Source Code gehört dir',
+  '5–10 Tage Projektlaufzeit, klare Meilensteine',
 ];
 
 const metrics = [
@@ -59,15 +61,29 @@ const metrics = [
   { value: '0', name: 'Cumulative Layout Shift', fill: 100 },
 ];
 
-const gapLeft = ['Strategie-Workshops', 'Moodboards & Wireframes', 'User Journeys', 'Content-Konzepte', 'Abstimmungsrunden'];
-const gapRight = ['Design-Umsetzung', 'Frontend-Entwicklung', 'CMS-Integration', 'Testing & QA', 'Korrekturschleifen'];
-const agencyItems = ['Komplettes Redesign von Null', 'Neue Konzeptphase, neuer Workshop', 'Neue Informationsarchitektur', 'Neuer Content, neue Texte', '3-6 Monate Projektlaufzeit', '15.000 - 50.000 €'];
-const upgradeItems = ['Modernisierung auf bestehendem Fundament', 'Die Konzeptarbeit steckt schon in deiner Seite', 'Struktur bleibt, Darstellung wird besser', 'Bestehende Texte schärfen statt wegwerfen', 'Tage bis wenige Wochen', 'Ein Bruchteil der Kosten'];
+const agencyItems = ['Komplettes Redesign von Null', 'Neue Konzeptphase, neuer Workshop', 'Neue Informationsarchitektur', 'Neuer Content, neue Texte', '3–6 Monate Projektlaufzeit', '15.000 – 50.000 €'];
+const upgradeItems = ['Modernisierung auf bestehendem Fundament', 'Die Konzeptarbeit steckt schon in deiner Seite', 'Struktur bleibt, Darstellung wird besser', 'Bestehende Texte schärfen statt wegwerfen', '5–10 Tage', 'Ein Bruchteil der Kosten'];
+
 ---
 
-<Layout title="Redline — KI-gesteuerte Webentwicklung mit menschlicher Präzision">
+<Layout title="Redline — Websites, die wirken. Handwerklich gebaut.">
 
-<div class="bg-texture fixed inset-0 -z-10 pointer-events-none bg-linear-to-br from-white to-bg-floor"></div>
+<div class="bg-texture fixed inset-0 -z-10 pointer-events-none bg-linear-to-br from-white to-bg-floor overflow-hidden" aria-hidden="true">
+    <div class="bg-accent-glow bg-accent-glow-1"></div>
+    <div class="bg-accent-glow bg-accent-glow-2"></div>
+    <svg class="bg-snake" viewBox="0 0 1600 1000" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+            <pattern id="snakeGrid" x="0" y="0" width="80" height="80" patternUnits="userSpaceOnUse">
+                <circle cx="0" cy="0" r="0.8" fill="var(--color-accent-red)" opacity="0.18"/>
+            </pattern>
+        </defs>
+        <rect width="1600" height="1000" fill="url(#snakeGrid)"/>
+        <path class="snake snake-1" pathLength="100" d="M -40 160 L 240 160 L 240 320 L 480 320 L 480 240 L 720 240 L 720 400 L 1040 400 L 1040 560 L 1280 560"/>
+        <path class="snake snake-2" pathLength="100" d="M 1640 720 L 1360 720 L 1360 560 L 1120 560 L 1120 800 L 880 800 L 880 640 L 560 640 L 560 880 L 240 880"/>
+        <path class="snake snake-3" pathLength="100" d="M 1440 -40 L 1440 160 L 1280 160 L 1280 400 L 1520 400 L 1520 640 L 1360 640"/>
+        <path class="snake snake-4" pathLength="100" d="M 160 -40 L 160 240 L 400 240 L 400 480 L 160 480 L 160 720 L 400 720"/>
+    </svg>
+</div>
 
 <Navbar />
 
@@ -75,7 +91,7 @@ const upgradeItems = ['Modernisierung auf bestehendem Fundament', 'Die Konzeptar
 <section class="min-h-[200px] max-h-[300px] flex items-center justify-center bg-linear-to-br from-white to-bg-floor relative overflow-hidden px-8 py-8 mt-[52px] border-b border-neutral-gray md:h-[20vh]" aria-label="Marke">
     <div class="text-center z-10 relative w-full max-w-[1200px]">
         <h1 class="font-display text-[clamp(2.5rem,6vw,4.5rem)] font-bold tracking-tight text-primary-black mb-2 leading-none uppercase">Redline</h1>
-        <p class="text-[clamp(0.75rem,1.5vw,1rem)] font-light tracking-[0.3em] text-text-muted uppercase mb-4">Precision AI Engineering</p>
+        <p class="text-[clamp(0.75rem,1.5vw,1rem)] font-light tracking-[0.3em] text-text-muted uppercase mb-4">Precision Web Engineering</p>
         <div class="brand-divider w-20 h-0.5 bg-linear-to-r from-transparent via-accent-red to-transparent mx-auto relative"></div>
     </div>
 </section>
@@ -84,25 +100,24 @@ const upgradeItems = ['Modernisierung auf bestehendem Fundament', 'Die Konzeptar
 <header id="main-content" class="px-5 py-16 max-w-[900px] mx-auto text-center">
     <div>
         <div class="badge-clip inline-flex items-center gap-2 bg-bg-base border border-border-dark px-2.5 py-1 font-mono text-[0.55rem] text-text-muted mb-5 font-medium tracking-[0.1em] uppercase shadow-[0_1px_2px_rgba(0,0,0,0.08)]">
-            Mensch + KI · Ergebnis vor Angebot
+            Statisch · Wartungsfrei · Festpreis
         </div>
-        <h2 class="font-display text-[clamp(2rem,5vw,4rem)] font-bold leading-[1.15] mb-3.5 tracking-tight text-primary-black">Wir reden nicht. Wir <span class="text-accent-red">bauen.</span></h2>
-        <p class="text-lg text-text-secondary mb-3.5">Deine Website, neu gedacht — als <span class="text-accent-red">Arbeitsprobe</span>.</p>
-        <p class="text-[1rem] text-text-secondary mb-7 max-w-[640px] leading-relaxed mx-auto">
-            KI kann Websites generieren. Aber <strong>ohne uns steuert sie im Blindflug</strong>.
-            Wir verbinden jahrelange Web-Expertise mit KI-Geschwindigkeit — und bauen deine bestehende Seite um, bevor du dich entscheidest. Kein Konzept. Ein <strong>Ergebnis</strong>.
+        <h2 class="font-display text-[clamp(2rem,5vw,4rem)] font-bold leading-[1.15] mb-3.5 tracking-tight text-primary-black">Websites, die <span class="text-accent-red">wirken.</span></h2>
+        <p class="text-lg text-text-secondary mb-3.5">Statisch gebaut. <span class="text-accent-red">Wartungsfrei</span>. Schnell.</p>
+        <p class="text-[1rem] text-text-secondary mb-7 max-w-[620px] leading-relaxed mx-auto">
+            Keine CMS-Updates, keine Plugin-Patches, kein Wartungs-Abo. Wir bauen statische Websites — als HTML vom CDN ausgeliefert. <strong>Gebaut, übergeben, fertig.</strong>
         </p>
         <div class="flex gap-3 mb-10 max-sm:flex-col justify-center">
             <Button href="#kontakt">
-                <span>Arbeitsprobe anfragen</span><span aria-hidden="true">→</span>
+                <span>Projekt anfragen</span><span aria-hidden="true">→</span>
             </Button>
-            <Button href="#prozess" variant="secondary">So funktioniert's</Button>
+            <Button href="#prozess" variant="secondary">So arbeiten wir</Button>
         </div>
         <div class="flex max-sm:flex-col bg-bg-base border border-border-mid rounded-[1px] overflow-hidden shadow-[0_2px_4px_rgba(0,0,0,0.06)]" role="list" aria-label="Kennzahlen">
             {[
-              { label: 'METRIC-A', value: '3x', text: 'Schneller als klassisch' },
-              { label: 'METRIC-B', value: '100%', text: 'Ergebnis vorab' },
-              { label: 'METRIC-C', value: '0', text: 'Konzept-PDFs' },
+              { label: 'METRIC-A', value: '100', text: 'PageSpeed-Score' },
+              { label: 'METRIC-B', value: '5–10T', text: 'Bis Go-Live' },
+              { label: 'METRIC-C', value: '0', text: 'Stundensatz-Roulette' },
             ].map((stat, i, arr) => (
                 <div class:list={['py-4 px-5 text-left relative flex-1', i < arr.length - 1 && 'border-r max-sm:border-r-0 max-sm:border-b border-border-dark']} role="listitem">
                     <span class="absolute top-1.5 left-2 font-mono text-[0.45rem] text-text-muted tracking-[0.1em] uppercase">{stat.label}</span>
@@ -117,7 +132,7 @@ const upgradeItems = ['Modernisierung auf bestehendem Fundament', 'Die Konzeptar
 <main>
 <!-- Problem -->
 <Section id="problem" gray>
-    <SectionHeader subtitle="KI ist mächtig. Aber ohne Erfahrung, die sie lenkt, ist sie nur ein schneller Zufallsgenerator.">Das <span class="text-accent-red">Problem</span> mit Webprojekten</SectionHeader>
+    <SectionHeader subtitle="Warum die meisten Websites nicht verkaufen — und wir es anders machen.">Das <span class="text-accent-red">Problem</span> mit Webprojekten</SectionHeader>
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-6 reveal-stagger">
         {problems.map((p) => (
             <Card id={p.id}>
@@ -129,60 +144,8 @@ const upgradeItems = ['Modernisierung auf bestehendem Fundament', 'Die Konzeptar
     </div>
 </Section>
 
-<!-- Gap -->
-<Section id="gap">
-    <SectionHeader subtitle="Warum die meisten Webprojekte scheitern oder 3x so lange dauern — und wie wir mit KI das ändern.">Der <span class="text-accent-red">Gap</span> zwischen Idee und Website</SectionHeader>
-    <div class="grid grid-cols-1 lg:grid-cols-[1fr_auto_1fr] mb-10 reveal">
-        <div class="flex">
-            <Card id="GAP-LEFT" hover={false} class="flex-1 flex flex-col">
-                <div class="font-mono text-[0.6rem] font-semibold uppercase tracking-[0.12em] px-4 py-3 border-b border-border-dark text-text-muted bg-bg-base">Konzeption</div>
-                <ul class="px-4 py-3 flex-1 list-none">
-                    {gapLeft.map((item, i) => (
-                        <li class:list={['text-[0.8rem] max-sm:text-[0.75rem] text-text-secondary py-1.5', i < gapLeft.length - 1 && 'border-b border-border-dark']}>◆ {item}</li>
-                    ))}
-                </ul>
-                <div class="font-mono text-[0.55rem] text-text-muted tracking-[0.08em] uppercase px-4 py-2.5 border-t border-border-dark bg-bg-inset text-center">Wochen 1-6</div>
-            </Card>
-        </div>
-        <div class="flex flex-col items-center justify-center px-6 py-6 lg:py-0 min-w-[180px] max-lg:min-w-0">
-            <div class="text-center py-4">
-                <div class="font-mono text-[0.65rem] font-bold tracking-[0.1em] uppercase text-accent-red mb-2">Der Gap</div>
-                <p class="text-[0.75rem] text-text-muted leading-snug max-w-[160px] max-lg:max-w-full">Wochen bis Monate, in denen aus Theorie Realität werden muss. Hier scheitern Budgets, Timelines und Erwartungen.</p>
-            </div>
-            <div class="my-2" aria-hidden="true">
-                <svg viewBox="0 0 40 80" width="40" height="80"><path d="M20,5 L20,55" stroke="var(--color-accent-red)" stroke-width="2" fill="none" stroke-dasharray="4,4" class="arrow-gap-anim"/><polygon points="20,65 14,52 26,52" fill="var(--color-accent-red)"/></svg>
-            </div>
-            <div class="flex items-center gap-2 bg-pass-muted border border-pass-border rounded-[1px] px-3 py-2">
-                <span class="text-pass text-[0.9rem]" aria-hidden="true">◉</span>
-                <span class="font-mono text-[0.55rem] font-semibold tracking-[0.08em] uppercase text-pass">Wir + KI schließen den Gap</span>
-            </div>
-        </div>
-        <div class="flex">
-            <Card id="GAP-RIGHT" hover={false} class="flex-1 flex flex-col">
-                <div class="font-mono text-[0.6rem] font-semibold uppercase tracking-[0.12em] px-4 py-3 border-b border-border-dark text-text-muted bg-bg-base">Umsetzung</div>
-                <ul class="px-4 py-3 flex-1 list-none">
-                    {gapRight.map((item, i) => (
-                        <li class:list={['text-[0.8rem] max-sm:text-[0.75rem] text-text-secondary py-1.5', i < gapRight.length - 1 && 'border-b border-border-dark']}>◆ {item}</li>
-                    ))}
-                </ul>
-                <div class="font-mono text-[0.55rem] text-text-muted tracking-[0.08em] uppercase px-4 py-2.5 border-t border-border-dark bg-bg-inset text-center">Wochen 7-14</div>
-            </Card>
-        </div>
-    </div>
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 reveal-stagger">
-        <div class="bg-bg-base border border-neutral-gray rounded-lg p-5 shadow-[0_2px_4px_rgba(0,0,0,0.05)]">
-            <h3 class="font-sans text-[0.75rem] font-semibold uppercase tracking-[0.08em] mb-2 text-text-primary">Das klassische Problem</h3>
-            <p class="text-[0.85rem] text-text-secondary leading-relaxed">Zwischen Konzeption und fertiger Website liegen <strong>Wochen der Übersetzungsarbeit</strong>. Designer interpretieren das Konzept. Entwickler interpretieren das Design. Bei jeder Übergabe geht Intention verloren. Am Ende sieht die Website anders aus als gedacht — und das Budget ist aufgebraucht.</p>
-        </div>
-        <div class="bg-pass-muted border border-pass-border rounded-lg p-5">
-            <h3 class="font-sans text-[0.75rem] font-semibold uppercase tracking-[0.08em] mb-2 text-text-primary">Wie wir mit KI den Gap schließen</h3>
-            <p class="text-[0.85rem] text-text-secondary leading-relaxed">Wir nutzen KI als Werkzeug, um aus einer Idee <strong>in Stunden einen funktionierenden Prototyp</strong> zu bauen. Aber die KI entscheidet nicht — wir entscheiden. Welches Layout funktioniert, welcher Text überzeugt, welche Struktur konvertiert. Das ist Erfahrung, kein Algorithmus. Fehler fallen sofort auf, Korrekturen kosten Minuten statt Sprints.</p>
-        </div>
-    </div>
-</Section>
-
 <!-- Modernisierung -->
-<Section id="modernisierung" gray>
+<Section id="modernisierung">
     <SectionHeader subtitle="Die meisten Websites brauchen keinen Neuanfang. Sie brauchen ein Upgrade.">Deine Website ist besser als du <span class="text-accent-red">denkst</span></SectionHeader>
     <div class="flex flex-col gap-8">
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6 reveal-stagger">
@@ -203,86 +166,106 @@ const upgradeItems = ['Modernisierung auf bestehendem Fundament', 'Die Konzeptar
                 </ul>
             </Card>
         </div>
-        <div class="max-w-[720px] mx-auto">
-            <p class="text-text-secondary text-[0.95rem] max-sm:text-[0.85rem] leading-relaxed mb-3.5 text-center max-md:text-left">Deine Website hat bereits <strong>Konzeptionsphasen durchlaufen</strong>. Jemand hat sich Gedanken über Struktur, Inhalte und Zielgruppe gemacht. Diese Arbeit ist nicht wertlos — sie ist das Fundament.</p>
-            <p class="text-text-secondary text-[0.95rem] max-sm:text-[0.85rem] leading-relaxed mb-3.5 text-center max-md:text-left">Trotzdem will dir jede Agentur einen <strong>kompletten Relaunch verkaufen</strong>. Neues Konzept, neues Design, neuer Content. Von vorn. Nicht weil es nötig wäre, sondern weil sich damit mehr Geld verdienen lässt.</p>
-            <p class="text-text-secondary text-[0.95rem] max-sm:text-[0.85rem] leading-relaxed text-center max-md:text-left">Die Wahrheit: In den meisten Fällen reicht eine <strong>gezielte Modernisierung</strong>. KI gibt uns die Geschwindigkeit dafür — aber nur unsere Erfahrung entscheidet, was bleibt, was sich ändert und warum. Aufbauen auf dem, was da ist — statt alles wegzuwerfen und bei Null zu starten.</p>
+        <div class="max-w-[680px] mx-auto">
+            <p class="text-text-secondary text-[0.95rem] max-sm:text-[0.85rem] leading-relaxed text-center max-md:text-left">Deine Website hat schon <strong>Konzept, Struktur und Inhalt</strong> — das ist das Fundament. Statt alles wegzuwerfen, modernisieren wir gezielt, was bleibt, und ersetzen, was nicht mehr trägt.</p>
         </div>
     </div>
 </Section>
 
-<!-- Ansatz -->
-<Section id="ansatz">
-    <SectionHeader subtitle="Wir zeigen, was wir können — bevor du dich entscheidest.">Ergebnis vor <span class="text-accent-red">Angebot</span></SectionHeader>
-    <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 items-start reveal">
-        <div>
-            <h3 class="font-sans text-[1.05rem] mb-3.5 font-semibold">Deine Website als Arbeitsprobe</h3>
-            <p class="text-text-secondary mb-3.5 leading-relaxed text-[0.95rem]">Wir nehmen deine bestehende Website und bauen sie um — als <strong>Demonstration unserer Arbeit</strong>. Die KI liefert die Geschwindigkeit, aber <strong>wir liefern die Richtung</strong>: Welche Struktur überzeugt, welcher Ton zu deiner Marke passt, was einen Besucher zum Kunden macht.</p>
-            <p class="text-text-secondary mb-3.5 leading-relaxed text-[0.95rem]">Ohne unsere Steuerung wäre das Ergebnis generisch. Mit unserer Erfahrung wird es <strong>ein Produkt, das es schon gibt</strong> — bevor du dich entscheidest.</p>
-            <p class="text-text-secondary mb-3.5 leading-relaxed text-[0.95rem]">Klassische Agenturen verkaufen Versprechen. KI-Tools liefern Durchschnitt. Wir verkaufen <strong>geprüfte Ergebnisse</strong>.</p>
-            <ul class="list-none mb-4 bg-bg-base border border-border-mid rounded-[1px] p-1.5 shadow-[0_1px_2px_rgba(0,0,0,0.08)]" role="list">
-                {features.map((f, i) => (
-                    <li class:list={['py-1.5 px-2.5 flex items-center gap-2.5 text-text-secondary text-[0.85rem]', i < features.length - 1 && 'border-b border-border-dark']}>
-                        <span class="text-pass font-bold text-[0.8rem]" aria-hidden="true">✓</span> {f}
-                    </li>
-                ))}
-            </ul>
-        </div>
-        <div class="bg-bg-base border border-border-mid rounded-[1px] p-5 shadow-[0_2px_4px_rgba(0,0,0,0.06)]" aria-label="Ablaufdiagramm" role="figure">
-            <div class="font-mono text-[0.55rem] text-text-muted text-center mb-5 tracking-[0.14em] font-medium uppercase pb-3.5 border-b border-border-dark">Ablauf: Ergebnis vor Angebot · REV-2.1</div>
-            {[
-              [{ bg: 'bg-bg-inset border-border-dark', icon: '▶', label: 'Deine URL' }, { bg: 'bg-red-muted border-red-dark', icon: '◉', label: 'KI-Umbau' }, { bg: 'bg-pass-muted border-pass-border', icon: '✓', label: 'Ergebnis' }],
-              [{ bg: 'bg-pass-muted border-pass-border', icon: '✓', label: 'Launch' }, { bg: 'bg-red-muted border-red-dark', icon: '⚙', label: 'Feinschliff' }, { bg: 'bg-bg-inset border-border-dark', icon: '◈', label: 'Angebot' }],
-            ].map((row, ri) => (
-                <div class:list={['flex items-center justify-center gap-1.5 flex-wrap', ri === 0 ? 'mb-2.5' : 'mt-2.5']}>
-                    {row.map((step, si) => (
-                        <Fragment>
-                            {si > 0 && <span class="text-steel-mid text-[0.9rem] font-bold" aria-hidden="true">{ri === 0 ? '→' : '←'}</span>}
-                            <div class={`${step.bg} border rounded-[1px] p-2.5 text-center min-w-[65px] md:min-w-[75px]`}>
-                                <div class="text-[0.9rem] mb-1 text-steel-light" aria-hidden="true">{step.icon}</div>
-                                <div class="text-[0.45rem] md:text-[0.5rem] text-text-muted uppercase tracking-[0.06em] font-medium">{step.label}</div>
-                            </div>
-                        </Fragment>
-                    ))}
-                </div>
+<!-- Was uns ausmacht -->
+<Section id="warum" gray>
+    <SectionHeader subtitle="Der Deal in sechs Punkten.">Was du <span class="text-accent-red">bekommst</span></SectionHeader>
+    <div class="max-w-[760px] mx-auto reveal">
+        <ul class="list-none bg-bg-base border border-border-mid rounded-[1px] p-1.5 shadow-[0_1px_2px_rgba(0,0,0,0.08)]" role="list">
+            {features.map((f, i) => (
+                <li class:list={['py-2 px-3 flex items-center gap-2.5 text-text-secondary text-[0.9rem]', i < features.length - 1 && 'border-b border-border-dark']}>
+                    <span class="text-pass font-bold text-[0.8rem]" aria-hidden="true">✓</span> {f}
+                </li>
             ))}
-        </div>
+        </ul>
     </div>
 </Section>
 
 <!-- Prozess -->
-<Section id="prozess" gray>
-    <SectionHeader subtitle="Du gibst uns deine URL. Wir liefern das Ergebnis. Dann reden wir.">So <span class="text-accent-red">funktioniert's</span></SectionHeader>
+<Section id="prozess">
+    <SectionHeader subtitle="Drei Schritte. Keine Konzeptphase, keine Handoffs, keine Moodboard-Schleifen.">So <span class="text-accent-red">arbeiten</span> wir</SectionHeader>
     <div class="flex flex-col gap-3.5 reveal-stagger">
-        <StepCard num="01" batch="PHASE-01" title="Du schickst uns drei Dinge">
-            <p class="text-text-secondary mb-2 leading-relaxed text-[0.9rem] max-sm:text-[0.8rem]"><strong>Deine URL</strong>, deine Anpassungswünsche und <strong>2-3 Websites, die dir gefallen</strong> — als Orientierung für Stil und Richtung. Kein Briefing-Marathon, kein Workshop, kein 20-Seiten-Fragebogen.</p>
-            <p class="text-text-secondary leading-relaxed text-[0.9rem] max-sm:text-[0.8rem]">Das reicht uns, um loszulegen.</p>
+        <StepCard num="01" batch="PHASE-01" title="Bestand analysieren">
+            <p class="text-text-secondary leading-relaxed text-[0.9rem] max-sm:text-[0.8rem]">Wir sehen uns <strong>deine bestehende Website</strong> an, identifizieren Lücken, Performance-Probleme und ungenutzte Chancen. Am Ende steht ein klarer Befund — keine 40-Seiten-Strategie.</p>
         </StepCard>
-        <StepCard num="02" batch="PHASE-02" title="Wir bauen deine Website um">
-            <p class="text-text-secondary mb-2 leading-relaxed text-[0.9rem] max-sm:text-[0.8rem]">Wir setzen KI ein, um in kurzer Zeit eine <strong>neue Version deiner Website</strong> zu erstellen. Aber die KI baut nicht allein — wir geben jede Richtung vor, prüfen jedes Ergebnis und korrigieren, was nicht passt. Nicht ein Mockup. Eine funktionierende Seite.</p>
-            <p class="text-text-secondary leading-relaxed text-[0.9rem] max-sm:text-[0.8rem]">Das dauert Tage statt Monate — weil KI unter unserer Anleitung schneller ist als jedes klassische Team.</p>
+        <StepCard num="02" batch="PHASE-02" title="Neu bauen mit deinen Wünschen">
+            <p class="text-text-secondary leading-relaxed text-[0.9rem] max-sm:text-[0.8rem]">Wir bauen die <strong>verbesserte Website</strong> — inklusive deiner Individualisierungswünsche. Du lieferst Bilder, Ideen und Inhalte. Den Rest machen wir.</p>
         </StepCard>
-        <StepCard num="03" batch="PHASE-03" title="Du siehst das Ergebnis — wir machen ein Angebot">
-            <p class="text-text-secondary mb-2 leading-relaxed text-[0.9rem] max-sm:text-[0.8rem]">Während andere Agenturen dir ein PDF mit Konzeptideen schicken, <strong>hast du bei uns bereits eine funktionierende Website vor dir</strong>. Du klickst durch, prüfst, vergleichst. Keine Vorstellungskraft nötig.</p>
-            <p class="text-text-secondary leading-relaxed text-[0.9rem] max-sm:text-[0.8rem]">Auf dieser Basis machen wir dir ein Angebot für den Feinschliff. Du weißt genau, was du kaufst — weil du es schon siehst.</p>
+        <StepCard num="03" batch="PHASE-03" title="Launch & Tuning">
+            <p class="text-text-secondary leading-relaxed text-[0.9rem] max-sm:text-[0.8rem]">Performance, SEO, Analytics. <strong>Wir gehen nicht live, bis PageSpeed 100 zeigt.</strong> Danach: übergeben, Source-Code inklusive.</p>
         </StepCard>
-        <StepCard num="04" batch="PHASE-04" title="Feinschliff & Go-Live">
-            <p class="text-text-secondary mb-2 leading-relaxed text-[0.9rem] max-sm:text-[0.8rem]">Unser Angebot deckt den letzten Schliff: <strong>Texte schärfen, Conversion optimieren, individuelle Wünsche einbauen, Performance tunen.</strong> Kein Pauschalpaket — nur das, was den Unterschied zwischen gut und exzellent macht.</p>
-            <p class="text-text-secondary leading-relaxed text-[0.9rem] max-sm:text-[0.8rem]">Du kaufst keine Theorie. Du kaufst die Veredelung eines Produkts, das du schon kennst.</p>
-        </StepCard>
+    </div>
+
+    <div class="max-w-[760px] mx-auto mt-8 reveal">
+        <div class="bg-bg-base border border-accent-red rounded-[2px] px-5 py-4 max-sm:px-4 max-sm:py-3.5 flex items-start gap-4 shadow-[0_4px_16px_rgba(196,30,58,0.10)]">
+            <div class="font-mono text-[0.55rem] text-accent-red tracking-[0.14em] uppercase font-semibold shrink-0 mt-0.5 whitespace-nowrap">Arbeitsprobe · gratis</div>
+            <div class="flex-1">
+                <p class="text-[0.9rem] max-sm:text-[0.85rem] text-text-secondary leading-snug">Unsicher, ob es passt? Mit <strong class="text-text-primary">1–3 Tagen Vorlauf</strong> bauen wir eine kostenlose Arbeitsprobe — ein echtes Stück deiner neuen Seite, bevor du dich entscheidest.</p>
+            </div>
+            <a href="#kontakt" class="font-mono text-[0.6rem] tracking-[0.12em] uppercase font-semibold text-accent-red whitespace-nowrap shrink-0 mt-1 hover:underline max-sm:hidden">Anfragen →</a>
+        </div>
     </div>
 </Section>
 
 <!-- Services -->
-<Section id="leistungen">
+<Section id="leistungen" gray>
     <SectionHeader subtitle="Kein Full-Service-Bauchladen. Fokus auf das, was wir exzellent können.">Was wir <span class="text-accent-red">bauen</span></SectionHeader>
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-6 reveal-stagger">
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-6 reveal-stagger mb-12">
         {services.map((svc) => <ServiceCard {...svc} />)}
+    </div>
+
+    <!-- Preise -->
+    <div id="preise" class="max-w-[960px] mx-auto reveal">
+        <div class="text-center mb-6">
+            <div class="font-mono text-[0.55rem] text-text-muted tracking-[0.14em] uppercase mb-2">Preise · Festpreis</div>
+            <h3 class="font-display text-2xl max-sm:text-xl font-bold mb-2 leading-tight">Transparent. <span class="text-accent-red">Einfach.</span></h3>
+            <p class="text-text-secondary text-[0.95rem] max-sm:text-[0.9rem] max-w-[600px] mx-auto leading-relaxed">Du zahlst ein Grundgerüst und bezahlst pro weiterer Unterseite. Formulierungen inklusive — du lieferst nur Bilder, Ideen und Inhalt.</p>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div class="bg-bg-base border border-border-mid rounded-[2px] p-6 max-sm:p-5 shadow-[0_2px_4px_rgba(0,0,0,0.05)]">
+                <div class="font-mono text-[0.55rem] text-text-muted tracking-[0.14em] uppercase mb-2">Basis</div>
+                <div class="flex items-baseline gap-2 mb-1">
+                    <span class="font-display text-4xl font-bold text-text-primary">1.000 €</span>
+                    <span class="font-mono text-[0.65rem] text-text-muted">Festpreis</span>
+                </div>
+                <div class="text-[0.75rem] text-text-muted mb-4">Grundgerüst · eine Seite</div>
+                <ul class="list-none flex flex-col gap-1.5 text-[0.85rem] text-text-secondary">
+                    <li class="flex items-start gap-2"><span class="text-pass font-bold mt-0.5" aria-hidden="true">✓</span> Design, Entwicklung, Launch</li>
+                    <li class="flex items-start gap-2"><span class="text-pass font-bold mt-0.5" aria-hidden="true">✓</span> Texte & Formulierungen inklusive</li>
+                    <li class="flex items-start gap-2"><span class="text-pass font-bold mt-0.5" aria-hidden="true">✓</span> PageSpeed 100 &amp; responsives Layout</li>
+                    <li class="flex items-start gap-2"><span class="text-pass font-bold mt-0.5" aria-hidden="true">✓</span> Source-Code gehört dir</li>
+                </ul>
+            </div>
+            <div class="bg-bg-base border border-accent-red rounded-[2px] p-6 max-sm:p-5 shadow-[0_4px_16px_rgba(196,30,58,0.12)] relative">
+                <span class="absolute -top-2.5 left-5 bg-accent-red text-white font-mono text-[0.55rem] tracking-[0.14em] uppercase font-semibold px-2 py-1 rounded-[1px]">Pro Unterseite</span>
+                <div class="font-mono text-[0.55rem] text-text-muted tracking-[0.14em] uppercase mb-2">Erweiterung</div>
+                <div class="flex items-baseline gap-2 mb-1">
+                    <span class="font-display text-4xl font-bold text-text-primary">150 €</span>
+                    <span class="font-mono text-[0.65rem] text-text-muted">pro Unterseite</span>
+                </div>
+                <div class="text-[0.75rem] text-text-muted mb-4">Additiv zum Grundgerüst</div>
+                <ul class="list-none flex flex-col gap-1.5 text-[0.85rem] text-text-secondary">
+                    <li class="flex items-start gap-2"><span class="text-pass font-bold mt-0.5" aria-hidden="true">✓</span> Neues Layout oder Variante</li>
+                    <li class="flex items-start gap-2"><span class="text-pass font-bold mt-0.5" aria-hidden="true">✓</span> Texte passend zur Seite</li>
+                    <li class="flex items-start gap-2"><span class="text-pass font-bold mt-0.5" aria-hidden="true">✓</span> In Navigation integriert</li>
+                    <li class="flex items-start gap-2"><span class="text-pass font-bold mt-0.5" aria-hidden="true">✓</span> Gleiche Performance-Garantie</li>
+                </ul>
+            </div>
+        </div>
+        <div class="mt-6 bg-bg-base border border-border-dark rounded-[1px] px-4 py-3 flex items-start gap-3 max-w-[720px] mx-auto">
+            <span class="font-mono text-[0.6rem] text-accent-red tracking-[0.12em] uppercase font-semibold shrink-0 mt-0.5">Du lieferst</span>
+            <span class="text-[0.85rem] text-text-secondary leading-snug">Bilder, Ideen, Inhalte. <strong class="text-text-primary">Alles andere machen wir.</strong> Beispiel: 4-Seiter komplett = 1.000 € + 3 × 150 € = <strong class="text-text-primary">1.450 €</strong>.</span>
+        </div>
     </div>
 </Section>
 
 <!-- PageSpeed -->
-<Section id="performance" gray>
+<Section id="performance">
     <SectionHeader subtitle="Unsere Websites bestehen den Google PageSpeed Test mit Bestnote — nicht als Ausnahme, sondern als Standard."><span class="text-accent-red">100</span> Punkte. Jedes Mal.</SectionHeader>
     <div class="label-plate-lighthouse reveal grid grid-cols-1 lg:grid-cols-[auto_1fr] gap-8 lg:gap-12 items-center bg-bg-base border border-border-mid rounded-lg p-6 max-sm:p-5 shadow-[0_2px_4px_rgba(0,0,0,0.06)] relative mb-6">
         <div class="flex max-sm:grid max-sm:grid-cols-2 gap-5 max-sm:gap-4 lg:gap-6 justify-center">
@@ -296,7 +279,7 @@ const upgradeItems = ['Modernisierung auf bestehendem Fundament', 'Die Konzeptar
 </Section>
 
 <!-- Testimonials -->
-<Section id="referenzen">
+<Section id="referenzen" gray>
     <SectionHeader subtitle="Ergebnisse statt Versprechen.">Was Kunden <span class="text-accent-red">sagen</span></SectionHeader>
     <div class="grid grid-cols-1 md:grid-cols-3 gap-6 reveal-stagger">
         {testimonials.map((t) => <TestimonialCard {...t} />)}
@@ -304,24 +287,72 @@ const upgradeItems = ['Modernisierung auf bestehendem Fundament', 'Die Konzeptar
 </Section>
 
 <!-- FAQ -->
-<Section id="faq" gray>
+<Section id="faq">
     <SectionHeader subtitle="Klar beantwortet, ohne Marketing-Sprech.">Häufige <span class="text-accent-red">Fragen</span></SectionHeader>
     <div class="max-w-[800px] mx-auto flex flex-col gap-3">
         {faqs.map((faq, i) => <FaqItem question={faq.q} answer={faq.a} index={i} />)}
     </div>
 </Section>
 
+<!-- Produkte · P.S. -->
+<Section id="produkte" gray>
+    <div class="max-w-[1100px] mx-auto">
+        <div class="flex items-baseline gap-3 mb-2">
+            <span class="font-mono text-[0.6rem] text-accent-red tracking-[0.18em] uppercase font-bold">P.S.</span>
+            <span class="font-mono text-[0.55rem] text-text-muted tracking-[0.14em] uppercase">Eigene Produkte</span>
+        </div>
+        <h2 class="font-display text-[clamp(1.5rem,3vw,2.5rem)] font-bold tracking-tight mb-3 leading-[1.15]">Achja — wir bauen auch <span class="text-accent-red">eigene Tools</span>.</h2>
+        <p class="text-text-secondary text-[0.95rem] max-sm:text-[0.9rem] max-w-[720px] mb-8 leading-relaxed">Für KMUs, für uns selbst, weil die Alternativen zu aufgeblasen waren. <strong class="text-text-primary">Nur, was tatsächlich gebraucht wird.</strong> Läuft auf jedem Webspace — wer schon eine Website hat, kann sie einfach dazunehmen.</p>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-5 reveal-stagger">
+            <a href="/stempel" class="group bg-bg-base border border-border-mid rounded-[2px] p-6 max-sm:p-5 shadow-[0_2px_4px_rgba(0,0,0,0.05)] transition-all hover:border-accent-red hover:shadow-[0_6px_20px_rgba(196,30,58,0.12)] hover:-translate-y-px block">
+                <div class="flex items-start justify-between mb-3 gap-3">
+                    <div>
+                        <div class="font-mono text-[0.55rem] text-accent-red tracking-[0.14em] uppercase font-semibold mb-1">Stempel</div>
+                        <div class="font-display text-xl font-bold text-text-primary leading-tight">Arbeitszeit&shy;erfassung</div>
+                    </div>
+                    <div class="font-mono text-[0.55rem] text-text-muted tracking-[0.1em] uppercase whitespace-nowrap shrink-0 mt-1">ab 490 €</div>
+                </div>
+                <p class="text-[0.85rem] text-text-secondary leading-snug mb-4">Ein Klick rein, einer raus. Überstunden-Genehmigung, gesetzes­konform (BAG / EuGH). Nur, was Arbeitszeit-Erfassung wirklich braucht.</p>
+                <ul class="list-none flex flex-col gap-1 mb-5">
+                    <li class="flex items-start gap-2 text-[0.78rem] text-text-secondary"><span class="text-pass font-bold mt-0.5" aria-hidden="true">✓</span> Gesetzeskonform nach BAG-Urteil 2022</li>
+                    <li class="flex items-start gap-2 text-[0.78rem] text-text-secondary"><span class="text-pass font-bold mt-0.5" aria-hidden="true">✓</span> Überstunden-Genehmigung im Workflow</li>
+                    <li class="flex items-start gap-2 text-[0.78rem] text-text-secondary"><span class="text-pass font-bold mt-0.5" aria-hidden="true">✓</span> Alle Arbeitszeitmodelle in einem System</li>
+                </ul>
+                <span class="font-mono text-[0.65rem] text-accent-red tracking-[0.12em] uppercase font-semibold group-hover:underline">Stempel ansehen →</span>
+            </a>
+
+            <a href="/zettel" class="group bg-bg-base border border-border-mid rounded-[2px] p-6 max-sm:p-5 shadow-[0_2px_4px_rgba(0,0,0,0.05)] transition-all hover:border-accent-red hover:shadow-[0_6px_20px_rgba(196,30,58,0.12)] hover:-translate-y-px block">
+                <div class="flex items-start justify-between mb-3 gap-3">
+                    <div>
+                        <div class="font-mono text-[0.55rem] text-accent-red tracking-[0.14em] uppercase font-semibold mb-1">Zettel</div>
+                        <div class="font-display text-xl font-bold text-text-primary leading-tight">Digitaler Regiebericht</div>
+                    </div>
+                    <div class="font-mono text-[0.55rem] text-text-muted tracking-[0.1em] uppercase whitespace-nowrap shrink-0 mt-1">ab 490 €</div>
+                </div>
+                <p class="text-[0.85rem] text-text-secondary leading-snug mb-4">Stunden, Material, Fotos, Unterschrift — vor Ort auf dem Handy. Für Handwerk, KFZ, Service. Integration mit Stempel inklusive.</p>
+                <ul class="list-none flex flex-col gap-1 mb-5">
+                    <li class="flex items-start gap-2 text-[0.78rem] text-text-secondary"><span class="text-pass font-bold mt-0.5" aria-hidden="true">✓</span> Kundenunterschrift direkt auf dem Handy</li>
+                    <li class="flex items-start gap-2 text-[0.78rem] text-text-secondary"><span class="text-pass font-bold mt-0.5" aria-hidden="true">✓</span> Offline-fähig, auch ohne Baustellen-Netz</li>
+                    <li class="flex items-start gap-2 text-[0.78rem] text-text-secondary"><span class="text-pass font-bold mt-0.5" aria-hidden="true">✓</span> PDF-Regiebericht auf Knopfdruck</li>
+                </ul>
+                <span class="font-mono text-[0.65rem] text-accent-red tracking-[0.12em] uppercase font-semibold group-hover:underline">Zettel ansehen →</span>
+            </a>
+        </div>
+    </div>
+</Section>
+
 <!-- CTA -->
 <section class="text-center py-16 max-sm:py-11 px-5 border-t border-border-dark" id="kontakt">
     <div class="max-w-[1200px] mx-auto">
-        <h2 class="font-display text-[clamp(1.3rem,3vw,2.25rem)] mb-3 font-bold tracking-tight">Schick uns deine <span class="text-accent-red">URL</span></h2>
-        <p class="text-text-secondary max-w-[500px] mx-auto mb-6 text-[0.95rem] max-sm:text-[0.9rem] leading-relaxed">Deine Website-Adresse, deine Wünsche und 2-3 Seiten, die dir gefallen. Das ist alles, was wir brauchen. Wir melden uns mit dem Ergebnis.</p>
+        <h2 class="font-display text-[clamp(1.3rem,3vw,2.25rem)] mb-3 font-bold tracking-tight">Bereit für deine nächste <span class="text-accent-red">Website</span>?</h2>
+        <p class="text-text-secondary max-w-[520px] mx-auto mb-6 text-[0.95rem] max-sm:text-[0.9rem] leading-relaxed">Erzähl uns kurz, was du vorhast. Ziele, Zeitrahmen, Budget — 15 Minuten per E-Mail oder Call genügen für ein erstes Festpreisangebot.</p>
         <div class="flex justify-center gap-3 mb-5 max-sm:flex-col max-sm:items-center max-sm:px-4">
             <Button href="mailto:hallo@redline.sh" size="lg">
-                <span>Website einreichen</span><span aria-hidden="true">→</span>
+                <span>Projekt anfragen</span><span aria-hidden="true">→</span>
             </Button>
         </div>
-        <p class="text-text-muted text-[0.75rem]">Kostenlos. Unverbindlich. Ergebnis statt Versprechen.</p>
+        <p class="text-text-muted text-[0.75rem]">Antwort meist innerhalb eines Werktags. Keine Callcenter, keine Salesfunnels.</p>
     </div>
 </section>
 </main>
@@ -344,6 +375,8 @@ const observer = new IntersectionObserver(
 document.querySelectorAll('.reveal, .reveal-stagger, .faq-reveal').forEach((el) => {
   observer.observe(el);
 });
+
+
 </script>
 
 </Layout>

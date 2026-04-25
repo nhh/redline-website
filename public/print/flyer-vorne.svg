@@ -15,7 +15,7 @@
   <text x="49.5" y="40" text-anchor="middle" font-family="Playfair Display, serif" font-size="8" font-weight="700" fill="#FFFFFF" letter-spacing="0.02em">REDLINE</text>
 
   <!-- Tagline -->
-  <text x="49.5" y="47" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="2.2" fill="#C41E3A" letter-spacing="0.25em">PRECISION AI ENGINEERING</text>
+  <text x="49.5" y="47" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="2.2" fill="#C41E3A" letter-spacing="0.25em">PRECISION WEB ENGINEERING</text>
 
   <!-- Divider -->
   <line x1="35" y1="53" x2="64" y2="53" stroke="#C41E3A" stroke-width="0.4" opacity="0.6"/>
@@ -23,7 +23,7 @@
 
   <!-- Subtitle -->
   <text x="49.5" y="62" text-anchor="middle" font-family="Inter, sans-serif" font-size="2.5" fill="#E8E8E8" font-weight="300">Websites, die wirken.</text>
-  <text x="49.5" y="66" text-anchor="middle" font-family="Inter, sans-serif" font-size="2.5" fill="#E8E8E8" font-weight="300">Gebaut mit KI. Gesteuert von Menschen.</text>
+  <text x="49.5" y="66" text-anchor="middle" font-family="Inter, sans-serif" font-size="2.5" fill="#E8E8E8" font-weight="300">Handwerklich gebaut. Messbar schnell.</text>
 
   <!-- === MIDDLE SECTION: White === -->
   <rect x="0" y="70" width="99" height="85" fill="#FFFFFF"/>
@@ -34,15 +34,15 @@
 
   <!-- Value prop 1 -->
   <rect x="10" y="102" width="2" height="14" fill="#C41E3A" rx="0.5"/>
-  <text x="16" y="108" font-family="Inter, sans-serif" font-size="2.8" font-weight="600" fill="#1A1A1A">Arbeitsprobe statt Konzept</text>
-  <text x="16" y="113" font-family="Inter, sans-serif" font-size="2.2" fill="#4A4A4A">Wir bauen deine Website um, bevor du</text>
-  <text x="16" y="116.5" font-family="Inter, sans-serif" font-size="2.2" fill="#4A4A4A">dich entscheidest. Kein Risiko.</text>
+  <text x="16" y="108" font-family="Inter, sans-serif" font-size="2.8" font-weight="600" fill="#1A1A1A">PageSpeed 100 als Standard</text>
+  <text x="16" y="113" font-family="Inter, sans-serif" font-size="2.2" fill="#4A4A4A">Schnelle Websites sind kein Zufall.</text>
+  <text x="16" y="116.5" font-family="Inter, sans-serif" font-size="2.2" fill="#4A4A4A">Sie sind das Ergebnis von Handwerk.</text>
 
   <!-- Value prop 2 -->
   <rect x="10" y="122" width="2" height="14" fill="#C41E3A" rx="0.5"/>
-  <text x="16" y="128" font-family="Inter, sans-serif" font-size="2.8" font-weight="600" fill="#1A1A1A">Mensch + KI = Präzision</text>
-  <text x="16" y="133" font-family="Inter, sans-serif" font-size="2.2" fill="#4A4A4A">KI liefert Geschwindigkeit. Wir liefern</text>
-  <text x="16" y="136.5" font-family="Inter, sans-serif" font-size="2.2" fill="#4A4A4A">die Richtung. Ohne uns: nur Durchschnitt.</text>
+  <text x="16" y="128" font-family="Inter, sans-serif" font-size="2.8" font-weight="600" fill="#1A1A1A">Festpreis statt Stundensatz</text>
+  <text x="16" y="133" font-family="Inter, sans-serif" font-size="2.2" fill="#4A4A4A">Klarer Scope, klares Angebot.</text>
+  <text x="16" y="136.5" font-family="Inter, sans-serif" font-size="2.2" fill="#4A4A4A">Du weißt, was du zahlst — vorher.</text>
 
   <!-- Value prop 3 -->
   <rect x="10" y="142" width="2" height="14" fill="#C41E3A" rx="0.5"/>
@@ -55,8 +55,8 @@
   <line x1="0" y1="155" x2="99" y2="155" stroke="#E8E8E8" stroke-width="0.3"/>
 
   <!-- CTA -->
-  <text x="49.5" y="171" text-anchor="middle" font-family="Inter, sans-serif" font-size="3" font-weight="600" fill="#1A1A1A">Kostenloser Umbau</text>
-  <text x="49.5" y="176" text-anchor="middle" font-family="Inter, sans-serif" font-size="3" font-weight="600" fill="#1A1A1A">deiner Website</text>
+  <text x="49.5" y="171" text-anchor="middle" font-family="Inter, sans-serif" font-size="3" font-weight="600" fill="#1A1A1A">Dein nächstes</text>
+  <text x="49.5" y="176" text-anchor="middle" font-family="Inter, sans-serif" font-size="3" font-weight="600" fill="#1A1A1A">Website-Projekt</text>
 
   <!-- URL -->
   <rect x="30" y="182" width="39" height="8" rx="1" fill="#C41E3A"/>

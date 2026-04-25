@@ -175,6 +175,90 @@ body {
     pointer-events: none;
 }
 
+.bg-texture::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    opacity: 0.5;
+    mix-blend-mode: multiply;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='220' height='220'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 0.18 0'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+}
+
+/* ── Background red accents ── */
+
+.bg-accent-glow {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(90px);
+    will-change: transform;
+}
+
+.bg-accent-glow-1 {
+    top: 6%;
+    left: -6%;
+    width: 420px;
+    height: 420px;
+    background: radial-gradient(circle, rgba(196, 30, 58, 0.16) 0%, rgba(196, 30, 58, 0) 70%);
+    animation: bgDrift1 18s ease-in-out infinite;
+}
+
+.bg-accent-glow-2 {
+    top: 58%;
+    right: -8%;
+    width: 520px;
+    height: 520px;
+    background: radial-gradient(circle, rgba(196, 30, 58, 0.12) 0%, rgba(196, 30, 58, 0) 70%);
+    animation: bgDrift2 22s ease-in-out infinite;
+    animation-delay: -4s;
+}
+
+@keyframes bgDrift1 {
+    0%, 100% { transform: translate3d(0, 0, 0) scale(0.9); opacity: 0.55; }
+    50%     { transform: translate3d(55px, 40px, 0) scale(1.18); opacity: 1; }
+}
+
+@keyframes bgDrift2 {
+    0%, 100% { transform: translate3d(0, 0, 0) scale(0.95); opacity: 0.5; }
+    50%     { transform: translate3d(-50px, -45px, 0) scale(1.22); opacity: 1; }
+}
+
+/* ── Background snake lines (tile-following) ── */
+
+.bg-snake {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.snake {
+    fill: none;
+    stroke: var(--color-accent-red);
+    stroke-width: 1.2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    opacity: 0.7;
+}
+
+.snake-1 { stroke-dasharray: 3.5 96.5; animation: snakeMove 14s linear infinite; }
+.snake-2 { stroke-dasharray: 4   96;   animation: snakeMove 19s linear infinite; animation-delay: -6s; }
+.snake-3 { stroke-dasharray: 3   97;   animation: snakeMove 11s linear infinite; animation-delay: -3s; }
+.snake-4 { stroke-dasharray: 5   95;   animation: snakeMove 23s linear infinite; animation-delay: -9s; }
+
+@keyframes snakeMove {
+    to { stroke-dashoffset: -100; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .bg-accent-glow-1,
+    .bg-accent-glow-2,
+    .snake {
+        animation: none;
+    }
+}
+
+
 /* ── FAQ answer animation ── */
 
 .faq-answer {
@@ -243,6 +327,83 @@ details[open] > .faq-answer {
         transform: none;
         transition: none;
     }
+}
+
+/* ── Stempel product mock ── */
+
+.stempel-mock {
+    transform: perspective(1600px) rotateY(-2deg) rotateX(1deg);
+    transform-origin: center center;
+}
+
+.stempel-bar {
+    height: var(--bar-height, 0%);
+    min-height: 2px;
+    transition: height 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+    transform: scaleY(0);
+    transform-origin: bottom;
+    animation: stempelBarIn 0.9s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+.stempel-bar:nth-child(1) .stempel-bar { animation-delay: 0.1s; }
+
+.stempel-mock .stempel-bar { animation-delay: calc(var(--i, 0) * 60ms + 200ms); }
+
+@keyframes stempelBarIn {
+    to { transform: scaleY(1); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .stempel-bar { transform: scaleY(1); animation: none; }
+}
+
+/* ── Zettel phone mock ── */
+
+.zettel-phone {
+    max-width: 340px;
+    width: 100%;
+    padding: 6px;
+}
+
+.zettel-phone-frame {
+    background: #1A1A1A;
+    border-radius: 40px;
+    padding: 10px;
+    box-shadow: 0 18px 48px rgba(0, 0, 0, 0.18), 0 4px 12px rgba(0, 0, 0, 0.08);
+    position: relative;
+}
+
+.zettel-phone-notch {
+    position: absolute;
+    top: 14px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 96px;
+    height: 20px;
+    background: #1A1A1A;
+    border-radius: 14px;
+    z-index: 2;
+}
+
+.zettel-phone-screen {
+    background: var(--color-bg-base);
+    border-radius: 32px;
+    overflow: hidden;
+    position: relative;
+}
+
+.zettel-signature {
+    stroke-dasharray: 100;
+    stroke-dashoffset: 100;
+    animation: zettelSign 3s ease-out 0.4s forwards;
+}
+
+@keyframes zettelSign {
+    to { stroke-dashoffset: 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .zettel-signature { animation: none; stroke-dashoffset: 0; }
 }
 
 /* ── Scrollbar ── */
